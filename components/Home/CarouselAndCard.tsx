@@ -81,15 +81,15 @@ export default function LocationCarousel() {
   }, [api])
 
   return (
-    <div className="mx-auto max-w-7xl">
+    <div className="mx-auto">
       <Carousel setApi={setApi}>
-        <CarouselContent className="-ml-4">
+        <CarouselContent className="">
           {locations.map((item, index) => (
             <CarouselItem
               key={index}
               className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
             >
-              <Card className="overflow-hidden rounded-xl border-0">
+              <Card className="overflow-hidden py-0 rounded-xl border-0">
                 <div className="relative h-105 w-full">
                   <Image
                     src={item.image}
@@ -105,7 +105,7 @@ export default function LocationCarousel() {
                   <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 
                   {/* Text overlay */}
-                  <div className="absolute bottom-4 left-4 text-white">
+                  <div className="absolute top-4 left-4 text-white">
                     <h3 className="text-lg font-semibold">
                       {item.title}
                     </h3>
