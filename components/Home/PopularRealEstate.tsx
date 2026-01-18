@@ -23,7 +23,7 @@ function PopularRealEstateTag({ text }: { text: string }) {
 
 export default function PopularRealEstate() {
   return (
-    <section className="lg:mt-20 md:mt-16 mt-10 px-4">
+    <section className="lg:mt-50 md:mt-30 mt-10">
       <TitleSubtitle 
         title="Popular Real Estate Markets" 
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
