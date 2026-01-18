@@ -1,7 +1,12 @@
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import AllPropertiesCard from "./AllPropertiesCard"
+import allProperties from "../../public/data/properties.json"
+import forRentProperties from "../../public/data/forRent.json"
+import forSellProperties from "../../public/data/forSell.json"
+import CommonButton from "../reuseable/CommonButton"
+import { FeaturedSectionCard } from "../reuseable/FeaturedSectionCard"
+
 
 export default function FeaturedTabs() {
   return (
@@ -35,36 +40,42 @@ export default function FeaturedTabs() {
       <TabsContent value="buy" className="mt-6 w-full">
             <div>
         
-        <AllPropertiesCard/>
+        <FeaturedSectionCard limit={3} properties={allProperties}/>
           
       </div>
 
       {/* View All Button */}
-      <div className="mt-10 text-center">
-        <button className="rounded-full bg-primary py-1 lg:px-8 lg:py-3 lg:my-4 text-white hover:opacity-90 transition">
-          View All Properties
-        </button>
+      <div className="mt-10 flex justify-center items-center text-center">
+        <CommonButton buttonText="View All Properties"/>
       </div>
       </TabsContent>
 
       {/* Rent Tab */}
-      <TabsContent value="rent" className="mt-6">
-        <div className="rounded-lg border py-1 lg:p-6">
-          <h3 className="text-lg font-semibold mb-2">Rent Property</h3>
-          <p className="text-gray-600">
-            Find rental homes that match your lifestyle and budget.
-          </p>
-        </div>
+       <TabsContent value="rent" className="mt-6 w-full">
+            <div>
+        
+         <FeaturedSectionCard limit={3} properties={forSellProperties}/>
+          
+      </div>
+
+      {/* View All Button */}
+      <div className="mt-10 flex justify-center items-center text-center">
+        <CommonButton buttonText="View Rentable Properties"/>
+      </div>
       </TabsContent>
 
       {/* Sell Tab */}
-      <TabsContent value="sell" className="mt-6">
-        <div className="rounded-lg border py-1 lg:p-6">
-          <h3 className="text-lg font-semibold py-1 mb-2">Sell Property</h3>
-          <p className="text-gray-600">
-            List your property and connect with verified buyers.
-          </p>
-        </div>
+      <TabsContent value="sell" className="mt-6 w-full">
+            <div>
+        
+         <FeaturedSectionCard limit={3} properties={forRentProperties}/>
+          
+      </div>
+
+      {/* View All Button */}
+      <div className="mt-10 flex justify-center items-center text-center">
+        <CommonButton buttonText="View On sell Properties"/>
+      </div>
       </TabsContent>
 
     </Tabs>

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "image": "/House1.jpg",
+    "title": "Luxury Family Home",
+    "address": "1800-1818 79th St, Dhaka",
+    "price": "$395,000",
+    "beds": 4,
+    "baths": 1,
+    "area": 400,
+    "status": "For Sale",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "image": "/House3.jpg",
+    "title": "Cozy Country House",
+    "address": "15 Green Road, Dhaka",
+    "price": "$450,000",
+    "beds": 5,
+    "baths": 3,
+    "area": 520,
+    "status": "For Sale",
+    "featured": true
+  },
+  {
+    "id": 3,
+    "image": "/House5.jpg",
+    "title": "Spacious Villa",
+    "address": "Block C, Bashundhara, Dhaka",
+    "price": "$780,000",
+    "beds": 6,
+    "baths": 4,
+    "area": 850,
+    "status": "For Sale",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "image": "/House6.jpg",
+    "title": "Elegant City Residence",
+    "address": "Dhanmondi 27, Dhaka",
+    "price": "$520,000",
+    "beds": 4,
+    "baths": 3,
+    "area": 610,
+    "status": "For Sale",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "image": "/House11.jpg",
+    "title": "Modern Family Villa",
+    "address": "Uttara Sector 12, Dhaka",
+    "price": "$680,000",
+    "beds": 5,
+    "baths": 3,
+    "area": 750,
+    "status": "For Sale",
+    "featured": true
+  },
+  {
+    "id": 6,
+    "image": "/House12.jpg",
+    "title": "Classic Colonial Home",
+    "address": "Gulshan 2, Dhaka",
+    "price": "$900,000",
+    "beds": 6,
+    "baths": 4,
+    "area": 950,
+    "status": "For Sale",
+    "featured": false
+  }
+]
