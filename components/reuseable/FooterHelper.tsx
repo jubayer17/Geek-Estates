@@ -66,7 +66,7 @@ export function AppStoreButton({ type }: AppStoreButtonProps) {
     );
 
   return (
-    <button className="flex min-w-[140px] items-center justify-center gap-2.5 rounded-lg border border-emerald-700/70 bg-emerald-900/40 px-4 py-2.5 text-white transition hover:bg-emerald-800/60">
+    <button className="flex min-w-35 items-center justify-center gap-2.5 rounded-lg border border-emerald-700/70 bg-emerald-900/40 px-4 py-2.5 text-white transition hover:bg-emerald-800/60">
       {type === "apple" ? <AppleIcon/> : <PlayIcon/>}
       <div className="flex flex-col items-start leading-tight">{content}</div>
     </button>

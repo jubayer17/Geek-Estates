@@ -90,7 +90,7 @@ export default function LocationCarousel() {
               className="pl-4 basis-[85%] sm:basis-1/2 md:basis-1/3 lg:basis-1/4"
             >
               <Card className="overflow-hidden rounded-xl border-0">
-                <div className="relative h-[420px] w-full">
+                <div className="relative h-105 w-full">
                   <Image
                     src={item.image}
                     alt={item.title}
@@ -102,7 +102,7 @@ export default function LocationCarousel() {
                   />
 
                   {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
 
                   {/* Text overlay */}
                   <div className="absolute bottom-4 left-4 text-white">
