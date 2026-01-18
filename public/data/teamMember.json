@@ -1,0 +1,22 @@
+[
+  {
+    "name": "John Powell",
+    "role": "Service Support",
+    "image": "/team_member_4.png"
+  },
+  {
+    "name": "Sarah Chen",
+    "role": "Customer Success",
+    "image": "/team_member_2.png"
+  },
+  {
+    "name": "Michael Rodriguez",
+    "role": "Technical Support",
+    "image": "/team_member_1.png"
+  },
+  {
+    "name": "Emily Thompson",
+    "role": "Support Specialist",
+    "image": "/team_member_3.png"
+  }
+]

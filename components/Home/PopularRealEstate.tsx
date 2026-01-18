@@ -29,7 +29,7 @@ export default function PopularRealEstate() {
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
       />
       
-      <div className="max-w-6xl mx-auto mt-8">
+      <div className="max-w-7xl mx-auto mt-8">
         <div className="flex flex-wrap gap-3 justify-center items-center">
           {locations.map((location, index) => (
             <PopularRealEstateTag 
