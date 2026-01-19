@@ -26,7 +26,7 @@ export default function OurStoryTextAnimation({
   paragraphs,
   image,
   stats,
-  bgColor = "#FFFFFF",
+  bgColor = "#2E3192",
 }: OurStoryProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
   const numbersRef = useRef<HTMLSpanElement[]>([]);
@@ -43,7 +43,7 @@ useEffect(() => {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top 75%",
-        toggleActions: "restart pause reverse pause", // <--- key change
+        toggleActions: "restart pause pause pause", // <--- key change
       },
     });
 
@@ -60,7 +60,7 @@ useEffect(() => {
           scrollTrigger: {
             trigger: el,
             start: "top 85%",
-            toggleActions: "restart pause reverse pause", // <--- key change
+            toggleActions: "restart pause pause pause", // <--- key change
           },
         }
       );
