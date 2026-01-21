@@ -19,8 +19,6 @@ export default function Home() {
   return (
     <div className="bg-[#FAFAFA]">
       <HeroSection />
-
-
       <WhyWithUs />
       <StatsSection />
       {/* <Companies /> */}
