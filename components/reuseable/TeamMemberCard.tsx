@@ -1,4 +1,3 @@
-// components/TeamMemberCard.tsx
 import Image from 'next/image';
 import { FC } from 'react';
 
@@ -20,7 +19,7 @@ const TeamMemberCard: FC<TeamMemberCardProps> = ({
       className={`
         group flex flex-col overflow-hidden rounded-xl bg-white shadow-md
         transition-all duration-300 hover:shadow-xl hover:-translate-y-1
-        w-full max-w-[328px]
+        w-full max-w-82
         ${className}
       `}
     >
