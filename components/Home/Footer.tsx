@@ -1,138 +1,156 @@
-import { Mail, Phone, MapPin } from "lucide-react";
+"use client"
+
+import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowUpRight, Send, Home } from "lucide-react";
 import Link from "next/link";
-import { AppStoreButton, FooterLinks, SocialIcon } from "../reuseable/FooterHelper";
+import React, { useRef, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Footer() {
+  const footerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Staggered reveal for grid items
+      gsap.from(".footer-item", {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 90%",
+        }
+      });
+
+      // Title animation
+      gsap.from(titleRef.current, {
+        y: 50,
+        opacity: 0,
+        duration: 1.2,
+        delay: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 80%",
+        }
+      });
+    }, footerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-emerald-950 text-emerald-100 mt-5 lg:mt-10">
-      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
-        {/* Top section - Logo + Social icons */}
-        <div className="flex flex-col items-center justify-between border-b border-emerald-800/50 py-12 md:flex-row md:items-start">
-          <div className="mb-8 md:mb-0">
-            <Link href="/" className="flex items-center justify-center gap-2.5">
-            {/*
-            *
-             To Do Add Logo
-             *
-              */}
-              {/* <span className="text-3xl font-bold tracking-tight text-white">JH</span> */}
-              <span className="text-2xl font-semibold text-emerald-400">GeekBuilders</span>
-            </Link>
-          </div>
+    <footer ref={footerRef} className="bg-slate-950 pt-20 pb-0 overflow-hidden relative border-t border-white/10">
 
-          <div className="flex gap-1 justify-center items-center">
-            <div className="text-sm flex flex-col mt-0">
-                <p className="text-sm">F</p>
-                <p className="text-sm">O</p>
-                <p className="text-sm">L</p>
-                <p className="text-sm">L</p>
-                <p className="text-sm">O</p>
-                <p className="text-sm">W</p>
-                <p className="text-sm">U</p>
-                <p className="text-sm">S</p>
+      {/* Background Gradients */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-[#E7C873]/5 rounded-full blur-[120px]"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-900/10 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+
+        {/* Top Section: Navigation & Newsletter */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12 lg:gap-x-24 mb-24">
+
+          {/* 1. Brand & CTA */}
+          <div className="footer-item md:col-span-4 lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 bg-[#E7C873] rounded-lg flex items-center justify-center">
+                  <Home className="text-slate-900 w-6 h-6" />
+                </div>
+                <span className="text-2xl font-serif text-white tracking-tight">Geek<span className="text-[#E7C873]">Estate</span></span>
+              </div>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-8">
+                Elevating the art of <br />
+                <span className="font-serif italic text-[#E7C873]">living well.</span>
+              </h3>
+              <Link href="/contact" className="inline-flex items-center gap-3 text-white group">
+                <span className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-[#E7C873] group-hover:border-[#E7C873] group-hover:text-slate-900 transition-all duration-300">
+                  <ArrowUpRight className="w-5 h-5" />
+                </span>
+                <span className="text-lg font-light tracking-wide">Start Your Journey</span>
+              </Link>
             </div>
-            <div className="flex gap-5 justify-center">
-            <SocialIcon href="#" icon="facebook" />
-            <SocialIcon href="#" icon="twitter" />
-            <SocialIcon href="#" icon="instagram" />
-            <SocialIcon href="#" icon="linkedin" />
           </div>
-          </div>
-        </div>
 
-        {/* Main columns */}
-        <div className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-7">
-          {/* Newsletter - bigger column */}
-          <div className="lg:col-span-2">
-            <h3 className="mb-4 text-md font-light text-gray-400">Subscribe</h3>
-            <p className="mb-5 text-sm text-emerald-300">
-              Subscribe to our newsletter to receive our weekly feed.
+          {/* 2. Links Columns */}
+          <div className="footer-item md:col-span-4 lg:col-span-4 grid grid-cols-2 gap-8 md:gap-12">
+            <div>
+              <h4 className="text-[#E7C873] text-xs uppercase tracking-[0.2em] mb-6 md:mb-8 font-medium">Explore</h4>
+              <ul className="space-y-4">
+                {["Properties", "Neighborhoods", "Agents", "Journal"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-[#E7C873] text-xs uppercase tracking-[0.2em] mb-6 md:mb-8 font-medium">Company</h4>
+              <ul className="space-y-4">
+                {["About Us", "Careers", "Contact", "Privacy Policy"].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* 3. Newsletter */}
+          <div className="footer-item md:col-span-4 lg:col-span-3">
+            <h4 className="text-[#E7C873] text-xs uppercase tracking-[0.2em] mb-6 md:mb-8 font-medium">Newsletter</h4>
+            <p className="text-slate-400 text-sm font-light mb-6 leading-relaxed">
+              Join our exclusive circle for off-market listings and market insights.
             </p>
-
-            <div className="relative">
+            <form className="flex flex-col gap-4">
               <input
                 type="email"
-                placeholder="Your email"
-                className="w-full rounded-lg bg-emerald-900/60 px-4 py-3 pr-28 text-sm text-white placeholder:text-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                placeholder="Email Address"
+                className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 text-white placeholder:text-slate-600 focus:outline-none focus:border-[#E7C873] transition-colors"
               />
-              <button className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-lg bg-emerald-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-emerald-500">
-                Send →
+              <button className="w-full bg-[#E7C873] text-slate-900 py-3 font-medium hover:bg-white transition-colors uppercase tracking-widest text-xs">
+                Subscribe
               </button>
-            </div>
+            </form>
           </div>
-
-          {/* Discover */}
-          <div>
-            <h3 className="mb-5 text-md font-light text-gray-400">Discover</h3>
-            <FooterLinks
-              links={["Miami", "New York", "Chicago", "Florida", "Los Angeles", "San Diego"]}
-            />
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="mb-5 text-md font-light text-gray-400">Quick Links</h3>
-            <FooterLinks
-              links={[
-                "About",
-                "Contact",
-                "FAQ's",
-                "Blog",
-                "Pricing Plans",
-                "Privacy Policy",
-                "Terms & Conditions",
-              ]}
-            />
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="mb-5 text-md font-light text-gray-400">Contact Us</h3>
-            <div className="space-y-5 text-sm">
-              <div className="flex items-start gap-3">
-                <Mail className="mt-0.5 h-5 w-5 text-emerald-400" />
-                <span>hr@geekssort.com</span>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Phone className="mt-0.5 h-5 w-5 text-emerald-400" />
-                <span>+8801914782366</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Address + App buttons */}
-         <div className="sm:col-span-1 lg:col-span-1">
-  <h3 className="mb-5 text-md font-light text-gray-400">
-    Our Address
-  </h3>
-
-  <div className="space-y-6">
-    <div className="flex items-start gap-3">
-      <MapPin className="mt-0.5 h-5 w-5 text-emerald-400" />
-      <div className="text-sm text-white/70">
-        <p>99 Fifth Avenue, 3rd Floor</p>
-        <p>San Francisco, CA 1980</p>
-      </div>
-    </div>
-
-    
-  </div>
-</div>
-
-<div className="flex flex-col gap-3">
-    <h3 className="mb-4 text-md font-light text-gray-400">Get Our App</h3>
-      <AppStoreButton type="apple" />
-      <AppStoreButton type="google" />
-    </div>
         </div>
-      </div>
 
-      {/* Copyright bar */}
-      <div className="border-t border-emerald-800/50 bg-emerald-950/70 py-6 text-center text-sm text-emerald-400">
-        Copyright © {new Date().getFullYear()} GeekBuilder
+        {/* Divider */}
+        <div className="w-full h-[1px] bg-white/10 mb-8 md:mb-12"></div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-light uppercase tracking-wider mb-12 md:mb-24">
+          <p>© {currentYear} GeekRealEstate. All rights reserved.</p>
+          <div className="flex gap-6">
+            <Link href="#" className="hover:text-[#E7C873] transition-colors">Instagram</Link>
+            <Link href="#" className="hover:text-[#E7C873] transition-colors">LinkedIn</Link>
+            <Link href="#" className="hover:text-[#E7C873] transition-colors">Twitter</Link>
+          </div>
+        </div>
+
+        {/* MASSIVE BRANDING - Full Width */}
+        <div className="relative w-full overflow-hidden leading-none select-none mb-1 pointer-events-none">
+          <h1 ref={titleRef} className="text-[15.5vw] font-bold text-center tracking-tighter whitespace-nowrap leading-[0.75]">
+            <span className="text-white">GEEK</span>
+            <span className="text-[#E7C873]">ESTATE</span>
+          </h1>
+        </div>
+
       </div>
     </footer>
   );
 }
-
