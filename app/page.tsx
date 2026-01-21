@@ -10,6 +10,7 @@ import PopularRealEstate from "@/components/Home/PopularRealEstate";
 import TestimonialsSection from "@/components/Home/Reviews";
 
 import TopNotchedProperties from "@/components/Home/TopProperties";
+import LocationSection from "@/components/Home/LocationSection";
 
 import WhyWithUs from "@/components/Home/WhyWithUs";
 
@@ -28,7 +29,8 @@ export default function Home() {
       <HowItWorks />
       <TestimonialsSection />
       {/* <Testimonials /> */}
-      <PopularRealEstate />
+      {/* <PopularRealEstate /> */}
+      <LocationSection />
     </div>
   );
 }
