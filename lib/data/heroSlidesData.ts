@@ -6,8 +6,8 @@ export const heroSlides = [
         heading: "Find Your Dream Home Today",
         subheading: "Discover exceptional properties in prime locations with our expert guidance and personalized service.",
         cta: "Book Now",
-        transition: "fadeScale", // Fade + slight scale-up
-        textAnimation: "staggerUp" // Staggered from bottom
+        transition: "fadeScale",
+        textAnimation: "dropIn" // Text drops from top
     },
     {
         id: 2,
@@ -16,8 +16,8 @@ export const heroSlides = [
         heading: "Elevate Your Lifestyle",
         subheading: "Experience world-class amenities and breathtaking views in our curated collection of luxury estates.",
         cta: "Schedule a Consultation",
-        transition: "slideRight", // Slide-in from right with motion blur feel
-        textAnimation: "slideLeft" // Text slides from left
+        transition: "slideRight",
+        textAnimation: "sideConnect" // Heading left, sub right, connecting
     },
     {
         id: 3,
@@ -26,8 +26,8 @@ export const heroSlides = [
         heading: "Your Journey Starts Here",
         subheading: "Let our experienced team guide you through every step of finding and securing your perfect property.",
         cta: "Get Started",
-        transition: "verticalReveal", // Vertical clip-path reveal
-        textAnimation: "fadeStagger" // Fade with stagger
+        transition: "verticalReveal",
+        textAnimation: "rotateUp" // Rotate up from bottom
     },
     {
         id: 4,
@@ -36,8 +36,8 @@ export const heroSlides = [
         heading: "Unlock Premium Access",
         subheading: "Get first access to off-market properties and exclusive listings not available anywhere else.",
         cta: "Talk to an Expert",
-        transition: "zoomParallax", // Zoom-in with parallax depth
-        textAnimation: "slideRight" // Text slides from right
+        transition: "zoomParallax",
+        textAnimation: "blurReveal" // Blur in from nothing
     },
     {
         id: 5,
@@ -46,7 +46,7 @@ export const heroSlides = [
         heading: "Building Dreams Together",
         subheading: "Join thousands of satisfied clients who found their perfect home with our dedicated support.",
         cta: "Request a Call",
-        transition: "crossfadeRotate", // Crossfade with subtle rotation
-        textAnimation: "scaleUp" // Scale up with fade
+        transition: "crossfadeRotate",
+        textAnimation: "clipReveal" // Reveal via clip-path
     }
 ]
