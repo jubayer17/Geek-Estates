@@ -205,7 +205,7 @@ const TestimonialsSection: React.FC = () => {
             const selector = gsap.utils.selector(sectionRef);
 
             // Initial States for Header
-            gsap.set(selector('[data-anim="header-bg"]'), { yPercent: 10, opacity: 0 });
+            gsap.set(selector('[data-anim="bg-letter"]'), { scale: 0, rotation: -45, opacity: 0 });
             gsap.set(selector('[data-anim="badge"]'), { opacity: 0, x: -20 });
             gsap.set(selector('[data-anim="title-line"]'), { yPercent: 100 });
             gsap.set(selector('[data-anim="desc"]'), { opacity: 0, y: 20 });
@@ -219,9 +219,9 @@ const TestimonialsSection: React.FC = () => {
                 }
             });
 
-            tl.to(selector('[data-anim="header-bg"]'), { yPercent: 0, opacity: 0.05, duration: 1.5, ease: "power2.out" })
-                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(2)" }, "-=1.2")
-                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "bounce.out" }, "-=1.0")
+            tl.to(selector('[data-anim="bg-letter"]'), { scale: 1, rotation: 0, opacity: 0.05, duration: 1, stagger: 0.1, ease: "back.out(1.7)" })
+                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(2)" }, "-=0.8")
+                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "bounce.out" }, "-=0.8")
                 .to(selector('[data-anim="desc"]'), { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8");
 
         }, sectionRef);
@@ -235,8 +235,12 @@ const TestimonialsSection: React.FC = () => {
             <div className="relative mb-16 md:mb-24 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
                 {/* Background Big Text */}
                 <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
-                    <h2 data-anim="header-bg" className="text-[18vw] font-bold text-white leading-none opacity-0 tracking-tighter text-left">
-                        REVIEWS
+                    <h2 className="text-[18vw] font-bold text-white leading-none tracking-tighter text-left flex">
+                        {"REVIEWS".split("").map((letter, i) => (
+                            <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
+                                {letter}
+                            </span>
+                        ))}
                     </h2>
                 </div>
 
@@ -253,7 +257,7 @@ const TestimonialsSection: React.FC = () => {
                                     Client
                                 </h2>
                             </div>
-                            <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
+                            <div className="overflow-hidden md:pl-0 lg:ml-24">
                                 <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-[#E7C873] leading-[0.9]">
                                     <span className="relative inline-block">
                                         Stories

@@ -23,7 +23,7 @@ export default function Testimonials() {
             const selector = gsap.utils.selector(sectionRef)
 
             // Initial States for Header
-            gsap.set(selector('[data-anim="header-bg"]'), { yPercent: 10, opacity: 0 })
+            gsap.set(selector('[data-anim="bg-letter"]'), { scale: 0, opacity: 0 })
             gsap.set(selector('[data-anim="badge"]'), { opacity: 0, x: -20 })
             gsap.set(selector('[data-anim="title-line"]'), { yPercent: 100 })
             gsap.set(selector('[data-anim="desc"]'), { opacity: 0, y: 20 })
@@ -37,9 +37,9 @@ export default function Testimonials() {
                 }
             })
 
-            tl.to(selector('[data-anim="header-bg"]'), { yPercent: 0, opacity: 0.05, duration: 1.5, ease: "power2.out" })
-                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(2)" }, "-=1.2")
-                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "bounce.out" }, "-=1.0")
+            tl.to(selector('[data-anim="bg-letter"]'), { scale: 1, opacity: 0.05, duration: 1, stagger: { amount: 0.6, from: "center" }, ease: "back.out(1.7)" })
+                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(2)" }, "-=0.8")
+                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "bounce.out" }, "-=0.8")
                 .to(selector('[data-anim="desc"]'), { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
 
             // Left column animations (Stats)
@@ -145,12 +145,16 @@ export default function Testimonials() {
             <div className="relative mb-16 md:mb-24 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
                 {/* Background Big Text */}
                 <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
-                    <h2 data-anim="header-bg" className="text-[18vw] font-bold text-slate-900 leading-none opacity-0 tracking-tighter text-center md:text-left">
-                        REVIEWS
+                    <h2 data-anim="header-bg" className="text-[18vw] font-bold text-slate-900 leading-none opacity-0 tracking-tighter text-left">
+                        {"REVIEWS".split("").map((letter, i) => (
+                            <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
+                                {letter}
+                            </span>
+                        ))}
                     </h2>
                 </div>
 
-                <div className="relative z-10 flex flex-col lg:flex-row items-end justify-between gap-10 lg:gap-20 pt-10">
+                <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 lg:gap-20 pt-10">
                     <div className="flex-1">
                         <div className="flex items-center gap-4 mb-8">
                             <span className="w-12 h-[1px] bg-[#E7C873]"></span>
