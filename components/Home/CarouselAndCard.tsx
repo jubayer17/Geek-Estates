@@ -65,6 +65,14 @@ export default function LocationCarousel() {
   const [canScrollNext, setCanScrollNext] = React.useState(false)
   const cardRefs = React.useRef<(HTMLDivElement | null)[]>([])
 
+  const autoplay = React.useRef(
+    Autoplay({
+      delay: 3500,
+      stopOnInteraction: false,
+      stopOnMouseEnter: true,
+    })
+  )
+
   React.useEffect(() => {
     if (!api) return
 
@@ -76,7 +84,6 @@ export default function LocationCarousel() {
     }
 
     update()
-
     api.on("select", update)
     api.on("reInit", update)
 
