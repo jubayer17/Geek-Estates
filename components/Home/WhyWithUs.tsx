@@ -31,162 +31,194 @@ const valuePoints = [
 
 export default function WhyWithUs() {
   const sectionRef = useRef<HTMLElement>(null)
-  const headingRef = useRef<HTMLHeadingElement>(null)
-  const subtitleRef = useRef<HTMLParagraphElement>(null)
   const cardsRef = useRef<(HTMLDivElement | null)[]>([])
   const ctaRef = useRef<HTMLDivElement>(null)
-  const labelRef = useRef<(HTMLSpanElement)>(null);
 
   useEffect(() => {
-    const section = sectionRef.current
-    const heading = headingRef.current
-    const subtitle = subtitleRef.current
-    const cards = cardsRef.current.filter(Boolean)
-    const cta = ctaRef.current
-    const label = labelRef.current
+    const ctx = gsap.context(() => {
+      const selector = gsap.utils.selector(sectionRef)
 
-    if (!section || !heading || !subtitle) return
+      // Initial States - Prevent FOUC (Flash of Unstyled Content)
+      // Set opacity: 0 immediately via CSS class or inline style in render would be even better, 
+      // but GSAP set here should be fast enough if this runs early.
+      gsap.set(selector('[data-anim="bg-letter"]'), { x: -100, opacity: 0 })
+      gsap.set(selector('[data-anim="badge"]'), { opacity: 0, x: -20 })
+      gsap.set(selector('[data-anim="title-line"]'), { yPercent: 100 })
+      gsap.set(selector('[data-anim="desc"]'), { opacity: 0, y: 20 })
+      gsap.set(cardsRef.current, { opacity: 0, y: 100 })
+      gsap.set(ctaRef.current, { opacity: 0, y: 20 })
 
-    if (label) {
-      gsap.set(label, { opacity: 0, y: 20, scale: 0.95 })
-    }
-    gsap.set(heading, { opacity: 0, y: 50, filter: 'blur(8px)' })
-    gsap.set(subtitle, { opacity: 0, y: 30 })
-    gsap.set(cards, { opacity: 0, y: 50 })
-    gsap.set(cta, { opacity: 0, y: 20 })
+      // Force a layout recalculation to ensure initial states are applied before animation starts
+      // This is sometimes needed with ScrollTrigger to prevent jumps
+      ScrollTrigger.refresh()
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 80%',
-        end: 'top 20%',
-        toggleActions: 'play none none none',
-      }
-    })
+      // Timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 75%",
+          toggleActions: "play none none reverse"
+        }
+      })
 
-    if (label) {
-      tl.to(label, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.7,
-        ease: 'power2.out'
-      });
-    }
-    tl
-      .to(heading, {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        duration: 1.1,
-        ease: 'power3.out'
-      }, label ? '-=0.4' : '+=0')
-      .to(subtitle, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out'
-      }, '-=0.7')
-      .to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        stagger: 0.13,
-        ease: 'power2.out'
-      }, '-=0.5')
-      .to(cta, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out'
-      }, '-=0.2')
+      tl.to(selector('[data-anim="bg-letter"]'), { x: 0, opacity: 0.03, duration: 1.2, stagger: 0.1, ease: "power3.out" })
+        .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=1.0")
+        .to(selector('[data-anim="title-line"]'), { yPercent: 0, opacity: 1, duration: 1.2, stagger: 0.1, ease: "back.out(1.7)" }, "-=0.8")
+        .to(selector('[data-anim="desc"]'), { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
+        .to(cardsRef.current, { opacity: 1, y: 0, duration: 1.5, stagger: 0.15, ease: "power4.out" }, "-=0.6")
+        .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
+    }, sectionRef)
+    return () => ctx.revert()
   }, [])
 
   return (
     <section
       ref={sectionRef}
-      className='lg:mt-24 md:mt-20 mt-14 lg:mb-8 max-w-550'
+      className='lg:mt-24 md:mt-20 mt-14 lg:mb-8 w-full overflow-hidden pt-12 md:pt-20'
     >
       {/* Header Section */}
-      <div className='flex flex-col py-1 items-center max-w-2xl mx-auto px-4 lg:px-12'>
-        {/* Golden label */}
-        <div className="flex items-center gap-3 mb-4">
-          <span className="h-px w-8 bg-linear-to-r from-transparent to-[#E7C873]"></span>
-          <span ref={labelRef} className="text-[#E7C873] text-xs font-semibold tracking-[0.25em] uppercase">Why Us</span>
-          <span className="h-px w-8 bg-linear-to-l from-transparent to-[#E7C873]"></span>
-        </div>
-        <h2
-          ref={headingRef}
-          className="lg:text-4xl md:text-3xl text-2xl font-light text-center text-gray-900 tracking-tight mb-4 md:mb-6 drop-shadow-lg"
-          style={{ filter: 'blur(0px)' }}
-        >
-          Why You Should <span className="font-semibold bg-linear-to-r from-[#E7C873] via-gray-900 to-[#E7C873] bg-clip-text text-transparent">Work With Us</span>
-        </h2>
-        <p
-          ref={subtitleRef}
-          className="mt-4 text-base md:text-lg text-gray-500 text-center leading-relaxed max-w-xl"
-        >
-          Discover the difference of working with a team dedicated to making your real estate journey <span className="text-[#E7C873] font-medium">seamless and rewarding</span>.
-        </p>
-      </div>
-
-      {/* Value Points Grid */}
-      <div className="w-full py-12 sm:py-16 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
-
-            {valuePoints.map((point, index) => (
-              <div
-                key={index}
-                ref={(el) => { cardsRef.current[index] = el }}
-                className="flex flex-col items-center text-center px-6 py-8 rounded-2xl border border-[#E7C873]/20 bg-white/90 shadow-md hover:shadow-xl hover:scale-[1.035] transition-all duration-500 hover:border-[#E7C873] group"
-                style={{ willChange: 'transform, box-shadow' }}
-              >
-                {/* Icon Container */}
-                <div className="w-16 h-16 mb-6 flex items-center justify-center bg-[#E7C873]/10 rounded-full border border-[#E7C873]/20 group-hover:shadow-lg group-hover:bg-[#E7C873]/20 transition-all duration-500">
-                  <Image
-                    src={point.icon}
-                    alt={`${point.title} Icon`}
-                    width={28}
-                    height={28}
-                    className="opacity-90"
-                  />
-                </div>
-
-                {/* Title */}
-                <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3 tracking-tight">
-                  {point.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm sm:text-base text-gray-500 leading-relaxed max-w-xs">
-                  {point.description}
-                </p>
-              </div>
+      <div className="relative mb-16 md:mb-24 max-w-450 mx-auto px-4 sm:px-6 lg:px-12">
+        {/* Background Big Text */}
+        <div className="absolute -top-16 md:-top-24 left-10 w-full overflow-hidden pointer-events-none select-none z-0">
+          <h2 className="text-[18vw] font-bold text-slate-900 leading-none tracking-tighter text-left flex">
+            {"TRUSTED".split("").map((letter, i) => (
+              <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
+                {letter}
+              </span>
             ))}
+          </h2>
+        </div>
 
+        <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 lg:gap-20 pt-10">
+          <div className="flex-1">
+            <div className="flex items-center ml-0 md:ml-4 gap-4 mb-8">
+              <span className="w-12 h-px bg-[#E7C873]"></span>
+              <span data-anim="badge" className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm opacity-0">Our Values</span>
+            </div>
+
+            <div className="relative left-0 md:left-4">
+              <div className="overflow-hidden">
+                <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-slate-900 tracking-tight leading-[0.9] opacity-0">
+                  Why
+                </h2>
+              </div>
+              <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
+                <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-slate-800 leading-[0.9] opacity-0">
+                  <span className="relative inline-block">
+                    Choose Us
+                    <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
+                  </span>
+                </h2>
+              </div>
+            </div>
           </div>
 
-          {/* Subtle CTA */}
-          <div
-            ref={ctaRef}
-            className="flex justify-center mt-12 lg:mt-16"
-          >
-            <button className="group inline-flex items-center gap-2 text-[#E7C873] hover:text-gray-900 font-medium text-base transition-colors duration-400 bg-[#E7C873]/10 px-6 py-2 rounded-full shadow hover:shadow-lg">
-              <span>Learn more about our approach</span>
-              <svg
-                className="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
+          <div className="lg:max-w-md pb-4">
+            <p data-anim="desc" className="text-slate-600 text-lg leading-relaxed border-l border-slate-300 pl-6 opacity-0">
+              Discover the difference of working with a team dedicated to making your real estate journey <span className="text-[#E7C873] font-medium">seamless and rewarding</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Unique 'Cinematic Lens' Accordion Structure */}
+      <div className="w-full py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1800px] mx-auto">
+          {/* The Stage */}
+          <div className="flex flex-col lg:flex-row h-auto lg:h-[90vh] min-h-[700px] gap-4 lg:gap-6">
+
+            {valuePoints.map((point, index) => {
+              // Define meaningful vertical labels based on the index/content
+              const verticalLabel = index === 0 ? "Inventory" : index === 1 ? "Transaction" : "Trusted";
+
+              return (
+                <div
+                  key={index}
+                  ref={(el) => { cardsRef.current[index] = el }}
+                  className="group relative flex-1 w-full lg:w-auto h-[600px] lg:h-auto hover:flex-[3] transition-all duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] overflow-hidden cursor-pointer opacity-0"
+                >
+                  {/* Background Image (Parallax Effect on Hover) */}
+                  <div className="absolute inset-0 w-full h-full transform scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-out">
+                    <Image
+                      src={`/outdoor-real-state/${index + 1}.avif`}
+                      alt={point.title}
+                      fill
+                      className="object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"
+                    />
+                    {/* Gradient Overlay - Darker on hover for text contrast */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-slate-900/40 via-slate-900/20 to-slate-900/90 group-hover:from-slate-900/30 group-hover:via-slate-900/50 group-hover:to-slate-900 transition-all duration-700"></div>
+                  </div>
+
+                  {/* Cover Text (Collapsed State) - Responsive: Horizontal on Mobile, Vertical on Desktop */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20 transition-all duration-700 ease-in-out group-hover:-translate-y-20 group-hover:opacity-0">
+                    <h3 className="text-4xl sm:text-5xl md:text-6xl font-serif italic text-white/80 tracking-widest uppercase 
+                      text-center lg:[writing-mode:vertical-rl] lg:rotate-180 whitespace-nowrap drop-shadow-lg">
+                      {verticalLabel}
+                    </h3>
+                  </div>
+
+                  {/* Expanded Content (Active State) - Unified Interaction for Mobile & Desktop */}
+                  <div className="absolute inset-x-0 bottom-0 p-8 md:p-12 flex flex-col justify-end z-30
+                    opacity-0 translate-y-12
+                    group-hover:opacity-100 group-hover:translate-y-0 
+                    transition-all duration-700 ease-out"
+                  >
+                    {/* Decorative Line */}
+                    <div className="w-16 h-1 bg-[#E7C873] mb-6 
+                      transform scale-x-0 group-hover:scale-x-100 
+                      transition-transform duration-700 ease-out origin-left delay-100"
+                    ></div>
+
+                    <div className="flex items-center gap-4 mb-6
+                      opacity-0 translate-y-8
+                      group-hover:opacity-100 group-hover:translate-y-0
+                      transition-all duration-700 ease-out delay-200"
+                    >
+                      <div className="p-3 bg-[#E7C873] rounded-none text-slate-900 shadow-[0_0_20px_rgba(231,200,115,0.4)]">
+                        <Image
+                          src={point.icon}
+                          alt="icon"
+                          width={28}
+                          height={28}
+                          className="invert brightness-0"
+                        />
+                      </div>
+                      <span className="text-[#E7C873] font-mono text-sm tracking-widest uppercase">0{index + 1} — Feature</span>
+                    </div>
+
+                    <h3 className="text-4xl md:text-5xl font-light text-white mb-6 leading-tight
+                      opacity-0 translate-y-8
+                      group-hover:opacity-100 group-hover:translate-y-0
+                      transition-all duration-700 ease-out delay-300"
+                    >
+                      {point.title}
+                    </h3>
+
+                    <p className="text-slate-300 text-lg max-w-lg leading-relaxed mb-10
+                      opacity-0 translate-y-8 
+                      group-hover:opacity-100 group-hover:translate-y-0 
+                      transition-all duration-700 ease-out delay-400"
+                    >
+                      {point.description}
+                    </p>
+
+                    <div className="
+                      opacity-0 translate-y-8
+                      group-hover:opacity-100 group-hover:translate-y-0
+                      transition-all duration-700 ease-out delay-500"
+                    >
+                      <button className="px-10 py-4 border border-white/20 bg-white/5 backdrop-blur-sm text-white hover:bg-[#E7C873] hover:border-[#E7C873] hover:text-slate-900 transition-all duration-300 uppercase tracking-widest text-xs font-bold">
+                        Explore More
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Hover Border Glow */}
+                  <div className="absolute inset-0 border-[1px] border-[#E7C873]/50 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-40"></div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </div>
