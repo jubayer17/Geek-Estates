@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Phone, User, MoreVertical, X } from "lucide-react"
+import { Phone, User, MoreVertical, X, ArrowUpRight } from "lucide-react"
 import gsap from "gsap"
 
 const navLinks = [
@@ -162,32 +162,32 @@ export default function Navbar() {
       <nav
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${scrolled
-          ? "bg-white/95 backdrop-blur-lg shadow-[0_2px_30px_rgba(0,0,0,0.08)]"
+          ? "bg-white/80 backdrop-blur-md shadow-[0_2px_30px_rgba(0,0,0,0.04)] border-b border-white/20"
           : "bg-transparent"
           }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
           <div
-            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-16 lg:h-20" : "h-20 lg:h-24"
+            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-20 lg:h-24" : "h-24 lg:h-32"
               }`}
           >
             {/* Logo */}
             <div
               ref={logoRef}
-              className={`text-xl lg:text-2xl font-bold tracking-tight transition-colors duration-500 ${scrolled ? "text-[#1F4B43]" : "text-white"
+              className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${scrolled ? "text-[#1F4B43]" : "text-white"
                 }`}
             >
-              <span className="font-light">Geek</span>
-              <span className="text-[#E7C873]">Estate</span>
+              <span className="font-light tracking-tighter">Geek</span>
+              <span className="text-[#E7C873] font-serif italic">Estate</span>
             </div>
 
             {/* Desktop Links */}
-            <div ref={linksRef} className="hidden lg:flex items-center gap-10">
+            <div ref={linksRef} className="hidden lg:flex items-center gap-12">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-sm font-medium tracking-wide transition-all duration-300 py-2 group ${scrolled
+                  className={`relative text-base font-medium tracking-wide transition-all duration-300 py-2 group ${scrolled
                     ? "text-gray-600 hover:text-[#1F4B43]"
                     : "text-white/90 hover:text-white"
                     }`}
@@ -197,7 +197,7 @@ export default function Navbar() {
                   {link.label}
                   {/* Animated underline */}
                   <span
-                    className={`absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-300 ease-out ${scrolled ? "bg-[#1F4B43]" : "bg-[#E7C873]"
+                    className={`absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500 ease-out ${scrolled ? "bg-[#1F4B43]" : "bg-[#E7C873]"
                       }`}
                   />
                 </Link>
@@ -205,26 +205,26 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Actions */}
-            <div ref={actionsRef} className="hidden lg:flex items-center gap-5">
-              <div className={`flex items-center gap-2 transition-colors duration-500 ${scrolled ? "text-gray-600" : "text-white/90"
+            <div ref={actionsRef} className="hidden lg:flex items-center gap-8">
+              <div className={`flex items-center gap-3 transition-colors duration-500 ${scrolled ? "text-gray-600" : "text-white/90"
                 }`}>
-                <Phone size={16} className="opacity-70" />
-                <span className="text-sm font-medium">+880 1914 782 366</span>
+                <Phone size={18} className="opacity-80" />
+                <span className="text-sm font-medium tracking-wide">+880 1914 782 366</span>
               </div>
 
-              <div className={`w-px h-6 ${scrolled ? "bg-gray-200" : "bg-white/20"}`} />
+              <div className={`w-px h-8 ${scrolled ? "bg-gray-200" : "bg-white/20"}`} />
 
               <button
-                className={`p-2 rounded-full transition-all duration-300 ${scrolled
+                className={`p-3 rounded-full transition-all duration-300 ${scrolled
                   ? "text-gray-600 hover:bg-gray-100"
                   : "text-white hover:bg-white/10"
                   }`}
               >
-                <User size={20} />
+                <User size={22} />
               </button>
 
               <Button
-                className="rounded-full px-6 py-5 text-sm font-semibold bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 transition-all duration-300"
+                className="rounded-full px-10 py-7 text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 transition-all duration-300 shadow-lg hover:shadow-[#E7C873]/40"
                 onMouseEnter={handleButtonHover}
                 onMouseLeave={handleButtonLeave}
               >
@@ -232,16 +232,20 @@ export default function Navbar() {
               </Button>
             </div>
 
-            {/* Mobile Menu Button - 3-dot vertical ellipsis */}
+            {/* Mobile Menu Button - Premium Hamburger */}
             <button
-              className={`lg:hidden p-2 rounded-full transition-all duration-300 ${scrolled
+              className={`lg:hidden p-2 rounded-full transition-all duration-300 group ${scrolled
                 ? "text-gray-900 hover:bg-gray-100"
                 : "text-white hover:bg-white/10"
                 }`}
               onClick={() => setOpen(true)}
               aria-label="Open menu"
             >
-              <MoreVertical size={24} />
+              <div className="flex flex-col gap-1.5 items-end">
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-6 group-hover:w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-4 group-hover:w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
+              </div>
             </button>
           </div>
         </div>
@@ -253,64 +257,68 @@ export default function Navbar() {
           {/* Backdrop overlay with blur */}
           <div
             ref={overlayRef}
-            className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] bg-black/40 backdrop-blur-md"
             onClick={closeMenu}
           />
 
-          {/* Slide-in Menu Panel */}
+          {/* Slide-in Menu Panel - Wider & Elegant */}
           <div
             ref={mobileMenuRef}
-            className="fixed top-0 right-0 bottom-0 z-[70] w-[85%] max-w-sm bg-white shadow-2xl"
+            className="fixed top-0 right-0 bottom-0 z-[70] w-full sm:w-[450px] bg-white shadow-2xl flex flex-col"
           >
             {/* Menu Header */}
-            <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-              <div className="text-xl font-bold tracking-tight text-[#1F4B43]">
-                <span className="font-light">Geek</span>
-                <span className="text-[#E7C873]">Estate</span>
+            <div className="flex items-center justify-between px-8 py-8 border-b border-gray-100">
+              <div className="text-2xl font-bold tracking-tight text-[#1F4B43]">
+                <span className="font-light tracking-tighter">Geek</span>
+                <span className="text-[#E7C873] font-serif italic">Estate</span>
               </div>
               <button
                 onClick={closeMenu}
-                className="p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors"
+                className="p-2 rounded-full text-gray-400 hover:text-gray-900 hover:bg-gray-50 transition-all duration-300"
                 aria-label="Close menu"
               >
-                <X size={24} />
+                <X size={28} />
               </button>
             </div>
 
             {/* Menu Links */}
-            <div className="px-6 py-8">
-              <nav className="flex flex-col gap-2">
+            <div className="flex-1 px-8 py-10 overflow-y-auto">
+              <nav className="flex flex-col gap-6">
                 {navLinks.map((link, index) => (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={closeMenu}
-                    className="menu-item flex items-center gap-4 px-4 py-4 rounded-xl text-gray-700 hover:text-[#1F4B43] hover:bg-[#1F4B43]/5 transition-all duration-300 text-lg font-medium"
+                    className="menu-item group flex items-center justify-between text-3xl font-light text-slate-800 hover:text-[#E7C873] transition-colors duration-300"
                     style={{ transitionDelay: `${index * 50}ms` }}
                   >
-                    {link.label}
+                    <span className="font-serif italic group-hover:pl-4 transition-all duration-300">{link.label}</span>
+                    <ArrowUpRight className="opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={24} />
                   </Link>
                 ))}
               </nav>
             </div>
 
             {/* Menu Footer */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gray-50 border-t border-gray-100">
-              <div className="menu-item flex items-center gap-3 text-gray-600 mb-4">
-                <Phone size={18} />
-                <span className="text-sm font-medium">+880 1914 782 366</span>
+            <div className="p-8 bg-gray-50/50 border-t border-gray-100">
+              <div className="menu-item flex flex-col gap-6">
+                <div className="flex items-center gap-4 text-gray-600">
+                  <div className="w-10 h-10 rounded-full bg-[#E7C873]/10 flex items-center justify-center text-[#E7C873]">
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest">Call Us</p>
+                    <p className="text-lg font-medium text-gray-900">+880 1914 782 366</p>
+                  </div>
+                </div>
+
+                <Button
+                  className="w-full rounded-full py-7 text-base font-bold tracking-widest uppercase bg-[#1F4B43] hover:bg-[#163832] text-white shadow-lg shadow-[#1F4B43]/20 transition-all duration-300"
+                  onClick={closeMenu}
+                >
+                  Add Property
+                </Button>
               </div>
-
-              <Button
-                className="menu-item w-full rounded-full py-6 text-base font-semibold bg-[#1F4B43] hover:bg-[#163832] text-white transition-all duration-300"
-                onClick={closeMenu}
-              >
-                Add Property
-              </Button>
-
-              <p className="menu-item text-xs text-gray-400 text-center mt-4">
-                © 2025 GeekEstate. All rights reserved.
-              </p>
             </div>
           </div>
         </>
