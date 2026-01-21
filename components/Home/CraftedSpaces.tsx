@@ -16,8 +16,7 @@ export default function CraftedSpaces() {
     const [isAnimating, setIsAnimating] = useState(false)
 
     const sectionRef = useRef<HTMLElement>(null)
-    const headingRef = useRef<HTMLHeadingElement>(null)
-    const subtitleRef = useRef<HTMLParagraphElement>(null)
+
     const categoriesRef = useRef<HTMLDivElement>(null)
     const slideshowRef = useRef<HTMLDivElement>(null)
     const trackRef = useRef<HTMLDivElement>(null)
@@ -247,120 +246,96 @@ export default function CraftedSpaces() {
 
     // Scroll-triggered entrance animation
     useEffect(() => {
-        const section = sectionRef.current
-        const heading = headingRef.current
-        const subtitle = subtitleRef.current
-        const categoriesEl = categoriesRef.current
-        const slideshow = slideshowRef.current
+        const ctx = gsap.context(() => {
+            const selector = gsap.utils.selector(sectionRef)
 
-        if (!section || !heading || !subtitle || !categoriesEl || !slideshow) return
+            // Initial States
+            gsap.set(selector('[data-anim="bg-letter"]'), { y: 100, opacity: 0 })
+            gsap.set(selector('[data-anim="badge"]'), { opacity: 0, x: -20 })
+            gsap.set(selector('[data-anim="title-line"]'), { yPercent: 100 })
+            gsap.set(selector('[data-anim="desc"]'), { opacity: 0, y: 20 })
 
-        // Get the decorative elements
-        const headerContainer = heading.parentElement
-        const decorativeLine = headerContainer?.querySelector('.flex.items-center.justify-center')
+            gsap.set(categoriesRef.current, { opacity: 0, y: 30 })
+            gsap.set(slideshowRef.current, { opacity: 0, y: 50 })
 
-        // Set initial states with elegant starting positions
-        if (decorativeLine) {
-            gsap.set(decorativeLine, { opacity: 0, y: 20, scale: 0.9 })
-        }
-        gsap.set(heading, { opacity: 0, y: 60, filter: 'blur(8px)' })
-        gsap.set(subtitle, { opacity: 0, y: 40 })
-        gsap.set(categoriesEl.children, { opacity: 0, y: 30 })
-        gsap.set(slideshow, { opacity: 0, y: 50 })
-
-        // Create scroll-triggered timeline with elegant animations
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: section,
-                start: "top 70%",
-                toggleActions: "play none none none",
-            }
-        })
-
-        tl
-            // Decorative line fades in first
-            .to(decorativeLine || {}, {
-                opacity: 1,
-                y: 0,
-                scale: 1,
-                duration: 0.8,
-                ease: "power2.out"
+            // Timeline
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                }
             })
-            // Title fades in with blur effect
-            .to(heading, {
-                opacity: 1,
-                y: 0,
-                filter: 'blur(0px)',
-                duration: 1.1,
-                ease: "power3.out"
-            }, "-=0.5")
-            // Subtitle follows with elegant timing
-            .to(subtitle, {
-                opacity: 1,
-                y: 0,
-                duration: 0.9,
-                ease: "power2.out"
-            }, "-=0.6")
-            // Category cards stagger in elegantly
-            .to(categoriesEl.children, {
-                opacity: 1,
-                y: 0,
-                duration: 0.7,
-                stagger: 0.08,
-                ease: "power2.out"
-            }, "-=0.4")
-            // Slideshow container fades in
-            .to(slideshow, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                ease: "power2.out"
-            }, "-=0.3")
 
-        return () => {
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-        }
+            tl.to(selector('[data-anim="bg-letter"]'), { y: 0, opacity: 0.03, duration: 1, stagger: 0.05, ease: "power3.out" })
+                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "power3.out" }, "-=0.8")
+                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "power4.out" }, "-=0.8")
+                .to(selector('[data-anim="desc"]'), { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8")
+                .to(categoriesRef.current, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.6")
+                .to(slideshowRef.current, { opacity: 1, y: 0, duration: 1, ease: "power2.out" }, "-=0.6")
+
+        }, sectionRef)
+        return () => ctx.revert()
     }, [])
 
     return (
         <section
             ref={sectionRef}
-            className="py-16 bg-[#FAFAFA]"
+            className="py-20 md:py-32 bg-[#FAFAFA] overflow-hidden relative"
         >
-            <div className="max-w-450 mx-auto px-4 sm:px-6 lg:px-12">
+            {/* Architectural Grid Background */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+                style={{
+                    backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)',
+                    backgroundSize: '40px 40px'
+                }}>
+            </div>
 
-                {/* Section Header - Premium & Elegant */}
-                <div className="text-center mb-14 md:mb-18 lg:mb-24">
-                    {/* Decorative line */}
-                    <div className="flex items-center justify-center gap-4 mb-6 md:mb-8">
-                        <span className="h-px w-8 md:w-12 bg-linear-to-r from-transparent to-[#E7C873]"></span>
-                        <span className="text-[#E7C873] text-xs md:text-sm font-medium tracking-[0.3em] uppercase">
-                            Portfolio
-                        </span>
-                        <span className="h-px w-8 md:w-12 bg-linear-to-l from-transparent to-[#E7C873]"></span>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
+
+                {/* Unique Header Structure */}
+                <div className="relative mb-16 md:mb-24">
+                    {/* Background Big Text */}
+                    <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
+                        <h2 className="text-[18vw] font-bold text-slate-900 leading-none tracking-tighter text-left flex">
+                            {"GALLERY".split("").map((letter, i) => (
+                                <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
+                                    {letter}
+                                </span>
+                            ))}
+                        </h2>
                     </div>
 
-                    <h2
-                        ref={headingRef}
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-[4rem] font-light text-gray-900 tracking-tight mb-5 md:mb-7 leading-[1.1]"
-                    >
-                        Crafted Spaces of{' '}
-                        <span className="relative inline-block">
-                            <span className="font-medium bg-linear-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
-                                Distinction
-                            </span>
-                            <span className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-0.5 bg-linear-to-r from-transparent via-[#E7C873] to-transparent"></span>
-                        </span>
-                    </h2>
+                    <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 lg:gap-20 pt-10">
+                        <div className="flex-1">
+                            <div className="flex items-center ml-0 md:ml-4 gap-4 mb-8">
+                                <span className="w-12 h-[1px] bg-[#E7C873]"></span>
+                                <span data-anim="badge" className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm">Our Portfolio</span>
+                            </div>
 
-                    <p
-                        ref={subtitleRef}
-                        className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed px-4 font-light"
-                    >
-                        Explore our portfolio of meticulously designed properties, each representing
-                        <span className="text-gray-700 font-normal"> the pinnacle of architectural excellence </span>
-                        and refined living.
-                    </p>
+                            <div className="relative left-0 md:left-4">
+                                <div className="overflow-hidden">
+                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-slate-900 tracking-tight leading-[0.9]">
+                                        Crafted
+                                    </h2>
+                                </div>
+                                <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
+                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-slate-800 leading-[0.9]">
+                                        <span className="relative inline-block">
+                                            Spaces
+                                            <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
+                                        </span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="lg:max-w-md pb-4">
+                            <p data-anim="desc" className="text-slate-600 text-lg leading-relaxed border-l border-slate-300 pl-6">
+                                Immerse yourself in a collection of properties where <span className="text-[#E7C873] font-medium">architectural brilliance</span> meets timeless elegance. Each space is a testament to refined living.
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Category Filter Cards */}
