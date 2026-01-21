@@ -1,81 +1,422 @@
+"use client"
+
+import { useEffect, useRef, useState, useCallback } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Badge } from "@/components/ui/badge"
-import { Home, Building2, Building, Search } from "lucide-react"
+import { ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
+import gsap from "gsap"
+import { heroSlides } from "@/lib/data/heroSlidesData"
 
 export default function HeroSection() {
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+  const slidesRef = useRef<(HTMLDivElement | null)[]>([])
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([])
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null)
+  const currentSlideRef = useRef(0) // Track current slide in ref for animations
+  const progressRef = useRef<HTMLDivElement>(null)
+
+  const AUTOPLAY_DELAY = 4000
+
+  // Premium Slide In Animation
+  const animateSlideIn = useCallback((index: number) => {
+    const slide = slidesRef.current[index]
+    const content = contentRefs.current[index]
+    if (!slide || !content) return
+
+    const slideData = heroSlides[index]
+    const tl = gsap.timeline({
+      defaults: { ease: "power3.out" }
+    })
+
+    // Reset slide and content state before animating
+    gsap.set(slide, {
+      zIndex: 2,
+      opacity: 1,
+      xPercent: 0,
+      yPercent: 0,
+      scale: 1,
+      rotation: 0,
+      clipPath: "inset(0% 0% 0% 0%)" // Reset clip-path
+    })
+    gsap.set(content, { opacity: 1 })
+
+    // Elements to animate
+    const image = slide.querySelector(".hero-image")
+    const badge = content.querySelector(".hero-badge")
+    const headingLines = content.querySelectorAll(".hero-heading-line")
+    const subheading = content.querySelector(".hero-subheading")
+    const cta = content.querySelector(".hero-cta")
+
+    // --- 1. Unique Image Transitions ---
+    switch (slideData.transition) {
+      case "slideRight":
+        // Slide in from right
+        tl.fromTo(slide,
+          { xPercent: 100 },
+          { xPercent: 0, duration: 1.0, ease: "power4.inOut" },
+          0
+        )
+        tl.fromTo(image,
+          { scale: 1.2 },
+          { scale: 1, duration: 1.0, ease: "power2.out" },
+          0
+        )
+        break
+
+      case "verticalReveal":
+        // Reveal from bottom using clip-path
+        tl.fromTo(slide,
+          { clipPath: "inset(100% 0% 0% 0%)" },
+          { clipPath: "inset(0% 0% 0% 0%)", duration: 1.0, ease: "power4.inOut" },
+          0
+        )
+        tl.fromTo(image,
+          { scale: 1.2, yPercent: -10 },
+          { scale: 1, yPercent: 0, duration: 1.0, ease: "power2.out" },
+          0
+        )
+        break
+
+      case "zoomParallax":
+        // Deep zoom effect
+        tl.fromTo(image,
+          { scale: 1.5, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.4, ease: "power2.out" },
+          0
+        )
+        break
+
+      case "crossfadeRotate":
+        // Subtle rotation with fade
+        tl.fromTo(image,
+          { scale: 1.3, rotation: 5, opacity: 0 },
+          { scale: 1, rotation: 0, opacity: 1, duration: 1.2, ease: "power2.out" },
+          0
+        )
+        break
+
+      case "fadeScale":
+      default:
+        // Classic fade with scale
+        tl.fromTo(image,
+          { scale: 1.2, opacity: 0 },
+          { scale: 1, opacity: 1, duration: 1.2, ease: "power2.out" },
+          0
+        )
+        break
+    }
+
+    // --- 2. Unique Text Animations ---
+    const textStagger = 0.05
+    const textDuration = 0.7
+    const textDelay = 0.3 // Start text animation after slide transition starts
+
+    // Helper for common elements
+    const elements = [badge, ...headingLines, subheading, cta].filter(Boolean)
+
+    switch (slideData.textAnimation) {
+      case "dropIn":
+        // Drop from top with bounce
+        tl.fromTo(elements,
+          { y: -100, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.05, duration: 0.8, ease: "bounce.out" },
+          textDelay
+        )
+        break
+
+      case "sideConnect":
+        // Heading from left, Subheading/CTA from right (Meeting in middle)
+        if (badge) tl.fromTo(badge, { opacity: 0, scale: 0 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out" }, textDelay)
+
+        if (headingLines.length > 0) {
+          tl.fromTo(headingLines,
+            { x: -100, opacity: 0 },
+            { x: 0, opacity: 1, stagger: 0.05, duration: 0.7, ease: "power3.out" },
+            textDelay + 0.1
+          )
+        }
+
+        if (subheading) {
+          tl.fromTo(subheading,
+            { x: 100, opacity: 0 },
+            { x: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+            textDelay + 0.2
+          )
+        }
+
+        if (cta) {
+          tl.fromTo(cta,
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.7, ease: "power3.out" },
+            textDelay + 0.3
+          )
+        }
+        break
+
+      case "rotateUp":
+        // 3D Rotation from bottom
+        tl.fromTo(elements,
+          { rotationX: 90, y: 50, opacity: 0, transformOrigin: "50% 100%" },
+          { rotationX: 0, y: 0, opacity: 1, stagger: 0.05, duration: 0.8, ease: "power3.out" },
+          textDelay
+        )
+        break
+
+      case "blurReveal":
+        // Blur in
+        tl.fromTo(elements,
+          { filter: "blur(20px)", opacity: 0, scale: 1.1 },
+          { filter: "blur(0px)", opacity: 1, scale: 1, stagger: 0.08, duration: 1.0, ease: "power2.out" },
+          textDelay
+        )
+        break
+
+      case "clipReveal":
+        // Reveal via clip-path (wipe effect)
+        tl.fromTo(elements,
+          { clipPath: "inset(0 100% 0 0)", opacity: 0 },
+          { clipPath: "inset(0 0% 0 0)", opacity: 1, stagger: 0.08, duration: 0.8, ease: "power4.inOut" },
+          textDelay
+        )
+        break
+
+      default:
+        // Fallback: Standard Stagger Up
+        tl.fromTo(elements,
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.05, duration: 0.7, ease: "power3.out" },
+          textDelay
+        )
+        break
+    }
+
+    return tl
+  }, [])
+
+  // Premium Slide Out Animation
+  const animateSlideOut = useCallback((index: number) => {
+    const slide = slidesRef.current[index]
+    const content = contentRefs.current[index]
+    if (!slide || !content) return
+
+    const tl = gsap.timeline()
+
+    // Elements
+    const contentElements = content.querySelectorAll(".hero-badge, .hero-heading-line, .hero-subheading, .hero-cta")
+
+    // 1. Fade out content quickly
+    tl.to(contentElements, { opacity: 0, y: -10, duration: 0.4, stagger: 0.05 })
+
+    // 2. Drop z-index (Image stays visible to be covered by next slide)
+    tl.to(slide, { zIndex: 1, duration: 0.1 })
+
+    return tl
+  }, [])
+
+  const goToSlide = useCallback((index: number) => {
+    if (isAnimating || index === currentSlideRef.current) return
+
+    setIsAnimating(true)
+    const previousSlide = currentSlideRef.current
+    currentSlideRef.current = index
+    setCurrentSlide(index)
+
+    // Restart progress bar
+    if (progressRef.current) {
+      gsap.fromTo(progressRef.current, { scaleX: 0 }, { scaleX: 1, duration: AUTOPLAY_DELAY / 1000, ease: "none" })
+    }
+
+    // Animate
+    animateSlideOut(previousSlide)
+    const inTl = animateSlideIn(index)
+
+    inTl?.eventCallback("onComplete", () => {
+      setIsAnimating(false)
+    })
+  }, [isAnimating, animateSlideIn, animateSlideOut])
+
+  const goToNext = useCallback(() => {
+    const nextIndex = (currentSlideRef.current + 1) % heroSlides.length
+    goToSlide(nextIndex)
+  }, [goToSlide])
+
+  const goToPrev = useCallback(() => {
+    const prevIndex = (currentSlideRef.current - 1 + heroSlides.length) % heroSlides.length
+    goToSlide(prevIndex)
+  }, [goToSlide])
+
+  // Initial Load
+  useEffect(() => {
+    // Hide all slides initially except the first one (set invisible for animation)
+    slidesRef.current.forEach((slide, i) => {
+      if (slide) {
+        if (i === 0) {
+          gsap.set(slide, { opacity: 1, zIndex: 2 })
+          // Set initial state for content to avoid FOUC
+          const content = contentRefs.current[0]
+          if (content) {
+            const elements = content.querySelectorAll(".hero-badge, .hero-heading-line, .hero-subheading, .hero-cta")
+            gsap.set(elements, { opacity: 0, y: 20 })
+          }
+        } else {
+          gsap.set(slide, { opacity: 0, zIndex: 1 })
+        }
+      }
+    })
+
+    // Start first slide animation
+    const timer = setTimeout(() => animateSlideIn(0), 100)
+
+    // Start progress bar
+    if (progressRef.current) {
+      gsap.fromTo(progressRef.current, { scaleX: 0 }, { scaleX: 1, duration: AUTOPLAY_DELAY / 1000, ease: "none" })
+    }
+
+    return () => clearTimeout(timer)
+  }, [animateSlideIn])
+
+  // Autoplay
+  useEffect(() => {
+    if (isAnimating) return
+
+    autoplayRef.current = setTimeout(() => {
+      goToNext()
+    }, AUTOPLAY_DELAY)
+
+    return () => {
+      if (autoplayRef.current) clearTimeout(autoplayRef.current)
+    }
+  }, [currentSlide, isAnimating, goToNext])
+
   return (
     <section
-      className="relative min-h-dvh md:min-h-[90vh] flex items-center justify-center bg-cover bg-center px-4"
-      style={{ backgroundImage: "url('/BannerImage.jpg')" }}
+      ref={sectionRef}
+      className="relative min-h-[100dvh] w-full overflow-hidden bg-black"
+      onMouseEnter={() => { if (autoplayRef.current) clearTimeout(autoplayRef.current) }}
+      onMouseLeave={() => {
+        if (!isAnimating) autoplayRef.current = setTimeout(goToNext, AUTOPLAY_DELAY)
+      }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 " />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl w-full text-center">
-        
-        {/* Top badge */}
-        <Badge
-          variant="outline"
-          className="mb-4 md:mb-6 rounded-full px-4 md:px-6 py-1.5 md:py-2 text-xs md:text-sm border-emerald-700 text-emerald-900 bg-white/80 backdrop-blur"
+      {/* Slides */}
+      {heroSlides.map((slide, index) => (
+        <div
+          key={slide.id}
+          ref={(el) => { slidesRef.current[index] = el }}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-0 ${index === 0 ? 'opacity-100 z-20' : 'opacity-0 z-10'}`}
         >
-          LET US GUIDE YOUR HOME
-        </Badge>
+          {/* Image Container with Zoom Effect */}
+          <div className="hero-image absolute inset-0 w-full h-full">
+            <Image
+              src={slide.image}
+              alt={slide.heading}
+              fill
+              priority={index === 0}
+              className="object-cover"
+              sizes="100vw"
+            />
+            {/* Cinematic Gradient Overlays */}
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+          </div>
 
-        {/* Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-emerald-900 leading-tight">
-          Believe in finding it
-        </h1>
-
-        {/* Subtitle */}
-        <p className="mt-3 md:mt-4 text-xs sm:text-sm md:text-base text-emerald-900 max-w-xl mx-auto">
-          Search properties for sale and to rent in the UK
-        </p>
-
-        {/* Search bar */}
-        <div className="mt-8 md:mt-10 flex items-center bg-white rounded-full shadow-lg max-w-full sm:max-w-3xl mx-auto p-2">
-          <Input
-            placeholder="Enter Name, Keywords..."
-            className="border-none focus-visible:ring-0 text-sm sm:text-base px-4 sm:px-6"
-          />
-          <Button
-            size="icon"
-            className="rounded-full bg-yellow-400 hover:bg-yellow-500 text-black h-10 w-10 sm:h-12 sm:w-12"
+          {/* Content */}
+          <div
+            ref={(el) => { contentRefs.current[index] = el }}
+            className="relative z-10 h-full flex items-center"
           >
-            <Search/>
-          </Button>
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full pt-20">
+              <div className="max-w-4xl">
+                {/* Badge */}
+                <div className="hero-badge overflow-hidden mb-6 md:mb-8">
+                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
+                    <span className="w-2 h-2 rounded-full bg-[#E7C873] animate-pulse" />
+                    <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-white/90">
+                      {slide.badge}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Heading - Split for Animation */}
+                <div className="mb-6 md:mb-8 overflow-hidden">
+                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium text-white leading-[0.9] tracking-tighter flex flex-wrap gap-x-3 md:gap-x-5">
+                    {slide.heading.split(" ").map((word, i) => (
+                      <span key={i} className="hero-heading-line inline-block font-serif italic">
+                        {word}
+                      </span>
+                    ))}
+                  </h1>
+                </div>
+
+                {/* Subheading */}
+                <p className="hero-subheading text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mb-10 md:mb-12 leading-relaxed font-light">
+                  {slide.subheading}
+                </p>
+
+                {/* CTA */}
+                <div className="hero-cta flex flex-wrap gap-6">
+                  <Button
+                    size="lg"
+                    className="group rounded-full px-10 py-8 text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
+                  >
+                    <span className="relative z-10">{slide.cta}</span>
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="rounded-full px-10 py-8 text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
+                  >
+                    View Details
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      ))}
 
-        {/* Property types */}
-        <p className="mt-6 md:mt-8 text-xs sm:text-sm text-white/90">
-          What are you looking for?
-        </p>
+      {/* Premium Navigation Controls */}
+      <div className="absolute bottom-12 left-0 w-full z-20 px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1800px] mx-auto flex items-end justify-between">
 
-        <div className="mt-3 md:mt-4 flex flex-wrap justify-center gap-2 sm:gap-4">
-          <Button
-            variant="secondary"
-            className="rounded-full px-4 sm:px-6 py-2 sm:py-4 gap-2 text-xs sm:text-sm"
-          >
-            <Home size={16} />
-            Modern Villa
-          </Button>
+          {/* Progress & Count */}
+          <div className="flex items-center gap-6">
+            <div className="text-white font-mono text-lg">
+              <span className="text-[#E7C873]">0{currentSlide + 1}</span>
+              <span className="opacity-30 mx-2">/</span>
+              <span className="opacity-50">0{heroSlides.length}</span>
+            </div>
 
-          <Button
-            variant="secondary"
-            className="rounded-full px-4 sm:px-6 py-2 sm:py-4 gap-2 text-xs sm:text-sm"
-          >
-            <Building2 size={16} />
-            Apartment
-          </Button>
+            {/* Progress Bar */}
+            <div className="w-32 md:w-48 h-[2px] bg-white/10 relative overflow-hidden">
+              <div
+                ref={progressRef}
+                className="absolute inset-0 bg-[#E7C873] origin-left"
+              />
+            </div>
+          </div>
 
-          <Button
-            variant="secondary"
-            className="rounded-full px-4 sm:px-6 py-2 sm:py-4 gap-2 text-xs sm:text-sm"
-          >
-            <Building size={16} />
-            Town House
-          </Button>
+          {/* Arrows */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={goToPrev}
+              disabled={isAnimating}
+              className="group w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
+            >
+              <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />
+            </button>
+            <button
+              onClick={goToNext}
+              disabled={isAnimating}
+              className="group w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
+            >
+              <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
