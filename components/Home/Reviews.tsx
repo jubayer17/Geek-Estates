@@ -1,7 +1,9 @@
 "use client";
-
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 type Testimonial = {
     id: number;
@@ -196,26 +198,87 @@ const TestimonialsSection: React.FC = () => {
     }, [currentIndex]);
 
     const current = testimonials[currentIndex];
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            const selector = gsap.utils.selector(sectionRef);
+
+            // Initial States for Header
+            gsap.set(selector('[data-anim="header-bg"]'), { yPercent: 10, opacity: 0 });
+            gsap.set(selector('[data-anim="badge"]'), { opacity: 0, x: -20 });
+            gsap.set(selector('[data-anim="title-line"]'), { yPercent: 100 });
+            gsap.set(selector('[data-anim="desc"]'), { opacity: 0, y: 20 });
+
+            // Header Timeline
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            tl.to(selector('[data-anim="header-bg"]'), { yPercent: 0, opacity: 0.05, duration: 1.5, ease: "power2.out" })
+                .to(selector('[data-anim="badge"]'), { opacity: 1, x: 0, duration: 0.8, ease: "back.out(2)" }, "-=1.2")
+                .to(selector('[data-anim="title-line"]'), { yPercent: 0, duration: 1.2, stagger: 0.1, ease: "bounce.out" }, "-=1.0")
+                .to(selector('[data-anim="desc"]'), { opacity: 1, y: 0, duration: 1, ease: "power3.out" }, "-=0.8");
+
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
 
     return (
-        <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-neutral-900 overflow-hidden py-20 px-6">
+        <section ref={sectionRef} className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-neutral-900 overflow-hidden py-20">
+            {/* Header Section */}
+            <div className="relative mb-16 md:mb-24 max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
+                {/* Background Big Text */}
+                <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
+                    <h2 data-anim="header-bg" className="text-[18vw] font-bold text-white leading-none opacity-0 tracking-tighter text-left">
+                        REVIEWS
+                    </h2>
+                </div>
+
+                <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 lg:gap-20 pt-10">
+                    <div className="flex-1">
+                        <div className="flex items-center ml-0 md:ml-4 gap-4 mb-8">
+                            <span className="w-12 h-[1px] bg-[#E7C873]"></span>
+                            <span data-anim="badge" className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm">Testimonials</span>
+                        </div>
+
+                        <div className="relative left-0 md:left-4">
+                            <div className="overflow-hidden">
+                                <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white tracking-tight leading-[0.9]">
+                                    Client
+                                </h2>
+                            </div>
+                            <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
+                                <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-[#E7C873] leading-[0.9]">
+                                    <span className="relative inline-block">
+                                        Stories
+                                        <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="lg:max-w-md pb-4">
+                        <p data-anim="desc" className="text-white/70 text-lg leading-relaxed border-l border-white/20 pl-6">
+                            Various versions have evolved over the years, sometimes by accident, sometimes on purpose injected humour and the like.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             {/* Animated background orbs */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 -left-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse"></div>
                 <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
             </div>
 
-            <div className="max-w-7xl mx-auto relative z-10">
-                {/* Header with unique typography */}
-                <div className="text-center mb-20">
-                    <div className="inline-block">
-                        <h2 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-amber-200 via-amber-400 to-amber-200 bg-clip-text text-transparent mb-4 tracking-tight">
-                            Voices of Trust
-                        </h2>
-                        <div className="h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
-                    </div>
-                </div>
-
+            <div className="max-w-7xl mx-auto relative z-10 px-4 sm:px-6 lg:px-8 mt-12 md:mt-20">
                 {/* Main Content - Split Panel Design */}
                 <div ref={containerRef} className="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -338,8 +401,7 @@ const TestimonialsSection: React.FC = () => {
                     ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
-
 export default TestimonialsSection;
