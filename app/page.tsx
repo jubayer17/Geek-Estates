@@ -13,14 +13,16 @@ import TopNotchedProperties from "@/components/Home/TopProperties";
 import LocationSection from "@/components/Home/LocationSection";
 
 import WhyWithUs from "@/components/Home/WhyWithUs";
-
-
+import LetsConnect from "@/components/Home/LetsConnect";
+import StatsSection from "@/components/Home/StatsSection";
 export default function Home() {
   return (
     <div className="bg-[#FAFAFA]">
       <HeroSection />
 
+
       <WhyWithUs />
+      <StatsSection />
       {/* <Companies /> */}
       <CraftedSpaces />
       <TopNotchedProperties />
@@ -31,6 +33,7 @@ export default function Home() {
       {/* <Testimonials /> */}
       {/* <PopularRealEstate /> */}
       <LocationSection />
+      <LetsConnect />
     </div>
   );
 }
