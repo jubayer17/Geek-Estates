@@ -6,6 +6,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { craftedSpacesProjects, craftedSpacesCategories } from '@/lib/data/craftedSpacesData'
+import Link from 'next/link'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -485,12 +486,14 @@ export default function CraftedSpaces() {
                 </div>
 
                 {/* View All CTA */}
+              <Link href="/allProject">
                 <div className="text-center mt-12 md:mt-16 lg:mt-20">
                     <button className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 border border-gray-900 text-gray-900 text-sm sm:text-base font-medium tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300">
                         <span>View All Projects</span>
                         <ChevronRight className="w-4 h-4" />
                     </button>
                 </div>
+              </Link>
 
             </div>
         </section>
