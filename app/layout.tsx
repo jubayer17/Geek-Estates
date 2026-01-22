@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Home/Navbar";
 import Footer from "@/components/Home/Footer";
+import { Toaster } from "@/components/ui/sonner";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +31,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex flex-col">
-          <Navbar/>
-          <div className="grow-1">{children}</div>
-          <Footer/>
+        <div className="flex flex-col min-h-screen">
+          <Navbar />
+          <div className="flex-1">{children}</div>
+          <Footer />
         </div>
+
+        {/* Toast provider at root level */}
+        <Toaster
+          position="top-right" 
+          toastOptions={{
+            className:
+              "bg-gradient-to-r from-emerald-400 to-green-600 text-white font-semibold shadow-xl",
+            duration: 4000, // 4 seconds
+          }}
+        />
       </body>
     </html>
   );
