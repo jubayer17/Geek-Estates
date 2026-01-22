@@ -1,11 +1,10 @@
-import ContactBanner from '@/components/Contact/ContactBanner'
 import ContactForm from '@/components/Contact/ContactForm'
-import React from 'react'
+import ContactAndCareerBanner from '@/components/reuseable/ContactBanner'
 
 export default function Contact() {
   return (
     <div>
-        <ContactBanner imageSrc='/9.avif'/>
+        <ContactAndCareerBanner imageSrc='/9.avif'/>
         <ContactForm/>
     </div>
   )
