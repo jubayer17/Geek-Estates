@@ -35,7 +35,14 @@ export default function AllPropertyCard({
           src={image}
           alt={title}
           fill
-          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
+          className="
+            object-cover
+            transition-transform
+            duration-700
+            ease-[cubic-bezier(0.19,1,0.22,1)]
+            group-hover:scale-[1.2]
+            rounded-lg
+          "
         />
         
         {/* Hover Overlay */}
