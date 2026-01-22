@@ -1,13 +1,17 @@
 "use client"
 
 import Image from "next/image"
-import { useState } from "react"
+import Link from "next/link"
+import { ArrowUpRight, MapPin } from "lucide-react"
 
 type PropertyCardProps = {
   image: string
   title: string
   address: string
   date: string
+  price?: string
+  area?: number
+  className?: string
 }
 
 export default function AllPropertyCard({
@@ -15,72 +19,59 @@ export default function AllPropertyCard({
   title,
   address,
   date,
+  price,
+  area,
+  className
 }: PropertyCardProps) {
-  const [cursor, setCursor] = useState({ x: 0, y: 0 })
-  const [hovered, setHovered] = useState(false)
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect()
-    setCursor({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    })
-  }
 
   return (
-    <div
-      className="w-full max-w-sm mx-auto group"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
+    <Link
+      href="/project-details"
+      className={`group block relative w-full ${className}`}
     >
-      {/* IMAGE */}
-      <div className="relative w-full h-[460px] overflow-hidden shadow-xl">
+      {/* IMAGE CONTAINER */}
+      <div className="relative w-full aspect-[4/5] md:aspect-[3/4] overflow-hidden bg-neutral-900 mb-6">
         <Image
           src={image}
           alt={title}
           fill
-          className="
-            object-cover
-            transition-transform
-            duration-700
-            ease-[cubic-bezier(0.19,1,0.22,1)]
-            group-hover:scale-[1.2]
-          "
+          className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-105 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0"
         />
+        
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
 
-        {/* DATE */}
-        {/* <div className="absolute top-4 left-4 bg-white text-black px-3 py-2 text-sm font-semibold shadow z-10">
-          <div>{date.split(" ")[0]}</div>
-          <div className="text-xs">{date.split(" ")[1]}</div>
-        </div> */}
-
-        {/* CURSOR FOLLOW */}
-        <div
-          className={`absolute pointer-events-none transition-opacity duration-300 ${
-            hovered ? "opacity-100" : "opacity-0"
-          }`}
-          style={{
-            left: cursor.x,
-            top: cursor.y,
-            transform: "translate(-50%, -50%)",
-          }}
-        >
-          <div className="w-28 h-28 rounded-full bg-[#e7c873] text-black flex items-center justify-center text-sm font-semibold shadow-2xl">
-            View Details
-          </div>
+        {/* Floating Action Button */}
+        <div className="absolute top-4 right-4 z-20">
+            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                <ArrowUpRight className="text-black w-5 h-5" />
+            </div>
         </div>
       </div>
 
-      {/* TEXT */}
-      <div className="mt-6 text-center">
-        <h3 className="text-xs tracking-widest uppercase font-semibold">
-          {title}
-        </h3>
-        <p className="text-sm text-gray-500 mt-1">
-          {address.replace(", Dhaka", "").trim()}
-        </p>
+      {/* TEXT CONTENT */}
+      <div className="flex flex-col gap-1 border-t border-white/10 pt-4 group-hover:border-[#C5A059] transition-colors duration-500">
+        <div className="flex justify-between items-baseline">
+            <h3 className="text-xl md:text-2xl font-light text-white group-hover:text-[#C5A059] transition-colors duration-300">
+                {title}
+            </h3>
+            <span className="text-sm font-medium text-white/60 group-hover:text-white transition-colors">
+                {date}
+            </span>
+        </div>
+        
+        <div className="flex justify-between items-center mt-1">
+            <p className="text-sm text-neutral-500 flex items-center gap-2 group-hover:text-neutral-400 transition-colors">
+                <MapPin size={12} className="text-[#C5A059]" />
+                {address.replace(", Dhaka", "").trim()}
+            </p>
+            {area && (
+                <span className="text-xs uppercase tracking-widest text-neutral-600">
+                    {area} Sq Ft
+                </span>
+            )}
+        </div>
       </div>
-    </div>
+    </Link>
   )
 }

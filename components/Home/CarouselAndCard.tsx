@@ -13,6 +13,7 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import { cn } from "@/lib/utils"
+import Autoplay from "embla-carousel-autoplay"
 
 const locations = [
   {
@@ -141,7 +142,7 @@ export default function LocationCarousel() {
   return (
     <div className="w-full">
       <div className="relative">
-        <Carousel setApi={setApi} className="w-full">
+        <Carousel setApi={setApi} plugins={[autoplay.current]} className="w-full">
           <CarouselContent className="-ml-2 sm:-ml-4">
             {locations.map((item, index) => (
               <CarouselItem
