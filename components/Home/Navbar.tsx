@@ -186,14 +186,15 @@ export default function Navbar() {
               }`}
           >
             {/* Logo */}
-            <div
-              ref={logoRef}
+            <Link
+              href="/"
+              ref={logoRef as React.Ref<HTMLAnchorElement>}
               className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${isDarkText ? "text-[#1F4B43]" : "text-white"
                 }`}
             >
               <span className="font-light tracking-tighter">Geek</span>
               <span className="text-[#E7C873] font-serif italic">Estate</span>
-            </div>
+            </Link>
 
             {/* Desktop Links */}
             <div ref={linksRef} className="hidden lg:flex items-center gap-12">
