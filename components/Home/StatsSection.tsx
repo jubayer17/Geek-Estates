@@ -145,73 +145,55 @@ export default function StatsSection() {
     }, [])
 
     return (
-        <section ref={sectionRef} className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-neutral-900 py-24 md:py-32 overflow-hidden">
-
-            {/* Background Abstract Elements */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-slate-900/50 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2 mix-blend-screen"></div>
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-slate-900/30 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2"></div>
-                {/* Grid Pattern */}
-                <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]"></div>
+        <section
+            ref={sectionRef}
+            className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-neutral-900"
+        >
+            {/* Background Big Text */}
+            <div className="absolute top-10 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
+                <div className="flex justify-center">
+                    {"MILESTONES".split("").map((char, i) => (
+                        <span
+                            key={i}
+                            data-anim="bg-letter"
+                            className="text-[15vw] md:text-[18vw] font-black text-white leading-none inline-block origin-bottom"
+                        >
+                            {char}
+                        </span>
+                    ))}
+                </div>
             </div>
 
-            {/* Standard Container - Matching Reviews.tsx & WhyWithUs.tsx */}
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 relative z-10">
-
-                {/* Header Section */}
-                <div className="relative mb-24 md:mb-40">
-                    {/* Big Background Text */}
-                    <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
-                        <h2 className="text-[18vw] font-bold text-white leading-none tracking-tighter text-left flex">
-                            {"IMPACT".split("").map((letter, i) => (
-                                <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
-                                    {letter}
-                                </span>
-                            ))}
-                        </h2>
+            {/* Content Container */}
+            <div ref={containerRef} className="relative z-10 max-w-[1920px] mx-auto px-4 lg:px-4">
+                {/* Header */}
+                <div className="mb-20 md:mb-32 max-w-7xl mx-auto text-center px-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E7C873]/10 border border-[#E7C873]/20 mb-6 stats-header-item">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#E7C873] animate-pulse" />
+                        <span className="text-[#E7C873] text-xs uppercase tracking-widest font-medium">Our Journey</span>
                     </div>
 
-                    <div className="relative z-10 flex flex-col md:flex-row items-end justify-between gap-8 pt-24 md:pt-32">
-                        <div>
-                            <div className="flex items-center gap-4 mb-6 stats-header-item">
-                                <span className="w-12 h-[1px] bg-[#E7C873]"></span>
-                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm">Our Legacy</span>
-                            </div>
-                            <h2 className="stats-header-item text-6xl sm:text-7xl md:text-8xl font-light text-white tracking-tight leading-[1.1]">
-                                Defining <span className="font-serif italic text-[#E7C873]">Architectural Excellence</span>
-                            </h2>
-                        </div>
-                        <p className="stats-header-item text-white/50 max-w-md text-lg leading-relaxed text-right hidden md:block">
-                            Building trust through numbers. Every digit represents a milestone in our journey of architectural innovation.
-                        </p>
-                    </div>
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 stats-header-item leading-[1.1]">
+                        Legacy of <span className="font-serif italic text-[#E7C873]">Trust</span>
+                    </h2>
+
+                    <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light stats-header-item">
+                        Building the future with precision, passion, and a commitment to excellence.
+                    </p>
                 </div>
 
-                {/* Staircase Content Container */}
-                <div ref={containerRef} className="flex flex-col relative w-full pb-10">
-                    {stats.map((stat, i) => (
+                {/* Staircase Cards */}
+                <div className="flex flex-col w-full">
+                    {stats.map((stat, index) => (
                         <div
                             key={stat.id}
-                            ref={el => { cardsRef.current[i] = el }}
-                            // Width & Layout Logic:
-                            // - Base width: 82% to allow for significant staircase stepping
-                            // - Height: min-h-[140px] mobile, md:min-h-[180px] desktop
-                            // - Margins: Large staggered left margins (6%, 12%, 18%) for clear stairs
-                            className={`
-                                relative w-full md:w-[82%]
-                                min-h-[140px] md:min-h-[180px] p-6 md:px-12 md:py-14
-                                border border-white/10
-                                bg-gradient-to-r from-white/[0.03] to-transparent
-                                backdrop-blur-[2px] shadow-2xl
-                                hover:from-white/[0.06] hover:border-[#E7C873]/50
-                                transition-all duration-500 group
-                                flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12
-                                ${i !== 0 ? 'mt-8 md:-mt-8' : ''}
-                                ${i === 0 ? 'md:ml-0 z-40' : ''}
-                                ${i === 1 ? 'md:ml-[6%] z-30' : ''}
-                                ${i === 2 ? 'md:ml-[12%] z-20' : ''}
-                                ${i === 3 ? 'md:ml-[18%] z-10' : ''}
-                            `}
+                            ref={el => { cardsRef.current[index] = el }}
+                            className="relative w-full md:w-[99%] lg:w-[99%] mx-auto h-auto md:h-[150px] bg-white/5 backdrop-blur-md border-l-4 border-[#E7C873] group hover:bg-white/10 transition-colors duration-500 mb-8 md:mb-0"
+                            style={{
+                                marginLeft: index % 2 === 0 ? '0.33%' : 'auto',
+                                marginRight: index % 2 !== 0 ? '0.33%' : 'auto',
+                                marginTop: index === 0 ? '0' : '-1px', // Seamless stacking (visually connected via spacing)
+                            }}
                         >
                             {/* Inner Content */}
                             <div className="flex items-center gap-6 md:gap-10 w-full">
