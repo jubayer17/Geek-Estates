@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Phone, User, MoreVertical, X, ArrowUpRight } from "lucide-react"
 import gsap from "gsap"
@@ -10,11 +11,13 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/properties", label: "Properties" },
+  { href: "/allProject", label: "Properties" },
   { href: "/contact", label: "Contact" },
 ]
 
 export default function Navbar() {
+  const pathname = usePathname()
+  const isHome = pathname === "/"
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const navRef = useRef<HTMLElement>(null)
@@ -157,14 +160,25 @@ export default function Navbar() {
     })
   }
 
+  // Styles based on scroll and page
+  const isDarkText = scrolled || !isHome
+  const navBgClass = (scrolled || !isHome)
+    ? "bg-white/90 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.03)]"
+    : "bg-transparent"
+
+  // Position based on page
+  const positionClass = isHome ? "fixed" : "sticky"
+
+  // Premium Golden Border
+  const borderClass = scrolled
+    ? "border-b-[3px] border-[#E7C873]/80"
+    : "border-b border-transparent"
+
   return (
     <>
       <nav
         ref={navRef}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${scrolled
-          ? "bg-white/80 backdrop-blur-md shadow-[0_2px_30px_rgba(0,0,0,0.04)] border-b border-white/20"
-          : "bg-transparent"
-          }`}
+        className={`${positionClass} top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${navBgClass} ${borderClass}`}
       >
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
           <div
@@ -174,7 +188,7 @@ export default function Navbar() {
             {/* Logo */}
             <div
               ref={logoRef}
-              className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${scrolled ? "text-[#1F4B43]" : "text-white"
+              className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${isDarkText ? "text-[#1F4B43]" : "text-white"
                 }`}
             >
               <span className="font-light tracking-tighter">Geek</span>
@@ -187,7 +201,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-base font-medium tracking-wide transition-all duration-300 py-2 group ${scrolled
+                  className={`relative text-base font-medium tracking-wide transition-all duration-300 py-2 group ${isDarkText
                     ? "text-gray-600 hover:text-[#1F4B43]"
                     : "text-white/90 hover:text-white"
                     }`}
@@ -197,7 +211,7 @@ export default function Navbar() {
                   {link.label}
                   {/* Animated underline */}
                   <span
-                    className={`absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500 ease-out ${scrolled ? "bg-[#1F4B43]" : "bg-[#E7C873]"
+                    className={`absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500 ease-out ${isDarkText ? "bg-[#1F4B43]" : "bg-[#E7C873]"
                       }`}
                   />
                 </Link>
@@ -206,16 +220,16 @@ export default function Navbar() {
 
             {/* Desktop Actions */}
             <div ref={actionsRef} className="hidden lg:flex items-center gap-8">
-              <div className={`flex items-center gap-3 transition-colors duration-500 ${scrolled ? "text-gray-600" : "text-white/90"
+              <div className={`flex items-center gap-3 transition-colors duration-500 ${isDarkText ? "text-gray-600" : "text-white/90"
                 }`}>
                 <Phone size={18} className="opacity-80" />
                 <span className="text-sm font-medium tracking-wide">+880 1914 782 366</span>
               </div>
 
-              <div className={`w-px h-8 ${scrolled ? "bg-gray-200" : "bg-white/20"}`} />
+              <div className={`w-px h-8 ${isDarkText ? "bg-gray-200" : "bg-white/20"}`} />
 
               <button
-                className={`p-3 rounded-full transition-all duration-300 ${scrolled
+                className={`p-3 rounded-full transition-all duration-300 ${isDarkText
                   ? "text-gray-600 hover:bg-gray-100"
                   : "text-white hover:bg-white/10"
                   }`}
@@ -234,7 +248,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button - Premium Hamburger */}
             <button
-              className={`lg:hidden p-2 rounded-full transition-all duration-300 group ${scrolled
+              className={`lg:hidden p-2 rounded-full transition-all duration-300 group ${isDarkText
                 ? "text-gray-900 hover:bg-gray-100"
                 : "text-white hover:bg-white/10"
                 }`}
@@ -242,9 +256,9 @@ export default function Navbar() {
               aria-label="Open menu"
             >
               <div className="flex flex-col gap-1.5 items-end">
-                <span className={`h-0.5 rounded-full transition-all duration-300 w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
-                <span className={`h-0.5 rounded-full transition-all duration-300 w-6 group-hover:w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
-                <span className={`h-0.5 rounded-full transition-all duration-300 w-4 group-hover:w-8 ${scrolled ? "bg-gray-900" : "bg-white"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-8 ${isDarkText ? "bg-gray-900" : "bg-white"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-6 group-hover:w-8 ${isDarkText ? "bg-gray-900" : "bg-white"}`} />
+                <span className={`h-0.5 rounded-full transition-all duration-300 w-4 group-hover:w-8 ${isDarkText ? "bg-gray-900" : "bg-white"}`} />
               </div>
             </button>
           </div>
