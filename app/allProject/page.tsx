@@ -1,6 +1,7 @@
 import AllPropertiesBanner from "@/components/all-projects/AllProjectBanner";
 import AllPropertiesSearch from "@/components/all-projects/AllPropertiesSearch";
 import AllProjectShowGrid from "@/components/all-projects/AllProjectShowGrid";
+import AllProjectsCTA from "@/components/all-projects/AllProjectsCTA";
 
 export default function AllPage() {
   return (
@@ -8,6 +9,7 @@ export default function AllPage() {
       <AllPropertiesBanner />
       <AllPropertiesSearch />
       <AllProjectShowGrid />
+      <AllProjectsCTA />
     </main>
   );
 }
