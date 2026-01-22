@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/House1.jpg",
+    "image": "/5.avif",
     "title": "Luxury Family Home",
     "address": "1800-1818 79th St, Dhaka",
     "price": "$395,000",
@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "image": "/House2.jpg",
+    "image": "/2.avif",
     "title": "Modern Apartment",
     "address": "221B Baker Street, Dhaka",
     "price": "$280,000",
@@ -25,7 +25,7 @@
   },
   {
     "id": 3,
-    "image": "/House3.jpg",
+    "image": "/8.avif",
     "title": "Cozy Country House",
     "address": "15 Green Road, Dhaka",
     "price": "$450,000",
@@ -37,7 +37,7 @@
   },
   {
     "id": 4,
-    "image": "/House4.jpg",
+    "image": "/3.avif",
     "title": "Downtown Studio",
     "address": "89 Lake View, Dhaka",
     "price": "$150,000",
@@ -49,7 +49,7 @@
   },
   {
     "id": 5,
-    "image": "/House5.jpg",
+    "image": "/10.avif",
     "title": "Spacious Villa",
     "address": "Block C, Bashundhara, Dhaka",
     "price": "$780,000",
@@ -61,7 +61,7 @@
   },
   {
     "id": 6,
-    "image": "/House6.jpg",
+    "image": "/4.avif",
     "title": "Elegant City Residence",
     "address": "Dhanmondi 27, Dhaka",
     "price": "$520,000",
@@ -73,7 +73,7 @@
   },
   {
     "id": 7,
-    "image": "/House7.jpg",
+    "image": "/9.avif",
     "title": "Geek City Residence",
     "address": "Mirpur 10, Dhaka",
     "price": "$520,000",
@@ -82,5 +82,29 @@
     "area": 610,
     "status": "For Sale",
     "featured": false
+  },
+  {
+    "id": 8,
+    "image": "/6.avif",
+    "title": "Minimalist Haven",
+    "address": "Banani Road 11, Dhaka",
+    "price": "$650,000",
+    "beds": 3,
+    "baths": 2,
+    "area": 550,
+    "status": "For Sale",
+    "featured": true
+  },
+  {
+    "id": 9,
+    "image": "/7.avif",
+    "title": "Skyline Penthouse",
+    "address": "Gulshan Avenue, Dhaka",
+    "price": "$1,200,000",
+    "beds": 4,
+    "baths": 4,
+    "area": 1200,
+    "status": "For Sale",
+    "featured": true
   }
 ]
