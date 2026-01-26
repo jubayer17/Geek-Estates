@@ -1,8 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Geek States
 
-## Getting Started
+Geek States is a modern, high-performance real estate platform built with Next.js 15 and React 19. It offers a premium user experience for browsing properties, viewing project details, and connecting with real estate agents.
 
-First, run the development server:
+## 🚀 Features
+
+- **Modern UI/UX**: Built with Tailwind CSS and Shadcn UI for a sleek, responsive design.
+- **Interactive Animations**: Powered by GSAP and Framer Motion for engaging user interactions.
+- **Property Listings**: showcasing properties for rent and sale with detailed information.
+- **Carousel Galleries**: Smooth image sliders using Embla Carousel.
+- **Responsive Design**: Fully optimized for mobile, tablet, and desktop devices.
+- **SEO Optimized**: Leveraging Next.js 15's latest features for better search engine visibility.
+
+## 🛠 Tech Stack
+
+- **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+- **Library**: [React 19](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) / Shadcn UI
+- **Animations**: [GSAP](https://greensock.com/gsap/) & [Framer Motion](https://www.framer.com/motion/)
+- **Carousel**: [Embla Carousel](https://www.embla-carousel.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Image Optimization**: [Sharp](https://sharp.pixelplumbing.com/)
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Node.js** (v18.17.0 or higher recommended)
+- **npm**, **yarn**, **pnpm**, or **bun**
+
+## 📦 Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/your-username/geek-states.git
+    cd geek-states
+    ```
+
+2.  **Install dependencies:**
+
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    # or
+    bun install
+    ```
+
+## 🚀 Getting Started
+
+Run the development server:
 
 ```bash
 npm run dev
@@ -16,21 +67,51 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+geek-real-state/
+├── app/                  # Next.js App Router pages and layouts
+│   ├── aboutUs/          # About Us page
+│   ├── allProject/       # All Projects listing
+│   ├── contact/          # Contact page
+│   ├── project-details/  # Individual project details
+│   └── ...
+├── components/           # Reusable React components
+│   ├── Home/             # Home page specific components
+│   ├── ui/               # Shadcn UI components (buttons, cards, etc.)
+│   └── reuseable/        # Shared components (PropertyCard, Navbar, etc.)
+├── public/               # Static assets (images, JSON data)
+├── lib/                  # Utility functions and data
+└── ...
+```
 
-## Learn More
+## 🏗 Build for Production
 
-To learn more about Next.js, take a look at the following resources:
+To create a production-ready build:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+# or
+yarn build
+# or
+pnpm build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To start the production server:
 
-## Deploy on Vercel
+```bash
+npm run start
+# or
+yarn start
+# or
+pnpm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
