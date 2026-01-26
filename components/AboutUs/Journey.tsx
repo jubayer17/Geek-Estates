@@ -1,14 +1,14 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, ReactNode } from "react";
 
 type JourneyItem = {
   year: string;
   label: string;
   title: string;
   description: string;
-  icon: string;
+  icon: ReactNode;
   side: string;
 };
 
@@ -25,23 +25,34 @@ export default function Journey({ data }: { data: JourneyItem[] }) {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#4a4a4a] py-32 px-6 md:px-20 overflow-hidden"
+      className="relative bg-white py-32 px-6 md:px-20 overflow-hidden"
     >
+      {/* Background Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
+
       {/* TITLE */}
-      <h2 className="text-center text-4xl md:text-5xl text-white mb-32">
-        Our Journey
-      </h2>
+      <div className="text-center mb-32 relative z-10">
+        <span className="text-[#E7C873] uppercase tracking-[0.25em] text-xs font-bold mb-4 block">
+          Our History
+        </span>
+        <h2 className="text-4xl md:text-5xl font-serif text-[#1A1A1A] mb-4">
+          The Journey
+        </h2>
+        <p className="text-gray-500 max-w-2xl mx-auto font-light text-lg">
+          From humble beginnings to an industry leader, trace the milestones that define our legacy.
+        </p>
+      </div>
 
       {/* CENTER SCROLL LINE */}
-      <div className="absolute left-1/2 top-[260px] -translate-x-1/2 h-[70%] w-[2px] bg-white/20">
+      <div className="absolute left-1/2 top-[300px] bottom-[100px] -translate-x-1/2 w-[1px] bg-gray-100">
         <motion.div
           style={{ height: lineHeight }}
-          className="w-full bg-[#e7c873] origin-top"
+          className="w-full bg-[#E7C873] origin-top shadow-[0_0_10px_#E7C873]"
         />
       </div>
 
       {/* TIMELINE */}
-      <div className="relative space-y-32">
+      <div className="relative space-y-32 z-10">
         {data.map((item, index) => {
           const isLeft = item.side === "left";
 
@@ -51,20 +62,22 @@ export default function Journey({ data }: { data: JourneyItem[] }) {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-100px" }}
               className="relative"
             >
-              {/* ICON — EXACT CENTER */}
+              {/* DIAMOND ICON — EXACT CENTER */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
                 <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ type: "spring", stiffness: 120 }}
+                  initial={{ scale: 0, rotate: 45 }}
+                  whileInView={{ scale: 1, rotate: 45 }}
+                  transition={{ type: "spring", stiffness: 120, delay: 0.2 }}
                   viewport={{ once: true }}
-                  className="w-12 h-12 rounded-full bg-white flex items-center justify-center text-xl
-                             border-2 border-[#e7c873] shadow-lg"
+                  className="w-14 h-14 bg-[#1A1A1A] flex items-center justify-center text-xl
+                             border border-[#E7C873] shadow-2xl text-[#E7C873]"
                 >
-                  {item.icon}
+                  <div className="-rotate-45"> {/* Counter-rotate icon */}
+                    {item.icon}
+                  </div>
                 </motion.div>
               </div>
 
@@ -101,24 +114,26 @@ function TimelineCard({
 }) {
   return (
     <div
-      className={`bg-white rounded-2xl p-8 shadow-xl max-w-xl
-        ${align === "left" ? "mr-auto text-left" : "ml-auto text-right"}`}
+      className={`relative p-10 bg-white border border-gray-100 shadow-[0_0_30px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-500 group
+                  ${align === "right" ? "text-right md:mr-16 md:pr-12" : "text-left md:ml-16 md:pl-12"}`}
     >
-      <span className="text-sm font-semibold text-[#e7c873]">
+      {/* Decorative Corner Accent */}
+      <div className={`absolute top-0 w-8 h-8 border-t border-[#E7C873] transition-all duration-500 group-hover:w-full group-hover:h-full group-hover:border-[#E7C873]/20
+        ${align === "right" ? "right-0 border-r" : "left-0 border-l"}`}
+      />
+
+      <span className="inline-block px-4 py-1 border border-[#E7C873] text-[#E7C873] font-bold text-sm mb-6 tracking-widest uppercase">
         {item.year}
       </span>
+      <h3 className="text-3xl font-serif text-[#1A1A1A] mb-4">{item.title}</h3>
+      <p className="text-gray-500 font-light leading-relaxed text-base">{item.description}</p>
 
-      <h3 className="text-lg md:text-xl font-semibold mt-2 mb-3">
-        {item.title}
-      </h3>
-
-      <p className="text-gray-600 text-sm leading-relaxed">
-        {item.description}
-      </p>
-
-      <p className="mt-4 text-xs font-medium text-gray-400">
-        {item.label}
-      </p>
+      {/* Connector Line (Desktop Only) */}
+      <div
+        className={`hidden md:block absolute top-1/2 -translate-y-1/2 w-16 h-[1px] bg-[#E7C873]
+          ${align === "right" ? "-right-16" : "-left-16"}
+        `}
+      />
     </div>
   );
 }
