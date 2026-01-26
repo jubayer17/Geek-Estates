@@ -150,49 +150,54 @@ export default function StatsSection() {
             className="relative py-20 lg:py-32 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-neutral-900"
         >
             {/* Background Big Text */}
-            <div className="absolute top-10 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
-                <div className="flex justify-center">
-                    {"MILESTONES".split("").map((char, i) => (
-                        <span
-                            key={i}
-                            data-anim="bg-letter"
-                            className="text-[15vw] md:text-[18vw] font-black text-white leading-none inline-block origin-bottom"
-                        >
-                            {char}
-                        </span>
-                    ))}
-                </div>
+            <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none select-none z-0 flex items-start justify-center">
+                <h2 className="text-[12vw] md:text-[14vw] font-black text-white/5 leading-none whitespace-nowrap pt-10">
+                    MILESTONES
+                </h2>
             </div>
 
             {/* Content Container */}
             <div ref={containerRef} className="relative z-10 max-w-[1920px] mx-auto px-4 lg:px-4">
                 {/* Header */}
-                <div className="mb-20 md:mb-32 max-w-7xl mx-auto text-center px-4">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#E7C873]/10 border border-[#E7C873]/20 mb-6 stats-header-item">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#E7C873] animate-pulse" />
-                        <span className="text-[#E7C873] text-xs uppercase tracking-widest font-medium">Our Journey</span>
+                <div className="mb-20 md:mb-32 max-w-[1800px] mx-auto">
+                    <div className="flex flex-col lg:flex-row items-end justify-between gap-10 lg:gap-20">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-4 mb-8 stats-header-item">
+                                <span className="w-12 h-[1px] bg-[#E7C873]"></span>
+                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm">Our Journey</span>
+                            </div>
+
+                            <div className="relative stats-header-item">
+                                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white tracking-tight leading-[0.9]">
+                                    Legacy of
+                                </h2>
+                                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-white/90 leading-[0.9] mt-2 md:ml-24">
+                                    <span className="relative inline-block">
+                                        Trust
+                                        <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
+                                    </span>
+                                </h2>
+                            </div>
+                        </div>
+
+                        <div className="lg:max-w-md pb-4 stats-header-item">
+                            <p className="text-white/60 text-lg leading-relaxed border-l border-white/10 pl-6">
+                                Building the future with precision, passion, and a commitment to excellence. We don&apos;t just build structures; we create landmarks that stand the test of time.
+                            </p>
+                        </div>
                     </div>
-
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 stats-header-item leading-[1.1]">
-                        Legacy of <span className="font-serif italic text-[#E7C873]">Trust</span>
-                    </h2>
-
-                    <p className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto font-light stats-header-item">
-                        Building the future with precision, passion, and a commitment to excellence.
-                    </p>
                 </div>
 
                 {/* Staircase Cards */}
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full gap-y-8 md:gap-y-6">
                     {stats.map((stat, index) => (
                         <div
                             key={stat.id}
                             ref={el => { cardsRef.current[index] = el }}
-                            className="relative w-full md:w-[99%] lg:w-[99%] mx-auto h-auto md:h-[150px] bg-white/5 backdrop-blur-md border-l-4 border-[#E7C873] group hover:bg-white/10 transition-colors duration-500 mb-8 md:mb-0"
+                            className="relative w-full md:w-[99%] lg:w-[99%] mx-auto h-auto md:h-[150px] bg-white/5 backdrop-blur-md border-l-4 border-[#E7C873] group hover:bg-white/10 transition-colors duration-500"
                             style={{
-                                marginLeft: index % 2 === 0 ? '0.33%' : 'auto',
-                                marginRight: index % 2 !== 0 ? '0.33%' : 'auto',
-                                marginTop: index === 0 ? '0' : '-1px', // Seamless stacking (visually connected via spacing)
+                                marginLeft: index % 2 === 0 ? '0' : '5%', // Much more pronounced stagger for desktop
+                                marginRight: index % 2 !== 0 ? '0' : '5%',
                             }}
                         >
                             {/* Inner Content */}
