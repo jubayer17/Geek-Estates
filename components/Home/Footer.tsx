@@ -3,7 +3,7 @@
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, ArrowUpRight, Send, Home } from "lucide-react";
 import Link from "next/link";
 import React, { useRef, useEffect } from "react";
-import gsap from "gsap";
+import gsap from "gsap"; ``
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
