@@ -17,9 +17,9 @@ const TeamMemberCard: FC<TeamMemberCardProps> = ({
   return (
     <div 
       className={`
-        group flex flex-col overflow-hidden rounded-xl bg-white shadow-md
-        transition-all duration-300 hover:shadow-xl hover:-translate-y-1
-        w-full max-w-82
+        group flex flex-col overflow-hidden bg-white border border-slate-100
+        transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 hover:border-[#E7C873]
+        w-full max-w-82 relative
         ${className}
       `}
     >
