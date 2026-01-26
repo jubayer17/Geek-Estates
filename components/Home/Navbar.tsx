@@ -189,7 +189,7 @@ export default function Navbar() {
             <Link
               href="/"
               ref={logoRef as React.Ref<HTMLAnchorElement>}
-              className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${isDarkText ? "text-[#1F4B43]" : "text-white"
+              className={`text-2xl lg:text-3xl font-bold tracking-tight transition-colors duration-500 ${isDarkText ? "text-slate-900" : "text-white"
                 }`}
             >
               <span className="font-light tracking-tighter">Geek</span>
@@ -203,7 +203,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   className={`relative text-base font-medium tracking-wide transition-all duration-300 py-2 group ${isDarkText
-                    ? "text-gray-600 hover:text-[#1F4B43]"
+                    ? "text-gray-600 hover:text-slate-900"
                     : "text-white/90 hover:text-white"
                     }`}
                   onMouseEnter={handleLinkHover}
@@ -212,7 +212,7 @@ export default function Navbar() {
                   {link.label}
                   {/* Animated underline */}
                   <span
-                    className={`absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500 ease-out ${isDarkText ? "bg-[#1F4B43]" : "bg-[#E7C873]"
+                    className={`absolute bottom-0 left-0 w-0 h-[1px] group-hover:w-full transition-all duration-500 ease-out ${isDarkText ? "bg-slate-900" : "bg-[#E7C873]"
                       }`}
                   />
                 </Link>
@@ -328,7 +328,7 @@ export default function Navbar() {
                 </div>
 
                 <Button
-                  className="w-full rounded-full py-7 text-base font-bold tracking-widest uppercase bg-[#1F4B43] hover:bg-[#163832] text-white shadow-lg shadow-[#1F4B43]/20 transition-all duration-300"
+                  className="w-full rounded-full py-7 text-base font-bold tracking-widest uppercase bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20 transition-all duration-300"
                   onClick={closeMenu}
                 >
                   Add Property
