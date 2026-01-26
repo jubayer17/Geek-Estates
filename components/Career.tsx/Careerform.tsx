@@ -102,7 +102,11 @@ export default function CareerForm({ job }: { job: Career }) {
         />
       </div>
 
-      <Button type="submit" className="w-full" disabled={loading}>
+      <Button 
+        type="submit" 
+        className="w-full bg-[#E7C873] hover:bg-[#d4b55f] text-[#1A1A1A] font-bold py-6 text-lg transition-all duration-300" 
+        disabled={loading}
+      >
         {loading ? "Submitting..." : "Submit Application"}
       </Button>
     </form>
