@@ -1,7 +1,7 @@
 export const heroSlides = [
     {
         id: 1,
-        image: "/slide1.jpg",
+        image: "/slide1.webp",
         badge: "PREMIUM PROPERTIES",
         heading: "Find Your Dream Home Today",
         subheading: "Discover exceptional properties in prime locations with our expert guidance and personalized service.",
@@ -11,7 +11,7 @@ export const heroSlides = [
     },
     {
         id: 2,
-        image: "/slide2.jpg",
+        image: "/slide2.webp",
         badge: "LUXURY LIVING",
         heading: "Elevate Your Lifestyle",
         subheading: "Experience world-class amenities and breathtaking views in our curated collection of luxury estates.",
@@ -21,7 +21,7 @@ export const heroSlides = [
     },
     {
         id: 3,
-        image: "/slide3.jpg",
+        image: "/slide3.webp",
         badge: "EXPERT GUIDANCE",
         heading: "Your Journey Starts Here",
         subheading: "Let our experienced team guide you through every step of finding and securing your perfect property.",
@@ -31,7 +31,7 @@ export const heroSlides = [
     },
     {
         id: 4,
-        image: "/slide4.jpg",
+        image: "/slide4.webp",
         badge: "EXCLUSIVE LISTINGS",
         heading: "Unlock Premium Access",
         subheading: "Get first access to off-market properties and exclusive listings not available anywhere else.",
@@ -41,7 +41,7 @@ export const heroSlides = [
     },
     {
         id: 5,
-        image: "/slide5.jpg",
+        image: "/slide5.webp",
         badge: "TRUSTED PARTNERS",
         heading: "Building Dreams Together",
         subheading: "Join thousands of satisfied clients who found their perfect home with our dedicated support.",

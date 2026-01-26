@@ -2,9 +2,9 @@
 
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
-import HomeIcon from "../../public/HomeIcon.png"
-import SecondHome from "../../public/secondHome.png"
-import ThirdIcon from "../../public/thirdIcon.png"
+import HomeIcon from "../../public/HomeIcon.webp"
+import SecondHome from "../../public/secondHome.webp"
+import ThirdIcon from "../../public/thirdIcon.webp"
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -141,7 +141,7 @@ export default function WhyWithUs() {
                   {/* Background Image (Parallax Effect on Hover) */}
                   <div className="absolute inset-0 w-full h-full transform scale-100 group-hover:scale-110 transition-transform duration-[1.5s] ease-out">
                     <Image
-                      src={`/outdoor-real-state/${index + 1}.avif`}
+                      src={`/outdoor-real-state/${index + 1}.webp`}
                       alt={point.title}
                       fill
                       className="object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700"

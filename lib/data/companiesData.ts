@@ -1,26 +1,26 @@
 export const companies = [
     {
         name: "Amazon",
-        logo: "/148.png"
+        logo: "/148.webp"
     },
     {
         name: "AMD",
-        logo: "/149.png"
+        logo: "/149.webp"
     },
     {
         name: "Cisco",
-        logo: "/150.png"
+        logo: "/150.webp"
     },
     {
         name: "Dropcam",
-        logo: "/151.png"
+        logo: "/151.webp"
     },
     {
         name: "Logitech",
-        logo: "/152.png"
+        logo: "/152.webp"
     },
     {
         name: "Spotify",
-        logo: "/153.png"
+        logo: "/153.webp"
     }
 ]

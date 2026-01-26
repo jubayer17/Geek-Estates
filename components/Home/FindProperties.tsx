@@ -12,37 +12,37 @@ const cities = [
   {
     name: "Dhaka",
     count: "320+ Properties",
-    image: "/outdoor-real-state/1.avif",
+    image: "/outdoor-real-state/1.webp",
     className: "md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[400px]"
   },
   {
     name: "Chittagong",
     count: "145+ Properties",
-    image: "/outdoor-real-state/2.avif",
+    image: "/outdoor-real-state/2.webp",
     className: "md:col-span-1 md:row-span-2 min-h-[300px] md:min-h-[400px]"
   },
   {
     name: "Sylhet",
     count: "89+ Properties",
-    image: "/outdoor-real-state/3.avif",
+    image: "/outdoor-real-state/3.webp",
     className: "md:col-span-1 md:row-span-1 min-h-[200px]"
   },
   {
     name: "Cox's Bazar",
     count: "65+ Properties",
-    image: "/outdoor-real-state/4.avif",
+    image: "/outdoor-real-state/4.webp",
     className: "md:col-span-1 md:row-span-1 min-h-[200px]"
   },
   {
     name: "Rajshahi",
     count: "42+ Properties",
-    image: "/outdoor-real-state/5.avif",
+    image: "/outdoor-real-state/5.webp",
     className: "md:col-span-2 md:row-span-1 min-h-[200px]"
   },
   {
     name: "Khulna",
     count: "38+ Properties",
-    image: "/outdoor-real-state/6.avif",
+    image: "/outdoor-real-state/6.webp",
     className: "md:col-span-2 md:row-span-1 min-h-[200px]"
   }
 ]

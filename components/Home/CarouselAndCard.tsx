@@ -19,42 +19,42 @@ const locations = [
   {
     title: "Chicago",
     count: "2 Properties",
-    image: "/carousel1.jpeg",
+    image: "/carousel1.webp",
   },
   {
     title: "Los Angeles",
     count: "1 Property",
-    image: "/carousel2.jpeg",
+    image: "/carousel2.webp",
   },
   {
     title: "Miami",
     count: "2 Properties",
-    image: "/carousel3.jpeg",
+    image: "/carousel3.webp",
   },
   {
     title: "Florida",
     count: "3 Properties",
-    image: "/carousel3.jpeg",
+    image: "/carousel3.webp",
   },
   {
     title: "Chicago",
     count: "2 Properties",
-    image: "/carousel1.jpeg",
+    image: "/carousel1.webp",
   },
   {
     title: "Los Angeles",
     count: "1 Property",
-    image: "/carousel2.jpeg",
+    image: "/carousel2.webp",
   },
   {
     title: "Miami",
     count: "2 Properties",
-    image: "/carousel3.jpeg",
+    image: "/carousel3.webp",
   },
   {
     title: "Florida",
     count: "3 Properties",
-    image: "/carousel3.jpeg",
+    image: "/carousel3.webp",
   },
 ]
 

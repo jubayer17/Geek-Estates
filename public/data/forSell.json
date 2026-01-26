@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/House1.jpg",
+    "image": "/House1.webp",
     "title": "Luxury Family Home",
     "address": "1800-1818 79th St, Dhaka",
     "price": "$395,000",
@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "image": "/House3.jpg",
+    "image": "/house3.webp",
     "title": "Cozy Country House",
     "address": "15 Green Road, Dhaka",
     "price": "$450,000",
@@ -25,7 +25,7 @@
   },
   {
     "id": 3,
-    "image": "/House5.jpg",
+    "image": "/house5.webp",
     "title": "Spacious Villa",
     "address": "Block C, Bashundhara, Dhaka",
     "price": "$780,000",
@@ -37,7 +37,7 @@
   },
   {
     "id": 4,
-    "image": "/House6.jpg",
+    "image": "/house6.webp",
     "title": "Elegant City Residence",
     "address": "Dhanmondi 27, Dhaka",
     "price": "$520,000",

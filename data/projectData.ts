@@ -2,7 +2,7 @@ export const projectData = {
   title: "The Azure \nSkyline",
   location: "Downtown District, Metropolis",
   category: "Luxury Residential",
-  image: "/slide1.jpg", 
+  image: "/slide1.webp",
   description: "Rising above the city's pulse, The Azure Skyline represents the pinnacle of modern urban living. This architectural masterpiece seamlessly blends sustainable design with uncompromising luxury, offering panoramic views that redefine your perspective of the metropolis. Every detail has been meticulously crafted to create an sanctuary of calm amidst the vibrant energy of the city.",
   address: "123 Skyline Avenue, Metropolis, NY 10001",
   stats: [
@@ -94,35 +94,35 @@ export const projectData = {
       category: "Sports"
     }
   ],
-  featureImage: "/indoor-real-state/1.avif",
+  featureImage: "/indoor-real-state/1.webp",
   galleryImages: [
-    "/indoor-real-state/2.avif",
-    "/indoor-real-state/3.avif",
-    "/indoor-real-state/4.avif",
-    "/indoor-real-state/5.avif",
-    "/indoor-real-state/6.avif",
-    "/outdoor-real-state/1.avif",
+    "/indoor-real-state/2.webp",
+    "/indoor-real-state/3.webp",
+    "/indoor-real-state/4.webp",
+    "/indoor-real-state/5.webp",
+    "/indoor-real-state/6.webp",
+    "/outdoor-real-state/1.webp",
   ],
   relatedProjects: [
     {
       id: "2",
       title: "Emerald Gardens",
       location: "Eco Park, Green City",
-      image: "/outdoor-real-state/2.avif",
+      image: "/outdoor-real-state/2.webp",
       category: "Eco-Living"
     },
     {
       id: "3",
       title: "Sapphire Heights",
       location: "Financial District",
-      image: "/outdoor-real-state/3.avif",
+      image: "/outdoor-real-state/3.webp",
       category: "Commercial"
     },
     {
       id: "4",
       title: "Ruby Estates",
       location: "Suburban Hills",
-      image: "/outdoor-real-state/4.avif",
+      image: "/outdoor-real-state/4.webp",
       category: "Private Villa"
     }
   ]

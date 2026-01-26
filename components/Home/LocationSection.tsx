@@ -64,7 +64,7 @@ export default function LocationSection() {
                 <div className="relative mb-16 md:mb-24">
                     {/* Background Big Text */}
                     <div className="absolute -top-16 md:-top-24 left-0 w-full overflow-hidden pointer-events-none select-none z-0">
-                        <h2 className="text-[18vw] font-bold text-slate-900 leading-none tracking-tighter text-left flex">
+                        <h2 className="text-[16vw] font-bold text-slate-900 leading-none tracking-tighter text-left flex">
                             {"CONTACT".split("").map((letter, i) => (
                                 <span key={i} data-anim="bg-letter" className="inline-block opacity-0">
                                     {letter}
@@ -128,19 +128,21 @@ export default function LocationSection() {
                     </div>
 
                     {/* Details Container - Grid Layout below Map */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-3 w-full border-t border-l border-slate-200">
 
                         {/* Address */}
-                        <div data-anim="details-item" className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50/50 hover:bg-slate-50 transition-colors duration-300">
-                            <div className="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-[#E7C873] mb-6">
+                        <div data-anim="details-item" className="group flex flex-col items-center text-center p-12 border-r border-b border-slate-200 hover:bg-slate-50 transition-all duration-500 relative">
+                            {/* Hover Line Top */}
+                            <div className="absolute top-0 left-0 w-0 h-[1px] bg-[#E7C873] transition-all duration-500 group-hover:w-full z-10"></div>
+
+                            <div className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-[#E7C873] group-hover:border-[#E7C873] transition-all duration-500 mb-8 bg-white">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-light text-slate-900 mb-3">Office Address</h3>
-                            <div className="w-12 h-0.5 bg-[#E7C873] mb-4"></div>
-                            <p className="text-slate-600 text-lg leading-relaxed font-light">
+                            <h3 className="text-xl font-medium uppercase tracking-widest text-slate-900 mb-4 group-hover:text-[#E7C873] transition-colors">Address</h3>
+                            <p className="text-slate-500 text-base leading-relaxed font-light">
                                 123 Luxury Avenue, Suite 500<br />
                                 Manhattan, NY 10001<br />
                                 United States
@@ -148,43 +150,47 @@ export default function LocationSection() {
                         </div>
 
                         {/* Contact */}
-                        <div data-anim="details-item" className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50/50 hover:bg-slate-50 transition-colors duration-300">
-                            <div className="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-[#E7C873] mb-6">
+                        <div data-anim="details-item" className="group flex flex-col items-center text-center p-12 border-r border-b border-slate-200 hover:bg-slate-50 transition-all duration-500 relative">
+                            {/* Hover Line Top */}
+                            <div className="absolute top-0 left-0 w-0 h-[1px] bg-[#E7C873] transition-all duration-500 group-hover:w-full z-10"></div>
+
+                            <div className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-[#E7C873] group-hover:border-[#E7C873] transition-all duration-500 mb-8 bg-white">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-light text-slate-900 mb-3">Contact Us</h3>
-                            <div className="w-12 h-0.5 bg-[#E7C873] mb-4"></div>
+                            <h3 className="text-xl font-medium uppercase tracking-widest text-slate-900 mb-4 group-hover:text-[#E7C873] transition-colors">Contact</h3>
                             <div className="flex flex-col gap-2">
-                                <a href="tel:+12125550123" className="text-slate-600 hover:text-[#E7C873] transition-colors text-lg font-light">
+                                <a href="tel:+12125550123" className="text-slate-500 hover:text-[#E7C873] transition-colors text-base font-light">
                                     +1 (212) 555-0123
                                 </a>
-                                <a href="mailto:contact@geekrealestate.com" className="text-slate-600 hover:text-[#E7C873] transition-colors text-lg font-light">
+                                <a href="mailto:contact@geekrealestate.com" className="text-slate-500 hover:text-[#E7C873] transition-colors text-base font-light">
                                     contact@geekrealestate.com
                                 </a>
                             </div>
                         </div>
 
                         {/* Hours */}
-                        <div data-anim="details-item" className="flex flex-col items-center text-center p-6 rounded-2xl bg-slate-50/50 hover:bg-slate-50 transition-colors duration-300">
-                            <div className="w-14 h-14 rounded-full bg-white shadow-sm flex items-center justify-center text-[#E7C873] mb-6">
+                        <div data-anim="details-item" className="group flex flex-col items-center text-center p-12 border-r border-b border-slate-200 hover:bg-slate-50 transition-all duration-500 relative">
+                            {/* Hover Line Top */}
+                            <div className="absolute top-0 left-0 w-0 h-[1px] bg-[#E7C873] transition-all duration-500 group-hover:w-full z-10"></div>
+
+                            <div className="w-16 h-16 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-[#E7C873] group-hover:border-[#E7C873] transition-all duration-500 mb-8 bg-white">
                                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </div>
-                            <h3 className="text-xl md:text-2xl font-light text-slate-900 mb-3">Business Hours</h3>
-                            <div className="w-12 h-0.5 bg-[#E7C873] mb-4"></div>
-                            <ul className="space-y-2 text-slate-600 text-lg font-light w-full max-w-xs">
-                                <li className="flex justify-between border-b border-slate-200 pb-2 border-dashed">
+                            <h3 className="text-xl font-medium uppercase tracking-widest text-slate-900 mb-4 group-hover:text-[#E7C873] transition-colors">Opening Hours</h3>
+                            <ul className="space-y-2 text-slate-500 text-sm font-light w-full">
+                                <li className="flex justify-between border-b border-slate-100 pb-2 border-dashed">
                                     <span>Mon - Fri</span>
-                                    <span className="font-normal text-slate-800">9:00 AM - 6:00 PM</span>
+                                    <span className="font-normal text-slate-700">9:00 AM - 6:00 PM</span>
                                 </li>
-                                <li className="flex justify-between border-b border-slate-200 pb-2 border-dashed">
+                                <li className="flex justify-between border-b border-slate-100 pb-2 border-dashed">
                                     <span>Saturday</span>
-                                    <span className="font-normal text-slate-800">10:00 AM - 4:00 PM</span>
+                                    <span className="font-normal text-slate-700">10:00 AM - 4:00 PM</span>
                                 </li>
-                                <li className="flex justify-between pb-2">
+                                <li className="flex justify-between pt-1">
                                     <span>Sunday</span>
                                     <span className="text-[#E7C873]">Closed</span>
                                 </li>

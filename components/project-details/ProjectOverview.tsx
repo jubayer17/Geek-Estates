@@ -15,7 +15,7 @@ interface ProjectOverviewProps {
     image?: string
 }
 
-export default function ProjectOverview({ stats, image = "/slide2.jpg" }: ProjectOverviewProps) {
+export default function ProjectOverview({ stats, image = "/slide2.webp" }: ProjectOverviewProps) {
     const containerRef = useRef<HTMLElement>(null)
     const imageContainerRef = useRef<HTMLDivElement>(null)
     const imageRef = useRef<HTMLDivElement>(null)

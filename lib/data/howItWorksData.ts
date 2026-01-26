@@ -20,15 +20,15 @@ export const howItWorksSteps = [
 
 export const howItWorksImages = [
     {
-        src: "/hiw1.jpg",
+        src: "/hiw1.webp",
         alt: "Family looking at new home"
     },
     {
-        src: "/hiw2.jpg",
+        src: "/hiw2.webp",
         alt: "Happy family in living room"
     },
     {
-        src: "/htw3.jpg",
+        src: "/htw3.webp",
         alt: "Modern luxury home"
     }
 ]

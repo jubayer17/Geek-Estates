@@ -34,7 +34,7 @@ export default function MeetTeam() {
   const isInView = useInView(ref, { amount: 0.2 })
 
   return (
-    <section className="lg:mt-50 md:mt-30 mt-10">
+    <section className="lg:mt-48 md:mt-32 mt-16 px-4">
       <TitleSubtitle
         title="Meet Our Team Of Experts"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
@@ -42,7 +42,7 @@ export default function MeetTeam() {
 
       <motion.div
         ref={ref}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 max-w-7xl mx-auto mt-3"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-[1800px] mx-auto mt-16"
         variants={containerVariants}
         animate={isInView ? 'visible' : 'hidden'} // 👈 reset + reanimate
         initial="hidden"
