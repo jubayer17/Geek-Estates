@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const images = [
-  "/outdoor-real-state/1.avif",
-  "/outdoor-real-state/2.avif",
-  "/outdoor-real-state/3.avif",
-  "/outdoor-real-state/4.avif",
-  "/outdoor-real-state/5.avif",
+  "/outdoor-real-state/1.webp",
+  "/outdoor-real-state/2.webp",
+  "/outdoor-real-state/3.webp",
+  "/outdoor-real-state/4.webp",
+  "/outdoor-real-state/5.webp",
 ];
 
 export default function AllPropertiesBanner() {
