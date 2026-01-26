@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Phone, User, MoreVertical, X, ArrowUpRight } from "lucide-react"
+import { X, ArrowUpRight } from "lucide-react"
 import gsap from "gsap"
 
 const navLinks = [
@@ -13,7 +13,6 @@ const navLinks = [
   { href: "/allProject", label: "Properties" },
   { href: "/blogs", label: "News & Blogs" },
   { href: "/career", label: "Career" },
-  { href: "/contact", label: "Contact" },
 ]
 
 export default function Navbar() {
@@ -183,7 +182,7 @@ export default function Navbar() {
       >
         <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12">
           <div
-            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-20 lg:h-24" : "h-24 lg:h-32"
+            className={`flex items-center justify-between transition-all duration-500 ${scrolled ? "h-16 lg:h-24" : "h-20 lg:h-36"
               }`}
           >
             {/* Logo */}
@@ -203,7 +202,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`relative text-base font-medium tracking-wide transition-all duration-300 py-2 group ${isDarkText
+                  className={`relative text-sm font-medium tracking-widest uppercase transition-all duration-300 py-2 group ${isDarkText
                     ? "text-gray-600 hover:text-slate-900"
                     : "text-white/90 hover:text-white"
                     }`}
@@ -222,30 +221,15 @@ export default function Navbar() {
 
             {/* Desktop Actions */}
             <div ref={actionsRef} className="hidden lg:flex items-center gap-8">
-              <div className={`flex items-center gap-3 transition-colors duration-500 ${isDarkText ? "text-gray-600" : "text-white/90"
-                }`}>
-                <Phone size={18} className="opacity-80" />
-                <span className="text-sm font-medium tracking-wide">+880 1914 782 366</span>
-              </div>
-
-              <div className={`w-px h-8 ${isDarkText ? "bg-gray-200" : "bg-white/20"}`} />
-
-              <button
-                className={`p-3 rounded-full transition-all duration-300 ${isDarkText
-                  ? "text-gray-600 hover:bg-gray-100"
-                  : "text-white hover:bg-white/10"
-                  }`}
-              >
-                <User size={22} />
-              </button>
-
-              <Button
-                className="rounded-full px-10 py-7 text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 transition-all duration-300 shadow-lg hover:shadow-[#E7C873]/40"
-                onMouseEnter={handleButtonHover}
-                onMouseLeave={handleButtonLeave}
-              >
-                Add Property
-              </Button>
+              <Link href="/contact">
+                <Button
+                  className="rounded-full px-10 py-7 text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 transition-all duration-300 shadow-lg hover:shadow-[#E7C873]/40"
+                  onMouseEnter={handleButtonHover}
+                  onMouseLeave={handleButtonLeave}
+                >
+                  Contact Us
+                </Button>
+              </Link>
             </div>
 
             {/* Mobile Menu Button - Premium Hamburger */}
@@ -305,7 +289,7 @@ export default function Navbar() {
                     key={link.href}
                     href={link.href}
                     onClick={closeMenu}
-                    className="menu-item group flex items-center justify-between text-3xl font-light text-slate-800 hover:text-[#E7C873] transition-colors duration-300"
+                    className="menu-item group flex items-center justify-between text-xl font-light text-slate-800 hover:text-[#E7C873] transition-colors duration-300"
                     style={{ transitionDelay: `${index * 50}ms` }}
                   >
                     <span className="font-serif italic group-hover:pl-4 transition-all duration-300">{link.label}</span>
@@ -318,22 +302,13 @@ export default function Navbar() {
             {/* Menu Footer */}
             <div className="p-8 bg-gray-50/50 border-t border-gray-100">
               <div className="menu-item flex flex-col gap-6">
-                <div className="flex items-center gap-4 text-gray-600">
-                  <div className="w-10 h-10 rounded-full bg-[#E7C873]/10 flex items-center justify-center text-[#E7C873]">
-                    <Phone size={20} />
-                  </div>
-                  <div>
-                    <p className="text-xs text-gray-400 uppercase tracking-widest">Call Us</p>
-                    <p className="text-lg font-medium text-gray-900">+880 1914 782 366</p>
-                  </div>
-                </div>
-
-                <Button
-                  className="w-full rounded-full py-7 text-base font-bold tracking-widest uppercase bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20 transition-all duration-300"
-                  onClick={closeMenu}
-                >
-                  Add Property
-                </Button>
+                <Link href="/contact" onClick={closeMenu} className="w-full">
+                  <Button
+                    className="w-full rounded-full py-7 text-base font-bold tracking-widest uppercase bg-slate-900 hover:bg-slate-800 text-white shadow-lg shadow-slate-900/20 transition-all duration-300"
+                  >
+                    Contact Us
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
