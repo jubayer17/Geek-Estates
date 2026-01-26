@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "image": "/House2.jpg",
+    "image": "/house2.webp",
     "title": "Modern Apartment",
     "address": "221B Baker Street, Dhaka",
     "price": "$1,200 / month",
@@ -13,7 +13,7 @@
   },
   {
     "id": 2,
-    "image": "/House4.jpg",
+    "image": "/house4.webp",
     "title": "Downtown Studio",
     "address": "89 Lake View, Dhaka",
     "price": "$800 / month",
@@ -25,7 +25,7 @@
   },
   {
     "id": 3,
-    "image": "/House7.jpg",
+    "image": "/house7.webp",
     "title": "City Loft Apartment",
     "address": "Mirpur 10, Dhaka",
     "price": "$950 / month",
@@ -61,7 +61,7 @@
   },
   {
     "id": 6,
-    "image": "/House1.jpg",
+    "image": "/House1.webp",
     "title": "Compact Studio",
     "address": "Uttara Sector 11, Dhaka",
     "price": "$700 / month",

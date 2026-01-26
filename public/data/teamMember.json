@@ -2,21 +2,21 @@
   {
     "name": "John Powell",
     "role": "Service Support",
-    "image": "/team_member_4.png"
+    "image": "/team_member_4.webp"
   },
   {
     "name": "Sarah Chen",
     "role": "Customer Success",
-    "image": "/team_member_2.png"
+    "image": "/team_member_2.webp"
   },
   {
     "name": "Michael Rodriguez",
     "role": "Technical Support",
-    "image": "/team_member_1.png"
+    "image": "/team_member_1.webp"
   },
   {
     "name": "Emily Thompson",
     "role": "Support Specialist",
-    "image": "/team_member_3.png"
+    "image": "/team_member_3.webp"
   }
 ]
