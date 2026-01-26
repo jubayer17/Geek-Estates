@@ -317,7 +317,7 @@ export default function HeroSection() {
               sizes="100vw"
             />
             {/* Cinematic Gradient Overlays */}
-            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 bg-black/20" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
           </div>
@@ -327,21 +327,21 @@ export default function HeroSection() {
             ref={(el) => { contentRefs.current[index] = el }}
             className="relative z-10 h-full flex items-center"
           >
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full pt-20">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full pt-20 md:pt-0">
               <div className="max-w-4xl">
                 {/* Badge */}
-                <div className="hero-badge overflow-hidden mb-6 md:mb-8">
-                  <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-                    <span className="w-2 h-2 rounded-full bg-[#E7C873] animate-pulse" />
-                    <span className="text-xs md:text-sm font-medium tracking-widest uppercase text-white/90">
+                <div className="hero-badge overflow-hidden mb-4 md:mb-6">
+                  <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
+                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#E7C873] animate-pulse" />
+                    <span className="text-[10px] md:text-sm font-medium tracking-widest uppercase text-white/90">
                       {slide.badge}
                     </span>
                   </div>
                 </div>
 
                 {/* Heading - Split for Animation */}
-                <div className="mb-6 md:mb-8 overflow-hidden">
-                  <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium text-white leading-[0.9] tracking-tighter flex flex-wrap gap-x-3 md:gap-x-5">
+                <div className="mb-4 md:mb-6 overflow-hidden">
+                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-medium text-white leading-[1.1] tracking-tighter flex flex-wrap gap-x-2 md:gap-x-4">
                     {slide.heading.split(" ").map((word, i) => (
                       <span key={i} className="hero-heading-line inline-block font-serif italic">
                         {word}
@@ -351,24 +351,24 @@ export default function HeroSection() {
                 </div>
 
                 {/* Subheading */}
-                <p className="hero-subheading text-lg sm:text-xl md:text-2xl text-white/80 max-w-2xl mb-10 md:mb-12 leading-relaxed font-light">
+                <p className="hero-subheading text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-xl md:max-w-2xl mb-8 md:mb-10 leading-relaxed font-light">
                   {slide.subheading}
                 </p>
 
                 {/* CTA */}
-                <div className="hero-cta flex flex-wrap gap-6">
+                <div className="hero-cta flex flex-wrap gap-4 md:gap-6">
                   <Button
                     size="lg"
-                    className="group rounded-full px-10 py-8 text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
+                    className="group rounded-full px-5 py-4 md:px-8 md:py-7 lg:px-10 lg:py-8 text-sm md:text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
                   >
                     <span className="relative z-10">{slide.cta}</span>
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
 
                   <Button
                     variant="outline"
                     size="lg"
-                    className="rounded-full px-10 py-8 text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
+                    className="rounded-full px-5 py-4 md:px-8 md:py-7 lg:px-10 lg:py-8 text-sm md:text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
                   >
                     View Details
                   </Button>
@@ -380,19 +380,19 @@ export default function HeroSection() {
       ))}
 
       {/* Premium Navigation Controls */}
-      <div className="absolute bottom-12 left-0 w-full z-20 px-4 sm:px-6 lg:px-12">
-        <div className="max-w-[1800px] mx-auto flex items-end justify-between">
+      <div className="absolute bottom-8 md:bottom-12 left-0 w-full z-20 px-4 sm:px-6 lg:px-12">
+        <div className="max-w-[1800px] mx-auto flex flex-row items-end justify-between gap-4">
 
           {/* Progress & Count */}
-          <div className="flex items-center gap-6">
-            <div className="text-white font-mono text-lg">
+          <div className="flex items-center gap-4 md:gap-6">
+            <div className="text-white font-mono text-sm md:text-lg">
               <span className="text-[#E7C873]">0{currentSlide + 1}</span>
               <span className="opacity-30 mx-2">/</span>
               <span className="opacity-50">0{heroSlides.length}</span>
             </div>
 
             {/* Progress Bar */}
-            <div className="w-32 md:w-48 h-[2px] bg-white/10 relative overflow-hidden">
+            <div className="w-20 sm:w-32 md:w-48 h-[2px] bg-white/10 relative overflow-hidden">
               <div
                 ref={progressRef}
                 className="absolute inset-0 bg-[#E7C873] origin-left"
@@ -401,20 +401,20 @@ export default function HeroSection() {
           </div>
 
           {/* Arrows */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <button
               onClick={goToPrev}
               disabled={isAnimating}
-              className="group w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
+              className="group w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
             >
-              <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform duration-300" />
+              <ChevronLeft className="w-4 h-4 md:w-6 md:h-6 group-hover:-translate-x-1 transition-transform duration-300" />
             </button>
             <button
               onClick={goToNext}
               disabled={isAnimating}
-              className="group w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
+              className="group w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white hover:text-black transition-all duration-500 disabled:opacity-50"
             >
-              <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+              <ChevronRight className="w-4 h-4 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform duration-300" />
             </button>
           </div>
         </div>
