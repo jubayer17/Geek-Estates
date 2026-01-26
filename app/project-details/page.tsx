@@ -5,7 +5,7 @@ import ProjectOverview from "@/components/project-details/ProjectOverview"
 import ProjectFeatures from "@/components/project-details/ProjectFeatures"
 import ProjectGallery from "@/components/project-details/ProjectGallery"
 import FeaturedProjects from "@/components/project-details/FeaturedProjects"
-import LetsConnect from "@/components/home/LetsConnect"
+import LetsConnect from "@/components/Home/LetsConnect"
 import { projectData } from "@/data/projectData"
 
 export default function ProjectDetailsPage() {
