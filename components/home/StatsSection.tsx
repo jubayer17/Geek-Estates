@@ -159,19 +159,19 @@ export default function StatsSection() {
             {/* Content Container */}
             <div ref={containerRef} className="relative z-10 max-w-[1920px] mx-auto px-4 lg:px-4">
                 {/* Header */}
-                <div className="mb-20 md:mb-32 max-w-[1800px] mx-auto">
+                <div className="mb-20 ml-16 md:mb-32 max-w-[1800px] mx-auto">
                     <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-20">
                         <div className="flex-1">
                             <div className="flex items-center gap-4 mb-6 md:mb-8 stats-header-item">
                                 <span className="w-8 md:w-12 h-[1px] bg-[#E7C873]"></span>
-                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-xs md:text-sm">Our Journey</span>
+                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-xs  md:text-sm">Our Journey</span>
                             </div>
 
                             <div className="relative stats-header-item">
                                 <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.9]">
                                     Legacy of
                                 </h2>
-                                <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif italic text-white/90 leading-[0.9] mt-2 md:ml-24">
+                                <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif italic text-[#E7C873] leading-[0.9] mt-4 md:ml-24">
                                     <span className="relative inline-block">
                                         Trust
                                         <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
