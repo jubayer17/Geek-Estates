@@ -45,7 +45,7 @@ export default function ContactForm() {
   return (
     <div className="w-full bg-white">
       {/* MAIN HEADLINE SECTION */}
-      <div className="w-full py-24 md:py-32 bg-white text-center px-4 relative overflow-hidden">
+      <div className="w-full py-16 md:py-32 bg-white text-center px-4 relative overflow-hidden">
         {/* Decorative Background Element */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-200 h-200 bg-gray-50 rounded-full blur-[120px] pointer-events-none opacity-60" />
 
@@ -61,7 +61,7 @@ export default function ContactForm() {
             <span className="text-[#E7C873] font-bold tracking-[0.3em] text-xs uppercase">Get in Touch</span>
             <div className="h-px w-8 md:w-16 bg-[#E7C873]" />
           </div>
-          <h1 className="text-6xl md:text-7xl lg:text-8xl font-serif text-[#1A1A1A] leading-none tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif text-[#1A1A1A] leading-none tracking-tight">
             Contact Us
           </h1>
         </motion.div>
@@ -70,7 +70,7 @@ export default function ContactForm() {
       <section className="relative w-full flex flex-col lg:flex-row">
 
         {/* LEFT COLUMN: Contact Info (White Background) - 50% Width */}
-        <div className="w-full lg:w-1/2 bg-white text-[#1A1A1A] px-8 md:px-16 lg:px-24 py-24 lg:py-32 flex flex-col justify-center relative overflow-hidden border-r border-gray-100">
+        <div className="w-full lg:w-1/2 bg-white text-[#1A1A1A] px-6 md:px-16 lg:px-24 py-16 lg:py-32 flex flex-col justify-center relative overflow-hidden border-r border-gray-100">
           {/* Subtle Decorative Background */}
           <div className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-[0.03]">
             <div className="absolute top-[-10%] right-[-10%] w-125 h-125 bg-[#E7C873] rounded-full blur-[100px]" />
@@ -88,7 +88,7 @@ export default function ContactForm() {
                 <span className="text-[#E7C873] font-bold tracking-[0.25em] text-xs uppercase">Get in Touch</span>
               </div>
 
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] leading-[1.1] mb-8">
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] leading-[1.1] mb-8">
                 Let&apos;s discuss <br />
                 <span className="italic text-gray-400 font-light">your future.</span>
               </h2>
@@ -108,7 +108,7 @@ export default function ContactForm() {
         </div>
 
         {/* RIGHT COLUMN: The Form (Dark Background) - 50% Width */}
-        <div className="w-full lg:w-1/2 bg-[#0F1115] text-white px-8 md:px-16 lg:px-24 py-24 lg:py-32 flex flex-col justify-center relative">
+        <div className="w-full lg:w-1/2 bg-[#0F1115] text-white px-6 md:px-16 lg:px-24 py-16 lg:py-32 flex flex-col justify-center relative">
           {/* Background Texture */}
           <div className="absolute inset-0 pointer-events-none opacity-20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(231,200,115,0.08),transparent_50%)]"></div>
