@@ -356,10 +356,10 @@ export default function HeroSection() {
                 </p>
 
                 {/* CTA */}
-                <div className="hero-cta flex flex-wrap gap-4 md:gap-6">
+                <div className="hero-cta flex flex-wrap gap-4 md:gap-6 mb-10 md:mb-14">
                   <Button
                     size="lg"
-                    className="group rounded-full px-5 py-4 md:px-8 md:py-7 lg:px-10 lg:py-8 text-sm md:text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
+                    className="group rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
                   >
                     <span className="relative z-10">{slide.cta}</span>
                     <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -368,7 +368,7 @@ export default function HeroSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="rounded-full px-5 py-4 md:px-8 md:py-7 lg:px-10 lg:py-8 text-sm md:text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
+                    className="rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
                   >
                     View Details
                   </Button>
