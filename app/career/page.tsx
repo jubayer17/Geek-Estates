@@ -1,8 +1,8 @@
 import React from 'react'
-import Jobs from '@/components/Career.tsx/Jobs'
+import Jobs from '@/components/career/Jobs'
 import ContactAndCareerBanner from '@/components/reuseable/ContactBanner'
-import CareerValues from '@/components/Career.tsx/CareerValues'
-import CareerPerks from '@/components/Career.tsx/CareerPerks'
+import CareerValues from '@/components/career/CareerValues'
+import CareerPerks from '@/components/career/CareerPerks'
 
 export default function Career() {
   return (
