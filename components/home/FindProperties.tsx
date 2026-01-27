@@ -13,37 +13,37 @@ const cities = [
     name: "Dhaka",
     count: "320+ Properties",
     image: "/outdoor-real-state/1.webp",
-    className: "md:col-span-2 md:row-span-2 min-h-[300px] md:min-h-[400px]"
+    className: "md:col-span-2 md:row-span-2 aspect-square md:aspect-auto md:h-[620px]"
   },
   {
     name: "Chittagong",
     count: "145+ Properties",
     image: "/outdoor-real-state/2.webp",
-    className: "md:col-span-1 md:row-span-2 min-h-[300px] md:min-h-[400px]"
+    className: "md:col-span-1 md:row-span-2 aspect-square md:aspect-auto md:h-[620px]"
   },
   {
     name: "Sylhet",
     count: "89+ Properties",
     image: "/outdoor-real-state/3.webp",
-    className: "md:col-span-1 md:row-span-1 min-h-[200px]"
+    className: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto md:h-[300px]"
   },
   {
     name: "Cox's Bazar",
     count: "65+ Properties",
     image: "/outdoor-real-state/4.webp",
-    className: "md:col-span-1 md:row-span-1 min-h-[200px]"
+    className: "md:col-span-1 md:row-span-1 aspect-square md:aspect-auto md:h-[300px]"
   },
   {
     name: "Rajshahi",
     count: "42+ Properties",
     image: "/outdoor-real-state/5.webp",
-    className: "md:col-span-2 md:row-span-1 min-h-[200px]"
+    className: "md:col-span-2 md:row-span-1 aspect-square md:aspect-auto md:h-[300px]"
   },
   {
     name: "Khulna",
     count: "38+ Properties",
     image: "/outdoor-real-state/6.webp",
-    className: "md:col-span-2 md:row-span-1 min-h-[200px]"
+    className: "md:col-span-2 md:row-span-1 aspect-square md:aspect-auto md:h-[300px]"
   }
 ]
 
@@ -179,13 +179,13 @@ export default function FindProperties() {
         </div>
 
         {/* Unique Bento Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-4 gap-1">
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6">
           {cities.map((city, index) => (
             <Link
               href="#"
               key={index}
               data-anim="city-card"
-              className={`group relative overflow-hidden cursor-pointer ${city.className}`}
+              className={`group relative overflow-hidden cursor-pointer shadow-lg hover:shadow-xl transition-shadow duration-500 ${city.className}`}
             >
               {/* Background Image */}
               <div className="absolute inset-0 w-full h-full">
