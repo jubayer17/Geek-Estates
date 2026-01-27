@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Home/Navbar";
-import Footer from "@/components/Home/Footer";
+import Navbar from "@/components/home/Navbar";
+import Footer from "@/components/home/Footer";
 import { Toaster } from "@/components/ui/sonner";
 
 
@@ -39,7 +39,7 @@ export default function RootLayout({
 
         {/* Toast provider at root level */}
         <Toaster
-          position="top-right" 
+          position="top-right"
           toastOptions={{
             className:
               "bg-gradient-to-r from-emerald-400 to-green-600 text-white font-semibold shadow-xl",
