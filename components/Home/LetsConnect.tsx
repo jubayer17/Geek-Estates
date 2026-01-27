@@ -97,7 +97,7 @@ export default function LetsConnect() {
 
                             <div className="relative">
                                 <div className="overflow-hidden">
-                                    <h2 data-anim="title-line" className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.9] opacity-0">
+                                    <h2 data-anim="title-line" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.9] opacity-0">
                                         Start Your
                                     </h2>
                                 </div>
