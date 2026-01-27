@@ -325,10 +325,10 @@ export default function HeroSection() {
           {/* Content */}
           <div
             ref={(el) => { contentRefs.current[index] = el }}
-            className="relative z-10 h-full flex items-center"
+            className="relative z-10 h-full flex items-center pt-24 md:pt-44"
           >
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full pt-20 md:pt-0">
-              <div className="max-w-4xl">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full  md:pt-0">
+              <div className="max-w-4xl -mt-32">
                 {/* Badge */}
                 <div className="hero-badge overflow-hidden mb-4 md:mb-6">
                   <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
@@ -341,7 +341,7 @@ export default function HeroSection() {
 
                 {/* Heading - Split for Animation */}
                 <div className="mb-4 md:mb-6 overflow-hidden">
-                  <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-medium text-white leading-[1.1] tracking-tighter flex flex-wrap gap-x-2 md:gap-x-4">
+                  <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-medium text-white leading-[1.1] tracking-tighter flex flex-wrap gap-x-2 md:gap-x-4">
                     {slide.heading.split(" ").map((word, i) => (
                       <span key={i} className="hero-heading-line inline-block font-serif italic">
                         {word}
