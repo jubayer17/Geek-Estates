@@ -1,5 +1,5 @@
-import ContactForm from '@/components/Contact/ContactForm'
-import ContactFAQ from '@/components/Contact/ContactFAQ'
+import ContactForm from '@/components/contact/ContactForm'
+import ContactFAQ from '@/components/contact/ContactFAQ'
 import ContactBanner from '@/components/reuseable/ContactBanner'
 import React from 'react'
 
