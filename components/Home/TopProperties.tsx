@@ -182,12 +182,12 @@ export default function TopNotchedProperties({
 
                             <div className="relative left-0 md:left-4">
                                 <div className="overflow-hidden">
-                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-slate-900 tracking-tight leading-[0.9]">
+                                    <h2 data-anim="title-line" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-slate-900 tracking-tight leading-[0.9]">
                                         Best
                                     </h2>
                                 </div>
                                 <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
-                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-slate-800 leading-[0.9]">
+                                    <h2 data-anim="title-line" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif italic text-slate-800 leading-[0.9]">
                                         <span className="relative inline-block">
                                             Properties
                                             <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
