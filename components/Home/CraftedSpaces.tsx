@@ -21,6 +21,7 @@ export default function CraftedSpaces() {
     const categoriesRef = useRef<HTMLDivElement>(null)
     const slideshowRef = useRef<HTMLDivElement>(null)
     const trackRef = useRef<HTMLDivElement>(null)
+    const mobileTrackRef = useRef<HTMLDivElement>(null)
     const slideRefs = useRef<(HTMLDivElement | null)[]>([])
     const imageRefs = useRef<(HTMLDivElement | null)[]>([])
 
@@ -38,9 +39,11 @@ export default function CraftedSpaces() {
 
         setIsAnimating(true)
         const track = trackRef.current
+        const mobileTrack = mobileTrackRef.current
+        const targets = [track, mobileTrack].filter(Boolean)
 
-        if (track) {
-            gsap.to(track, {
+        if (targets.length > 0) {
+            gsap.to(targets, {
                 opacity: 0,
                 scale: 0.97,
                 duration: 0.4,
@@ -51,9 +54,10 @@ export default function CraftedSpaces() {
                     setCurrentIndex(0)
 
                     // Reset track position
-                    gsap.set(track, { x: 0 })
+                    if (track) gsap.set(track, { x: 0 })
+                    if (mobileTrack) mobileTrack.scrollTo({ left: 0 })
 
-                    gsap.to(track, {
+                    gsap.to(targets, {
                         opacity: 1,
                         scale: 1,
                         duration: 0.5,
@@ -62,6 +66,11 @@ export default function CraftedSpaces() {
                     })
                 }
             })
+        } else {
+            setActiveCategory(category)
+            setFilteredProjects(filterProjects(category))
+            setCurrentIndex(0)
+            setIsAnimating(false)
         }
     }, [activeCategory, isAnimating, filterProjects])
 
@@ -316,12 +325,12 @@ export default function CraftedSpaces() {
 
                             <div className="relative left-0 md:left-4">
                                 <div className="overflow-hidden">
-                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-slate-900 tracking-tight leading-[0.9]">
+                                    <h2 data-anim="title-line" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-slate-900 tracking-tight leading-[0.9]">
                                         Crafted
                                     </h2>
                                 </div>
                                 <div className="overflow-hidden pl-4 md:pl-0 lg:ml-24">
-                                    <h2 data-anim="title-line" className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-slate-800 leading-[0.9]">
+                                    <h2 data-anim="title-line" className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif italic text-slate-800 leading-[0.9]">
                                         <span className="relative inline-block">
                                             Spaces
                                             <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
@@ -373,7 +382,7 @@ export default function CraftedSpaces() {
                             <button
                                 onClick={() => navigate('prev')}
                                 disabled={isAnimating}
-                                className="absolute left-0 top-[35%] md:top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-3 lg:-translate-x-6 z-10 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-400 hover:bg-white transition-all duration-300 disabled:opacity-50"
+                                className="hidden md:flex absolute left-0 top-[35%] md:top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-3 lg:-translate-x-6 z-10 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 items-center justify-center bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-400 hover:bg-white transition-all duration-300 disabled:opacity-50"
                                 aria-label="Previous slide"
                             >
                                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -381,7 +390,7 @@ export default function CraftedSpaces() {
                             <button
                                 onClick={() => navigate('next')}
                                 disabled={isAnimating}
-                                className="absolute right-0 top-[35%] md:top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-3 lg:translate-x-6 z-10 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-400 hover:bg-white transition-all duration-300 disabled:opacity-50"
+                                className="hidden md:flex absolute right-0 top-[35%] md:top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-3 lg:translate-x-6 z-10 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 items-center justify-center bg-white/90 backdrop-blur-sm border border-gray-200 text-gray-600 hover:text-gray-900 hover:border-gray-400 hover:bg-white transition-all duration-300 disabled:opacity-50"
                                 aria-label="Next slide"
                             >
                                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -389,8 +398,49 @@ export default function CraftedSpaces() {
                         </>
                     )}
 
-                    {/* Slides - Horizontal sliding carousel */}
-                    <div className="overflow-hidden px-6 sm:px-10 md:px-14 lg:px-16">
+                    {/* Mobile Slides - Native Scroll */}
+                    <div
+                        ref={mobileTrackRef}
+                        className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 px-4 scrollbar-hide"
+                    >
+                        {filteredProjects.map((project, index) => (
+                            <div
+                                key={`${project.name}-${index}`}
+                                className="min-w-full snap-center"
+                            >
+                                {/* Mobile Image Container */}
+                                <div className="relative overflow-hidden bg-gray-100 aspect-[4/5] w-full">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.name}
+                                        fill
+                                        className="object-cover"
+                                        sizes="100vw"
+                                        priority={index === 0}
+                                    />
+                                    <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-30" />
+                                </div>
+                                {/* Mobile Project Info */}
+                                <div className="pt-5 pb-2">
+                                    <h3 className="font-semibold text-gray-900 tracking-tight mb-1 text-2xl">
+                                        {project.name}
+                                    </h3>
+                                    <div className='flex flex-row items-center'>
+                                        <p className="text-sm text-gray-500 uppercase tracking-widest font-medium mr-3">
+                                            {project.category}
+                                        </p>
+                                        <span className="text-gray-300">|</span>
+                                        <p className="text-sm text-gray-500 uppercase tracking-widest font-medium ml-3">
+                                            {project.location}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Desktop Slides - Horizontal sliding carousel */}
+                    <div className="hidden md:block overflow-hidden px-6 sm:px-10 md:px-14 lg:px-16">
                         <div
                             ref={trackRef}
                             className="flex items-end gap-4 md:gap-5 lg:gap-6"
@@ -460,7 +510,7 @@ export default function CraftedSpaces() {
 
                     {/* Slide Indicators */}
                     {filteredProjects.length > 3 && (
-                        <div className="flex justify-center gap-2 mt-8 md:mt-10 lg:mt-12">
+                        <div className="hidden md:flex justify-center gap-2 mt-8 md:mt-10 lg:mt-12">
                             {filteredProjects.map((_, index) => (
                                 <button
                                     key={index}
@@ -486,14 +536,14 @@ export default function CraftedSpaces() {
                 </div>
 
                 {/* View All CTA */}
-              <Link href="/allProject">
-                <div className="text-center mt-12 md:mt-16 lg:mt-20">
-                    <button className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 border border-gray-900 text-gray-900 text-sm sm:text-base font-medium tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300">
-                        <span>View All Projects</span>
-                        <ChevronRight className="w-4 h-4" />
-                    </button>
-                </div>
-              </Link>
+                <Link href="/allProject">
+                    <div className="text-center mt-12 md:mt-16 lg:mt-20">
+                        <button className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 md:py-4 border border-gray-900 text-gray-900 text-sm sm:text-base font-medium tracking-wide hover:bg-gray-900 hover:text-white transition-all duration-300">
+                            <span>View All Projects</span>
+                            <ChevronRight className="w-4 h-4" />
+                        </button>
+                    </div>
+                </Link>
 
             </div>
         </section>
