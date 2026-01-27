@@ -160,18 +160,18 @@ export default function StatsSection() {
             <div ref={containerRef} className="relative z-10 max-w-[1920px] mx-auto px-4 lg:px-4">
                 {/* Header */}
                 <div className="mb-20 md:mb-32 max-w-[1800px] mx-auto">
-                    <div className="flex flex-col lg:flex-row items-end justify-between gap-10 lg:gap-20">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-6 lg:gap-20">
                         <div className="flex-1">
-                            <div className="flex items-center gap-4 mb-8 stats-header-item">
-                                <span className="w-12 h-[1px] bg-[#E7C873]"></span>
-                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-sm">Our Journey</span>
+                            <div className="flex items-center gap-4 mb-6 md:mb-8 stats-header-item">
+                                <span className="w-8 md:w-12 h-[1px] bg-[#E7C873]"></span>
+                                <span className="text-[#E7C873] font-medium tracking-[0.3em] uppercase text-xs md:text-sm">Our Journey</span>
                             </div>
 
                             <div className="relative stats-header-item">
-                                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-light text-white tracking-tight leading-[0.9]">
+                                <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-light text-white tracking-tight leading-[0.9]">
                                     Legacy of
                                 </h2>
-                                <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-serif italic text-white/90 leading-[0.9] mt-2 md:ml-24">
+                                <h2 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-serif italic text-white/90 leading-[0.9] mt-2 md:ml-24">
                                     <span className="relative inline-block">
                                         Trust
                                         <span className="absolute -right-8 top-0 text-2xl md:text-4xl not-italic font-light text-[#E7C873]">*</span>
@@ -181,7 +181,7 @@ export default function StatsSection() {
                         </div>
 
                         <div className="lg:max-w-md pb-4 stats-header-item">
-                            <p className="text-white/60 text-lg leading-relaxed border-l border-white/10 pl-6">
+                            <p className="text-white/60 text-sm md:text-lg leading-relaxed border-l border-white/10 pl-4 md:pl-6">
                                 Building the future with precision, passion, and a commitment to excellence. We don&apos;t just build structures; we create landmarks that stand the test of time.
                             </p>
                         </div>
@@ -194,30 +194,30 @@ export default function StatsSection() {
                         <div
                             key={stat.id}
                             ref={el => { cardsRef.current[index] = el }}
-                            className="relative w-full md:w-[99%] lg:w-[99%] mx-auto h-auto md:h-[150px] bg-white/5 backdrop-blur-md border-l-4 border-[#E7C873] group hover:bg-white/10 transition-colors duration-500"
+                            className="relative w-full md:w-[99%] lg:w-[99%] mx-auto h-auto md:h-[150px] bg-white/5 backdrop-blur-md border-l-4 border-[#E7C873] group hover:bg-white/10 transition-colors duration-500 p-4 md:p-0 md:px-8 md:flex md:items-center"
                             style={{
                                 marginLeft: index % 2 === 0 ? '0' : '5%', // Much more pronounced stagger for desktop
                                 marginRight: index % 2 !== 0 ? '0' : '5%',
                             }}
                         >
                             {/* Inner Content */}
-                            <div className="flex items-center gap-6 md:gap-10 w-full">
+                            <div className="flex items-center gap-3 md:gap-10 w-full">
                                 {/* ID */}
-                                <span className="font-mono text-[#E7C873] text-lg tracking-widest opacity-30 group-hover:opacity-100 transition-opacity">
+                                <span className="font-mono text-[#E7C873] text-sm md:text-lg tracking-widest opacity-30 group-hover:opacity-100 transition-opacity hidden sm:block">
                                     / {stat.id}
                                 </span>
 
                                 {/* Number & Label */}
-                                <div className="flex-1 flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+                                <div className="flex-1 flex flex-col md:flex-row md:items-baseline gap-1 md:gap-6">
                                     <div className="flex items-baseline">
-                                        <span className="stat-number text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter">
+                                        <span className="stat-number text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter">
                                             {stat.value}
                                         </span>
-                                        <span className="text-2xl md:text-4xl font-serif italic text-[#E7C873] ml-1">
+                                        <span className="text-xl md:text-4xl font-serif italic text-[#E7C873] ml-1">
                                             {stat.suffix}
                                         </span>
                                     </div>
-                                    <h3 className="text-sm md:text-base font-medium text-white/70 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+                                    <h3 className="text-[10px] sm:text-xs md:text-base font-medium text-white/70 uppercase tracking-[0.2em] group-hover:text-white transition-colors">
                                         {stat.label}
                                     </h3>
                                 </div>
@@ -231,8 +231,8 @@ export default function StatsSection() {
                                 </p>
 
                                 {/* Action Icon */}
-                                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E7C873] group-hover:border-[#E7C873] group-hover:text-black transition-all duration-500 shrink-0">
-                                    <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white/40 group-hover:text-black transition-colors" />
+                                <div className="w-8 h-8 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-[#E7C873] group-hover:border-[#E7C873] group-hover:text-black transition-all duration-500 shrink-0">
+                                    <ArrowUpRight className="w-3 h-3 md:w-5 md:h-5 text-white/40 group-hover:text-black transition-colors" />
                                 </div>
                             </div>
                         </div>
