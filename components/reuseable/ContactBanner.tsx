@@ -31,9 +31,9 @@ export default function ContactBanner({ imageSrc, title, subtitle }: ContactBann
   }, [imageSrc]);
 
   return (
-    <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row bg-white overflow-hidden">
+    <div className="relative w-full min-h-auto lg:min-h-[85vh] flex flex-col-reverse lg:flex-row bg-white overflow-hidden">
       {/* Left Content Section */}
-      <div className="w-full lg:w-[45%] relative z-20 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-24 lg:py-0">
+      <div className="w-full lg:w-[45%] relative z-20 flex flex-col justify-center px-6 md:px-12 lg:px-20 py-16 md:py-24 lg:py-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -49,7 +49,7 @@ export default function ContactBanner({ imageSrc, title, subtitle }: ContactBann
           </div>
 
           {/* Heading */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] leading-[1.1]">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] leading-[1.1]">
             {title ? (
               title
             ) : (
