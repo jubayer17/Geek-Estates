@@ -20,7 +20,7 @@ export default function AllPropertiesSearch() {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
 
   return (
-    <div className="w-full bg-white border-b border-[#1A1A1A]/10 sticky top-20 lg:top-24 z-40 transition-all duration-300">
+    <div className="w-full bg-white border-b border-[#1A1A1A]/10 transition-all duration-300">
       <div className="max-w-[1920px] mx-auto">
         <div className="flex flex-col md:flex-row">
 
