@@ -87,10 +87,15 @@ export default function Footer() {
             <div>
               <h4 className="text-[#E7C873] text-xs uppercase tracking-[0.2em] mb-6 md:mb-8 font-medium">Explore</h4>
               <ul className="space-y-4">
-                {["Properties", "Neighborhoods", "Agents", "Journal"].map((item) => (
-                  <li key={item}>
-                    <Link href="#" className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
-                      {item}
+                {[
+                  { label: "Properties", href: "/all-projects" },
+                  { label: "Neighborhoods", href: "/all-projects" },
+                  { label: "Agents", href: "/about-us" },
+                  { label: "Journal", href: "/news-and-blogs" }
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
+                      {item.label}
                     </Link>
                   </li>
                 ))}
@@ -99,10 +104,15 @@ export default function Footer() {
             <div>
               <h4 className="text-[#E7C873] text-xs uppercase tracking-[0.2em] mb-6 md:mb-8 font-medium">Company</h4>
               <ul className="space-y-4">
-                {["About Us", "Careers", "Contact", "Privacy Policy"].map((item) => (
-                  <li key={item}>
-                    <Link href="#" className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
-                      {item}
+                {[
+                  { label: "About Us", href: "/about-us" },
+                  { label: "Careers", href: "/career" },
+                  { label: "Contact", href: "/contact" },
+                  { label: "Privacy Policy", href: "#" }
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="text-slate-400 hover:text-white transition-colors text-sm md:text-base font-light block py-1">
+                      {item.label}
                     </Link>
                   </li>
                 ))}
