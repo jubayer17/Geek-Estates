@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Ahsan Rahman",
+    "role": "Managing Director",
+    "message": "Leadership is not about control, it’s about creating trust and empowering people to build something meaningful together.",
+    "image": "/team_member_1.webp"
+  },
+  {
+    "name": "Nabila Chowdhury",
+    "role": "Chief Architect",
+    "message": "Every building tells a story. Our responsibility is to make that story sustainable, inspiring, and timeless.",
+    "image": "/team_member_2.webp"
+  },
+  {
+    "name": "Farhan Ahmed",
+    "role": "Head of Operations",
+    "message": "Operational excellence is achieved when planning, people, and purpose move forward as one.",
+    "image": "/team_member_3.webp"
+  }
+]
