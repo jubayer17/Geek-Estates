@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const platform_express_1 = require("@nestjs/platform-express");
 const home_service_1 = require("./home.service");
 const fileUploader_1 = require("../helper/fileUploader");
+const homeDTO_1 = require("./homeDTO");
 let HomeController = class HomeController {
     homeService;
     constructor(homeService) {
@@ -55,6 +56,50 @@ let HomeController = class HomeController {
     }
     async deleteHeroBanner(id) {
         return this.homeService.deleteHeroBanner(id);
+    }
+    create(dto) {
+        return this.homeService.textSectionCreate(dto);
+    }
+    getAll() {
+        return this.homeService.textSectionGetAll();
+    }
+    getById(id) {
+        return this.homeService.textSectionGetById(id);
+    }
+    update(id, dto) {
+        return this.homeService.textSectionUpdate(id, dto);
+    }
+    remove(id) {
+        return this.homeService.textSectionRemove(id);
+    }
+    featuredImageCreate(files, data) {
+        let parsedData;
+        try {
+            parsedData = JSON.parse(data);
+        }
+        catch {
+            throw new common_1.BadRequestException('Invalid JSON in data field');
+        }
+        return this.homeService.featuredImageCreate(parsedData, files.image?.[0], files.icon?.[0]);
+    }
+    featuredImageGetAll() {
+        return this.homeService.featuredImageGetAll();
+    }
+    featuredImageGetById(id) {
+        return this.homeService.featuredImageGetById(id);
+    }
+    featuredImageUpdate(id, files, data) {
+        let parsedData;
+        try {
+            parsedData = JSON.parse(data);
+        }
+        catch {
+            throw new common_1.BadRequestException('Invalid JSON in data field');
+        }
+        return this.homeService.featuredImageUpdate(id, parsedData, files.image?.[0], files.icon?.[0]);
+    }
+    featuredImageDelete(id) {
+        return this.homeService.featuredImageDelete(id);
     }
 };
 exports.HomeController = HomeController;
@@ -101,6 +146,90 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HomeController.prototype, "deleteHeroBanner", null);
+__decorate([
+    (0, common_1.Post)("/text"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [homeDTO_1.CreateLegacySectionDto]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "create", null);
+__decorate([
+    (0, common_1.Get)('/text'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "getAll", null);
+__decorate([
+    (0, common_1.Get)('/text/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "getById", null);
+__decorate([
+    (0, common_1.Patch)('/text/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, homeDTO_1.UpdateLegacySectionDto]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "update", null);
+__decorate([
+    (0, common_1.Delete)('/text/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)("/featuredImage"),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileFieldsInterceptor)([
+        { name: 'image', maxCount: 1 },
+        { name: 'icon', maxCount: 1 },
+    ], {
+        storage: fileUploader_1.fileUploader.storage,
+    })),
+    __param(0, (0, common_1.UploadedFiles)()),
+    __param(1, (0, common_1.Body)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "featuredImageCreate", null);
+__decorate([
+    (0, common_1.Get)("/featuredImage"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "featuredImageGetAll", null);
+__decorate([
+    (0, common_1.Get)('/featuredImage/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "featuredImageGetById", null);
+__decorate([
+    (0, common_1.Patch)('/featuredImage/:id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileFieldsInterceptor)([
+        { name: 'image', maxCount: 1 },
+        { name: 'icon', maxCount: 1 },
+    ], {
+        storage: fileUploader_1.fileUploader.storage,
+    })),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.UploadedFiles)()),
+    __param(2, (0, common_1.Body)('data')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object, String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "featuredImageUpdate", null);
+__decorate([
+    (0, common_1.Delete)('/featuredImage/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "featuredImageDelete", null);
 exports.HomeController = HomeController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [home_service_1.HomeService])

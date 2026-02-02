@@ -8,12 +8,13 @@ import {
   Patch,
   Post,
   UploadedFile,
+  UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { HomeService } from './home.service';
 import { fileUploader } from 'src/helper/fileUploader';
-import { CreateHeroBannerDto } from './homeDTO';
+import { CreateHeroBannerDto, CreateLegacySectionDto, UpdateLegacySectionDto } from './homeDTO';
 
 @Controller()
 export class HomeController {
@@ -90,5 +91,126 @@ async updateHeroBanner(
     return this.homeService.deleteHeroBanner(id);
   }
 
+// create text
+  @Post("/text")
+  create(@Body() dto: CreateLegacySectionDto) {
+    return this.homeService.textSectionCreate(dto);
+  }
 
+  @Get('/text')
+  getAll() {
+    return this.homeService.textSectionGetAll();
+  }
+// get text by id
+  @Get('/text/:id')
+  getById(@Param('id') id: string) {
+    return this.homeService.textSectionGetById(id);
+  }
+// update by id text
+  @Patch('/text/:id')
+  update(@Param('id') id: string, @Body() dto: UpdateLegacySectionDto) {
+    return this.homeService.textSectionUpdate(id, dto);
+  }
+// delete text
+  @Delete('/text/:id')
+  remove(@Param('id') id: string) {
+    return this.homeService.textSectionRemove(id);
+  }
+
+
+
+
+
+
+  @Post("/featuredImage")
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'image', maxCount: 1 },
+        { name: 'icon', maxCount: 1 },
+      ],
+      {
+      storage: fileUploader.storage,
+    }
+,
+    ),
+  )
+  featuredImageCreate(
+    @UploadedFiles()
+    files: {
+      image?: Express.Multer.File[];
+      icon?: Express.Multer.File[];
+    },
+    @Body('data') data: string,
+  ) {
+    let parsedData;
+    try {
+      parsedData = JSON.parse(data);
+    } catch {
+      throw new BadRequestException('Invalid JSON in data field');
+    }
+
+    return this.homeService.featuredImageCreate(
+      parsedData,
+      files.image?.[0],
+      files.icon?.[0],
+    );
+  }
+
+  @Get("/featuredImage")
+  featuredImageGetAll() {
+    return this.homeService.featuredImageGetAll();
+  }
+
+  @Get('/featuredImage/:id')
+  featuredImageGetById(@Param('id') id: string) {
+    return this.homeService.featuredImageGetById(id);
+  }
+
+  @Patch('/featuredImage/:id')
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'image', maxCount: 1 },
+        { name: 'icon', maxCount: 1 },
+      ],
+      {
+      storage: fileUploader.storage,
+    }
+    ),
+  )
+  featuredImageUpdate(
+    @Param('id') id: string,
+    @UploadedFiles()
+    files: {
+      image?: Express.Multer.File[];
+      icon?: Express.Multer.File[];
+    },
+    @Body('data') data: string,
+  ) {
+    let parsedData;
+    try {
+      parsedData = JSON.parse(data);
+    } catch {
+      throw new BadRequestException('Invalid JSON in data field');
+    }
+
+    return this.homeService.featuredImageUpdate(
+      id,
+      parsedData,
+      files.image?.[0],
+      files.icon?.[0],
+    );
+  }
+
+  @Delete('/featuredImage/:id')
+  featuredImageDelete(@Param('id') id: string) {
+    return this.homeService.featuredImageDelete(id);
+  }
 }
+
+
+
+
+
+

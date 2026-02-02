@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
-import { CreateHeroBannerDto } from './homeDTO';
+import {  CreateFeaturedImageDto, CreateHeroBannerDto, CreateLegacySectionDto, UpdateFeaturedImageDto, UpdateLegacySectionDto } from './homeDTO';
 import { fileUploader } from 'src/helper/fileUploader';
 import { prisma } from 'src/helper/prisma';
 
@@ -147,4 +147,146 @@ async deleteHeroBanner(id: string) {
     };
   }
 
+
+  // legacy-section.service.ts
+
+
+  async textSectionCreate(dto: CreateLegacySectionDto) {
+    return prisma.textSection.create({ data: dto });
+  }
+
+  async textSectionGetAll() {
+  const records = await prisma.textSection.findMany();
+
+  if (records.length === 0) {
+    throw new NotFoundException('No text sections found');
+  }
+
+  return records;
 }
+
+
+
+  async textSectionGetById(id: string) {
+    const record = await prisma.textSection.findUnique({ where: { id } });
+    if (!record) {
+      throw new NotFoundException(`text Section with id ${id} not found`);
+    }
+    return record;
+  }
+
+  async textSectionUpdate(id: string, dto: UpdateLegacySectionDto) {
+    // Check existence
+    await this.textSectionGetById(id);
+
+    return prisma.textSection.update({
+      where: { id },
+      data: dto,
+    });
+  }
+
+  async textSectionRemove(id: string) {
+    // Check existence
+    await this.textSectionGetById(id);
+
+    return prisma.textSection.delete({ where: { id } });
+  }
+
+
+ //Create featured image
+ 
+  async featuredImageCreate(
+    dto: CreateFeaturedImageDto,
+    image?: Express.Multer.File,
+    icon?: Express.Multer.File,
+  ) {
+    if (!image) {
+      throw new BadRequestException('Image is required');
+    }
+
+    const imageUpload = await fileUploader.uploadToCloudinary(image);
+    if (!imageUpload?.secure_url) {
+      throw new BadRequestException('Image upload failed');
+    }
+
+    let iconUrl: string | null = null;
+    if (icon) {
+      const iconUpload = await fileUploader.uploadToCloudinary(icon);
+      if (!iconUpload?.secure_url) {
+        throw new BadRequestException('Icon upload failed');
+      }
+      iconUrl = iconUpload.secure_url;
+    }
+
+    return prisma.featuredImage.create({
+      data: {
+        order: dto.order,
+        label: dto.label,
+        title: dto.title,
+        description: dto.description,
+        imageUrl: imageUpload.secure_url,
+        iconUrl,
+      },
+    });
+  }
+ //Get all featured image
+  async featuredImageGetAll() {
+    return prisma.featuredImage.findMany({
+      orderBy: { order: 'asc' },
+    });
+  }
+ //Get by id featured image
+  async featuredImageGetById(id: string) {
+    const record = await prisma.featuredImage.findUnique({ where: { id } });
+
+    if (!record) {
+      throw new NotFoundException('Featured image not found');
+    }
+
+    return record;
+  }
+ // Update featured image
+  async featuredImageUpdate(
+    id: string,
+    dto: UpdateFeaturedImageDto,
+    image?: Express.Multer.File,
+    icon?: Express.Multer.File,
+  ) {
+    await this.featuredImageGetById(id);
+
+    let imageUrl: string | undefined;
+    let iconUrl: string | undefined;
+
+    if (image) {
+      const upload = await fileUploader.uploadToCloudinary(image);
+      imageUrl = upload?.secure_url;
+    }
+
+    if (icon) {
+      const upload = await fileUploader.uploadToCloudinary(icon);
+      iconUrl = upload?.secure_url;
+    }
+
+    return prisma.featuredImage.update({
+      where: { id },
+      data: {
+        ...dto,
+        ...(imageUrl && { imageUrl }),
+        ...(iconUrl && { iconUrl }),
+      },
+    });
+  }
+  // Delete featured image
+  async featuredImageDelete(id: string) {
+    await this.featuredImageGetById(id);
+    return prisma.featuredImage.delete({ where: { id } });
+  }
+}
+
+
+
+
+
+
+
+
