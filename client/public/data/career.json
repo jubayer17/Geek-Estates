@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "title": "Frontend Developer",
+    "description": "Build amazing user interfaces using React and Next.js.",
+    "longDescription": "We are looking for a passionate Frontend Developer to join our creative team. You will be responsible for building pixel-perfect, responsive web applications that delight our users. You will work closely with designers and backend developers to bring our vision to life using the latest web technologies.",
+    "responsibilities": [
+      "Develop new user-facing features using React.js and Next.js",
+      "Build reusable components and front-end libraries for future use",
+      "Translate designs and wireframes into high-quality code",
+      "Optimize components for maximum performance across a vast array of web-capable devices and browsers",
+      "Collaborate with the design team to ensure UI consistency"
+    ],
+    "requirements": [
+      "Strong proficiency in JavaScript, including DOM manipulation and the JavaScript object model",
+      "Thorough understanding of React.js and its core principles",
+      "Experience with popular React.js workflows (such as Flux or Redux)",
+      "Familiarity with newer specifications of EcmaScript",
+      "Experience with data structure libraries (e.g., Immutable.js)"
+    ],
+    "salary": "$50,000 - $70,000",
+    "experience": "2+ years",
+    "location": "Remote",
+    "deadline": "2026-03-01",
+    "jobType": "Full Time",
+    "vacancies": "3",
+    "category": "Frontend Development",
+    "gender": "Any"
+  },
+  {
+    "id": 2,
+    "title": "Backend Developer",
+    "description": "Develop and maintain APIs with Node.js and Express.",
+    "longDescription": "We are seeking a skilled Backend Developer to help us build robust and scalable server-side logic. You will be responsible for managing the interchange of data between the server and the users, as well as integrating user-facing elements developed by front-end developers with server-side logic.",
+    "responsibilities": [
+      "Integration of user-facing elements developed by front-end developers with server side logic",
+      "Building reusable code and libraries for future use",
+      "Optimization of the application for maximum speed and scalability",
+      "Implementation of security and data protection",
+      "Design and implementation of data storage solutions"
+    ],
+    "requirements": [
+      "Basic understanding of front-end technologies and platforms, such as JavaScript, HTML, and CSS",
+      "Good understanding of server-side CSS preprocessors, such as LESS and SASS",
+      "User authentication and authorization between multiple systems, servers, and environments",
+      "Integration of multiple data sources and databases into one system",
+      "Management of hosting environment, including database administration and scaling an application to support load changes"
+    ],
+    "salary": "$55,000 - $75,000",
+    "experience": "3+ years",
+    "location": "New York, USA",
+    "deadline": "2026-04-15",
+    "jobType": "Full Time",
+    "vacancies": "2",
+    "category": "Backend Development",
+    "gender": "Any"
+  },
+  {
+    "id": 3,
+    "title": "UI/UX Designer",
+    "description": "Design intuitive and engaging user experiences.",
+    "longDescription": "We are looking for a creative UI/UX Designer to turn our software into easy-to-use products for our clients. You will be responsible for gathering user requirements, designing graphic elements, and building navigation components.",
+    "responsibilities": [
+      "Gather and evaluate user requirements in collaboration with product managers and engineers",
+      "Illustrate design ideas using storyboards, process flows and sitemaps",
+      "Design graphic user interface elements, like menus, tabs and widgets",
+      "Build page navigation buttons and search fields",
+      "Develop UI mockups and prototypes that clearly illustrate how sites function and look like"
+    ],
+    "requirements": [
+      "Proven work experience as a UI/UX Designer or similar role",
+      "Portfolio of design projects",
+      "Knowledge of wireframe tools (e.g. Wireframe.cc and InVision)",
+      "Up-to-date knowledge of design software like Adobe Illustrator and Photoshop",
+      "Team spirit; strong communication skills to collaborate with various stakeholders"
+    ],
+    "salary": "$45,000 - $65,000",
+    "experience": "1+ years",
+    "location": "Remote",
+    "deadline": "2026-03-15",
+    "jobType": "Full Time",
+    "vacancies": "1",
+    "category": "Design",
+    "gender": "Any"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "image": "/house2.webp",
+    "title": "Modern Apartment",
+    "address": "221B Baker Street, Dhaka",
+    "price": "$1,200 / month",
+    "beds": 3,
+    "baths": 2,
+    "area": 320,
+    "status": "For Rent",
+    "featured": true
+  },
+  {
+    "id": 2,
+    "image": "/house4.webp",
+    "title": "Downtown Studio",
+    "address": "89 Lake View, Dhaka",
+    "price": "$800 / month",
+    "beds": 1,
+    "baths": 1,
+    "area": 180,
+    "status": "For Rent",
+    "featured": false
+  },
+  {
+    "id": 3,
+    "image": "/house7.webp",
+    "title": "City Loft Apartment",
+    "address": "Mirpur 10, Dhaka",
+    "price": "$950 / month",
+    "beds": 2,
+    "baths": 1,
+    "area": 220,
+    "status": "For Rent",
+    "featured": true
+  },
+  {
+    "id": 4,
+    "image": "/House8.jpg",
+    "title": "Cozy Garden Flat",
+    "address": "Dhanmondi 32, Dhaka",
+    "price": "$1,100 / month",
+    "beds": 2,
+    "baths": 2,
+    "area": 280,
+    "status": "For Rent",
+    "featured": false
+  },
+  {
+    "id": 5,
+    "image": "/House8.jpg",
+    "title": "Luxury Penthouse",
+    "address": "Gulshan 1, Dhaka",
+    "price": "$2,500 / month",
+    "beds": 4,
+    "baths": 3,
+    "area": 500,
+    "status": "For Rent",
+    "featured": true
+  },
+  {
+    "id": 6,
+    "image": "/House1.webp",
+    "title": "Compact Studio",
+    "address": "Uttara Sector 11, Dhaka",
+    "price": "$700 / month",
+    "beds": 1,
+    "baths": 1,
+    "area": 150,
+    "status": "For Rent",
+    "featured": false
+  }
+]

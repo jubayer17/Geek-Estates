@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model HeroBanner {
+  id        String   @id @default(uuid())
+  badgeText String?
+  title     String?
+  subtitle  String?
+  imageUrl  String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("hero_banner")
+}
+
+model Admin {
+  id        String   @id
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model User {
+  id        String   @id
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model CareerPage {
+  id          String   @id
+  badge       String   @default("Join The Team")
+  title       String   @default("Current Positions")
+  description String   @default("Discover the role that will challenge you, inspire you, and let you make a real impact.")
+  updatedAt   DateTime
+}
+
+model Job {
+  id               String   @id
+  title            String
+  description      String
+  longDescription  String?
+  responsibilities String[]
+  requirements     String[]
+  salary           String
+  experience       String
+  location         String
+  deadline         DateTime
+  jobType          String?
+  vacancies        String?
+  category         String?
+  gender           String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime
+}
+
+enum Role {
+  USER
+  ADMIN
+}
