@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 
 type Career = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   deadline: string;

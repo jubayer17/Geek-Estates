@@ -1,21 +1,26 @@
 import { notFound } from "next/navigation"
-import careersData from "../../../public/data/career.json"
 import JobDetails from "@/components/career/JobDetails"
-
-// Ensure dynamic rendering if desired, though Next.js might cache by default.
-// export const dynamic = 'force-dynamic' 
 
 export default async function JobPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const job = careersData.find((j) => j.id.toString() === id)
+  
+  try {
+    const res = await fetch(`http://localhost:4001/career/jobs/${id}`, {
+        cache: 'no-store'
+    });
 
-  if (!job) {
-    notFound()
+    if (!res.ok) {
+        notFound();
+    }
+
+    const job = await res.json();
+
+    return (
+        <div className="bg-white min-h-screen">
+        <JobDetails job={job} />
+        </div>
+    )
+  } catch (error) {
+    notFound();
   }
-
-  return (
-    <div className="bg-white min-h-screen">
-      <JobDetails job={job} />
-    </div>
-  )
 }
