@@ -182,4 +182,59 @@ export declare class HomeService {
         updatedAt: Date;
         iconUrl: string | null;
     }>;
+    getCompanyExperience(): Promise<{
+        number: number;
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        suffix: string | null;
+    }[]>;
+    getCompanyExperienceById(id: string): Promise<{
+        number: number;
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        suffix: string | null;
+    }>;
+    createCompanyExperience(data: any): Promise<{
+        number: number;
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        suffix: string | null;
+    }>;
+    updateCompanyExperience(id: string, data: any): Promise<{
+        number: number;
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        suffix: string | null;
+    }>;
+    deleteCompanyExperience(id: string): Promise<{
+        number: number;
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        suffix: string | null;
+    }>;
 }

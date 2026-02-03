@@ -281,6 +281,65 @@ async deleteHeroBanner(id: string) {
     await this.featuredImageGetById(id);
     return prisma.featuredImage.delete({ where: { id } });
   }
+
+
+   async getCompanyExperience() {
+    return prisma.companyExperienceText.findMany({
+      where: {
+        isActive: true,
+      },
+      orderBy: {
+        order: 'asc',
+      },
+    });
+  }
+
+  //  Get company experience by ID
+  async getCompanyExperienceById(id: string) {
+    const experience =
+      await prisma.companyExperienceText.findUnique({
+        where: { id },
+      });
+
+    if (!experience) {
+      throw new NotFoundException('Company experience not found');
+    }
+
+    return experience;
+  }
+
+  //  Create company experience
+  async createCompanyExperience(
+    data
+  ) {
+    return prisma.companyExperienceText.create({
+      data,
+    });
+  }
+
+  //  Update company experience
+  async updateCompanyExperience(
+    id: string,
+    data
+  ) {
+    await this.getCompanyExperienceById(id);
+
+    return prisma.companyExperienceText.update({
+      where: { id },
+      data,
+    });
+  }
+
+  //  Delete company experience
+  async deleteCompanyExperience(id: string) {
+    await this.getCompanyExperienceById(id);
+
+    return prisma.companyExperienceText.delete({
+      where: { id },
+    });
+  }
+
+
 }
 
 

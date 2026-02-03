@@ -15,6 +15,7 @@ import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express
 import { HomeService } from './home.service';
 import { fileUploader } from 'src/helper/fileUploader';
 import { CreateHeroBannerDto, CreateLegacySectionDto, UpdateLegacySectionDto } from './homeDTO';
+import { prisma } from './../helper/prisma';
 
 @Controller()
 export class HomeController {
@@ -206,6 +207,42 @@ async updateHeroBanner(
   @Delete('/featuredImage/:id')
   featuredImageDelete(@Param('id') id: string) {
     return this.homeService.featuredImageDelete(id);
+  }
+
+
+  // ✅ GET: active + ordered
+  @Get("/companyExperienceText")
+  getCompanyExperience() {
+    return this.homeService.getCompanyExperience();
+  }
+
+  // ✅ GET by ID
+  @Get('/companyExperienceText/:id')
+  getCompanyExperienceByID(@Param('id') id: string) {
+    return this.homeService.getCompanyExperienceById(id);
+  }
+
+  // ✅ CREATE
+  @Post("/companyExperienceText")
+  createCompanyExperience(
+    @Body() body
+  ) {
+    return this.homeService.createCompanyExperience(body);
+  }
+
+  // ✅ UPDATE
+  @Patch('/companyExperienceText/:id')
+  updateCompanyExperience(
+    @Param('id') id: string,
+    @Body() body
+  ) {
+    return this.homeService.updateCompanyExperience(id, body);
+  }
+
+  // ✅ DELETE
+  @Delete('/companyExperienceText/:id')
+  deleteCompanyExperience(@Param('id') id: string) {
+    return this.homeService.deleteCompanyExperience(id);
   }
 }
 

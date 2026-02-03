@@ -101,6 +101,21 @@ let HomeController = class HomeController {
     featuredImageDelete(id) {
         return this.homeService.featuredImageDelete(id);
     }
+    getCompanyExperience() {
+        return this.homeService.getCompanyExperience();
+    }
+    getCompanyExperienceByID(id) {
+        return this.homeService.getCompanyExperienceById(id);
+    }
+    createCompanyExperience(body) {
+        return this.homeService.createCompanyExperience(body);
+    }
+    updateCompanyExperience(id, body) {
+        return this.homeService.updateCompanyExperience(id, body);
+    }
+    deleteCompanyExperience(id) {
+        return this.homeService.deleteCompanyExperience(id);
+    }
 };
 exports.HomeController = HomeController;
 __decorate([
@@ -230,6 +245,41 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], HomeController.prototype, "featuredImageDelete", null);
+__decorate([
+    (0, common_1.Get)("/companyExperienceText"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "getCompanyExperience", null);
+__decorate([
+    (0, common_1.Get)('/companyExperienceText/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "getCompanyExperienceByID", null);
+__decorate([
+    (0, common_1.Post)("/companyExperienceText"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "createCompanyExperience", null);
+__decorate([
+    (0, common_1.Patch)('/companyExperienceText/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "updateCompanyExperience", null);
+__decorate([
+    (0, common_1.Delete)('/companyExperienceText/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "deleteCompanyExperience", null);
 exports.HomeController = HomeController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [home_service_1.HomeService])

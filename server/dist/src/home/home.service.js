@@ -204,6 +204,43 @@ let HomeService = class HomeService {
         await this.featuredImageGetById(id);
         return prisma_1.prisma.featuredImage.delete({ where: { id } });
     }
+    async getCompanyExperience() {
+        return prisma_1.prisma.companyExperienceText.findMany({
+            where: {
+                isActive: true,
+            },
+            orderBy: {
+                order: 'asc',
+            },
+        });
+    }
+    async getCompanyExperienceById(id) {
+        const experience = await prisma_1.prisma.companyExperienceText.findUnique({
+            where: { id },
+        });
+        if (!experience) {
+            throw new common_1.NotFoundException('Company experience not found');
+        }
+        return experience;
+    }
+    async createCompanyExperience(data) {
+        return prisma_1.prisma.companyExperienceText.create({
+            data,
+        });
+    }
+    async updateCompanyExperience(id, data) {
+        await this.getCompanyExperienceById(id);
+        return prisma_1.prisma.companyExperienceText.update({
+            where: { id },
+            data,
+        });
+    }
+    async deleteCompanyExperience(id) {
+        await this.getCompanyExperienceById(id);
+        return prisma_1.prisma.companyExperienceText.delete({
+            where: { id },
+        });
+    }
 };
 exports.HomeService = HomeService;
 exports.HomeService = HomeService = __decorate([

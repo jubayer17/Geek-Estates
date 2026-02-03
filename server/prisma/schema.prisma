@@ -35,6 +35,20 @@ model TextSection {
   @@map("text_section")
 }
 
+model CompanyExperienceText {
+  id          String   @id @default(uuid())
+  number      Int
+  suffix      String?
+  title       String
+  description String?
+  order       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("company_experience")
+}
+
 model FeaturedImage {
   id          String   @id @default(uuid())
   order       Int      @unique
@@ -51,12 +65,14 @@ model FeaturedImage {
 }
 
 model Admin {
-  id        String   @id
-  email     String   @unique
-  name      String
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime
+  id             String        @id
+  email          String        @unique
+  name           String
+  password       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime
+  projectsPageId String?
+  ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
 
 model User {
@@ -124,21 +140,43 @@ model CareerValue {
 }
 
 model Project {
-  id          String   @id
-  title       String
-  description String?
-  image       String
-  location    String
-  date        String?
-  price       String?
-  beds        Int?
-  baths       Int?
-  area        Float?
-  category    String?
-  status      String?
-  featured    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  id             String        @id
+  title          String
+  description    String?
+  image          String
+  location       String
+  date           String?
+  price          String?
+  beds           Int?
+  baths          Int?
+  area           Float?
+  category       String?
+  status         String?
+  featured       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime
+  projectsPageId String?
+  ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
+}
+
+model ProjectsPage {
+  id              String    @id
+  heroBadge       String    @default("Exclusive Portfolio")
+  heroTitle       String    @default("Curated Excellence")
+  heroDescription String    @default("Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy.")
+  statsCount1     String    @default("140+")
+  statsLabel1     String    @default("Properties")
+  statsCount2     String    @default("12")
+  statsLabel2     String    @default("Cities")
+  heroImages      String[]  @default(["/outdoor-real-state/1.webp", "/outdoor-real-state/2.webp", "/outdoor-real-state/3.webp", "/outdoor-real-state/4.webp", "/outdoor-real-state/5.webp"])
+  ctaBadge        String    @default("Bespoke Service")
+  ctaTitleRegular String    @default("Can't find exactly what")
+  ctaTitleItalic  String    @default("you're looking for?")
+  ctaDescription  String    @default("Our private collection includes exclusive off-market listings reserved for our most discerning clients. Let us help you find your perfect match.")
+  ctaButtonText   String    @default("Contact Our Team")
+  updatedAt       DateTime
+  Admin           Admin[]
+  Project         Project[]
 }
 
 enum Role {
