@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+ 
 }
 
 datasource db {
@@ -7,43 +8,87 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model hero_banner {
-  id          String   @id
+model HeroBanner {
+  id          String   @id @default(uuid())
   badgeText   String?
   title       String?
   subtitle    String?
   imageUrl    String?
   isActive    Boolean  @default(true)
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
   buttonText1 String?
   buttonText2 String?
+
+  @@map("hero_banner")
+}
+
+model TextSection {
+  id          String   @id @default(uuid())
+  journeyTag  String?
+  title       String
+  emphasis    String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isActive    Boolean  @default(true)
+
+  @@map("text_section")
+}
+
+model CompanyExperienceText {
+  id          String   @id @default(uuid())
+  number      Int
+  suffix      String?
+  title       String
+  description String?
+  order       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("company_experience")
+}
+
+model FeaturedImage {
+  id          String   @id @default(uuid())
+  order       Int      @unique
+  label       String
+  title       String
+  description String
+  imageUrl    String
+  iconUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  isActive    Boolean  @default(true)
+
+  @@map("featured_image")
+}
+
+model Admin {
+  id             String        @id
+  email          String        @unique
+  name           String
+  password       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime
+  projectsPageId String?
+  ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id
   email     String   @unique
   name      String
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Admin {
-  id             String        @id @default(uuid())
-  email          String        @unique
-  name           String
-  password       String
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  projectsPageId String?
-  projectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
+  updatedAt DateTime
 }
 
 model CareerPage {
-  id                String   @id @default(uuid())
-  updatedAt         DateTime @updatedAt
+  id                String   @id
+  updatedAt         DateTime
   heroImage         String   @default("/career.jpg")
   heroSubtitle      String   @default("We’re always looking for talented people. Explore opportunities and grow your career with us!")
   heroTitle         String   @default("Join Our Team")
@@ -58,26 +103,8 @@ model CareerPage {
   valuesTitle       String   @default("Driven by Purpose")
 }
 
-model CareerValue {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  icon        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model CareerPerk {
-  id          String   @id @default(uuid())
-  title       String
-  description String
-  icon        String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
 model Job {
-  id               String   @id @default(uuid())
+  id               String   @id
   title            String
   description      String
   longDescription  String?
@@ -92,11 +119,29 @@ model Job {
   category         String?
   gender           String?
   createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  updatedAt        DateTime
+}
+
+model CareerPerk {
+  id          String   @id
+  title       String
+  description String
+  icon        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+model CareerValue {
+  id          String   @id
+  title       String
+  description String
+  icon        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
 }
 
 model Project {
-  id             String        @id @default(uuid())
+  id             String        @id
   title          String
   description    String?
   image          String
@@ -110,13 +155,13 @@ model Project {
   status         String?
   featured       Boolean       @default(false)
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
+  updatedAt      DateTime
   projectsPageId String?
-  projectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
+  ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
 
 model ProjectsPage {
-  id              String    @id @default(uuid())
+  id              String    @id
   heroBadge       String    @default("Exclusive Portfolio")
   heroTitle       String    @default("Curated Excellence")
   heroDescription String    @default("Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy.")
@@ -130,33 +175,9 @@ model ProjectsPage {
   ctaTitleItalic  String    @default("you're looking for?")
   ctaDescription  String    @default("Our private collection includes exclusive off-market listings reserved for our most discerning clients. Let us help you find your perfect match.")
   ctaButtonText   String    @default("Contact Our Team")
-  updatedAt       DateTime  @updatedAt
-  admins          Admin[]
-  projects        Project[]
-}
-
-model text_section {
-  id          String   @id
-  journeyTag  String?
-  title       String
-  emphasis    String?
-  description String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
-  isActive    Boolean  @default(true)
-}
-
-model featured_image {
-  id          String   @id
-  order       Int      @unique
-  label       String
-  title       String
-  description String
-  imageUrl    String
-  iconUrl     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
-  isActive    Boolean  @default(true)
+  updatedAt       DateTime
+  Admin           Admin[]
+  Project         Project[]
 }
 
 enum Role {
