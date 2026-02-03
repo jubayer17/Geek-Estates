@@ -4,7 +4,22 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-const images = [
+interface ProjectsPageData {
+  heroBadge: string;
+  heroTitle: string;
+  heroDescription: string;
+  statsCount1: string;
+  statsLabel1: string;
+  statsCount2: string;
+  statsLabel2: string;
+  heroImages: string[];
+}
+
+interface AllPropertiesBannerProps {
+  data?: ProjectsPageData;
+}
+
+const defaultImages = [
   "/outdoor-real-state/1.webp",
   "/outdoor-real-state/2.webp",
   "/outdoor-real-state/3.webp",
@@ -12,15 +27,17 @@ const images = [
   "/outdoor-real-state/5.webp",
 ];
 
-export default function AllPropertiesBanner() {
+export default function AllPropertiesBanner({ data }: AllPropertiesBannerProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  
+  const images = data?.heroImages?.length ? data.heroImages : defaultImages;
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [images.length]);
 
   return (
     <div className="relative w-full min-h-[85vh] flex flex-col lg:flex-row bg-white overflow-hidden">
@@ -36,31 +53,36 @@ export default function AllPropertiesBanner() {
           <div className="flex items-center space-x-4">
             <div className="h-[2px] w-12 bg-[#E7C873]" />
             <span className="text-[#E7C873] uppercase tracking-[0.25em] text-xs font-bold">
-              Exclusive Portfolio
+              {data?.heroBadge || "Exclusive Portfolio"}
             </span>
           </div>
 
           {/* Heading */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif text-[#1A1A1A] leading-[1.1]">
-            Curated <br />
-            <span className="italic text-[#E7C873]">Excellence</span>
+            {data?.heroTitle ? (
+              data.heroTitle
+            ) : (
+              <>
+                Curated <br />
+                <span className="italic text-[#E7C873]">Excellence</span>
+              </>
+            )}
           </h1>
 
           {/* Description */}
           <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-md font-light">
-            Explore a world of architectural marvels. From modern villas to
-            timeless estates, find the home that reflects your legacy.
+            {data?.heroDescription || "Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy."}
           </p>
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-8 pt-8 border-t border-gray-100">
             <div>
-              <span className="block text-4xl font-serif text-[#1A1A1A]">140+</span>
-              <span className="text-xs uppercase tracking-widest text-gray-400 mt-1 block">Properties</span>
+              <span className="block text-4xl font-serif text-[#1A1A1A]">{data?.statsCount1 || "140+"}</span>
+              <span className="text-xs uppercase tracking-widest text-gray-400 mt-1 block">{data?.statsLabel1 || "Properties"}</span>
             </div>
             <div>
-              <span className="block text-4xl font-serif text-[#1A1A1A]">12</span>
-              <span className="text-xs uppercase tracking-widest text-gray-400 mt-1 block">Cities</span>
+              <span className="block text-4xl font-serif text-[#1A1A1A]">{data?.statsCount2 || "12"}</span>
+              <span className="text-xs uppercase tracking-widest text-gray-400 mt-1 block">{data?.statsLabel2 || "Cities"}</span>
             </div>
           </div>
         </motion.div>

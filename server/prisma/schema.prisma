@@ -1,14 +1,165 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model hero_banner {
+  id          String   @id
+  badgeText   String?
+  title       String?
+  subtitle    String?
+  imageUrl    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  buttonText1 String?
+  buttonText2 String?
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Admin {
+  id             String        @id @default(uuid())
+  email          String        @unique
+  name           String
+  password       String
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  projectsPageId String?
+  projectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
+}
+
+model CareerPage {
+  id                String   @id @default(uuid())
+  updatedAt         DateTime @updatedAt
+  heroImage         String   @default("/career.jpg")
+  heroSubtitle      String   @default("We’re always looking for talented people. Explore opportunities and grow your career with us!")
+  heroTitle         String   @default("Join Our Team")
+  jobsBadge         String   @default("Join The Team")
+  jobsDescription   String   @default("Discover the role that will challenge you, inspire you, and let you make a real impact.")
+  jobsTitle         String   @default("Current Positions")
+  perksBadge        String   @default("Employee Benefits")
+  perksDescription  String   @default("We believe that when you feel your best, you do your best work. That's why we've crafted a benefits package that supports you inside and outside the office.")
+  perksTitle        String   @default("Everything You Need To Thrive.")
+  valuesBadge       String   @default("Our Core Philosophy")
+  valuesDescription String   @default("At Geek Estate, we don't just build properties; we build legacies. Our core values are the compass that guides every decision, ensuring we remain true to our mission of redefining modern living.")
+  valuesTitle       String   @default("Driven by Purpose")
+}
+
+model CareerValue {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  icon        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model CareerPerk {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  icon        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Job {
+  id               String   @id @default(uuid())
+  title            String
+  description      String
+  longDescription  String?
+  responsibilities String[]
+  requirements     String[]
+  salary           String
+  experience       String
+  location         String
+  deadline         DateTime
+  jobType          String?
+  vacancies        String?
+  category         String?
+  gender           String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Project {
+  id             String        @id @default(uuid())
+  title          String
+  description    String?
+  image          String
+  location       String
+  date           String?
+  price          String?
+  beds           Int?
+  baths          Int?
+  area           Float?
+  category       String?
+  status         String?
+  featured       Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  projectsPageId String?
+  projectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
+}
+
+model ProjectsPage {
+  id              String    @id @default(uuid())
+  heroBadge       String    @default("Exclusive Portfolio")
+  heroTitle       String    @default("Curated Excellence")
+  heroDescription String    @default("Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy.")
+  statsCount1     String    @default("140+")
+  statsLabel1     String    @default("Properties")
+  statsCount2     String    @default("12")
+  statsLabel2     String    @default("Cities")
+  heroImages      String[]  @default(["/outdoor-real-state/1.webp", "/outdoor-real-state/2.webp", "/outdoor-real-state/3.webp", "/outdoor-real-state/4.webp", "/outdoor-real-state/5.webp"])
+  ctaBadge        String    @default("Bespoke Service")
+  ctaTitleRegular String    @default("Can't find exactly what")
+  ctaTitleItalic  String    @default("you're looking for?")
+  ctaDescription  String    @default("Our private collection includes exclusive off-market listings reserved for our most discerning clients. Let us help you find your perfect match.")
+  ctaButtonText   String    @default("Contact Our Team")
+  updatedAt       DateTime  @updatedAt
+  admins          Admin[]
+  projects        Project[]
+}
+
+model text_section {
+  id          String   @id
+  journeyTag  String?
+  title       String
+  emphasis    String?
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  isActive    Boolean  @default(true)
+}
+
+model featured_image {
+  id          String   @id
+  order       Int      @unique
+  label       String
+  title       String
+  description String
+  imageUrl    String
+  iconUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  isActive    Boolean  @default(true)
+}
+
+enum Role {
+  USER
+  ADMIN
 }

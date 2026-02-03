@@ -1,5 +1,38 @@
-node_modules
-# Keep environment variables out of version control
-.env
+# compiled output
+/dist
+/node_modules
 
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# os
+.DS_Store
+Thumbs.db
+
+# env
+.env
+.env.production
+.env.development
+.env.test
+
+# coverage
+/coverage
+/test/coverage
+
+# ide
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# prisma
 /generated/prisma
+*.sqlite
+*.sqlite-journal
+
+# nest
+*.tsbuildinfo
