@@ -1,20 +1,33 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AllPropertyCard from "./AllPropertyCard";
-import propertiesData from "../../public/data/properties.json";
 
 // Register GSAP plugin
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+type Project = {
+  id: string;
+  title: string;
+  image: string;
+  location: string;
+  price?: string;
+  beds?: number;
+  baths?: number;
+  area?: number;
+  status?: string;
+  featured: boolean;
+};
+
 export default function AllProjectShowGrid() {
   const containerRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
 
   const addToRefs = (el: HTMLDivElement | null) => {
     if (el && !cardsRef.current.includes(el)) {
@@ -23,7 +36,23 @@ export default function AllProjectShowGrid() {
   };
 
   useEffect(() => {
-    cardsRef.current = cardsRef.current.filter((el) => el && el.isConnected);
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch('http://localhost:4001/projects');
+        const data = await res.json();
+        setProjects(Array.isArray(data) ? data : []);
+      } catch (error) {
+        console.error('Failed to fetch projects', error);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  useEffect(() => {
+    if (projects.length === 0) return;
+
+    // Reset refs for new data
+    cardsRef.current = [];
 
     const ctx = gsap.context(() => {
       // 1. Header Animation (Elegant Fade Up)
@@ -44,39 +73,43 @@ export default function AllProjectShowGrid() {
 
       // 2. Card Animation: Premium 3D Stagger
       // Cards slide up with a slight rotation and scale effect
-      cardsRef.current.forEach((card, i) => {
-        gsap.fromTo(
-          card,
-          {
-            y: 120,
-            opacity: 0,
-            scale: 0.9,
-            rotationX: 10, // Slight tilt backwards
-            transformOrigin: "center top",
-            filter: "blur(10px)",
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            rotationX: 0,
-            filter: "blur(0px)",
-            duration: 1.6,
-            ease: "power4.out", // Smoother, more luxurious ease
-            scrollTrigger: {
-              trigger: card,
-              start: "top bottom-=20", // Trigger slightly earlier
-              end: "bottom center",
-              toggleActions: "play none none reverse",
+      // Wait for DOM to update with new projects
+      setTimeout(() => {
+        cardsRef.current.forEach((card, i) => {
+          if (!card) return;
+          gsap.fromTo(
+            card,
+            {
+              y: 120,
+              opacity: 0,
+              scale: 0.9,
+              rotationX: 10, // Slight tilt backwards
+              transformOrigin: "center top",
+              filter: "blur(10px)",
             },
-            delay: (i % 3) * 0.15, // Stagger logic
-          }
-        );
-      });
+            {
+              y: 0,
+              opacity: 1,
+              scale: 1,
+              rotationX: 0,
+              filter: "blur(0px)",
+              duration: 1.6,
+              ease: "power4.out", // Smoother, more luxurious ease
+              scrollTrigger: {
+                trigger: card,
+                start: "top bottom-=20", // Trigger slightly earlier
+                end: "bottom center",
+                toggleActions: "play none none reverse",
+              },
+              delay: (i % 3) * 0.15, // Stagger logic
+            }
+          );
+        });
+      }, 100);
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [projects]);
 
   return (
     <section
@@ -98,80 +131,24 @@ export default function AllProjectShowGrid() {
         <span className="mb-4 inline-block font-sans text-xs font-bold uppercase tracking-[0.3em] text-[#C5A059]">
           Exclusive Collection
         </span>
-        <h2 className="mb-6 font-serif text-5xl font-medium leading-tight text-gray-900 md:text-6xl lg:text-7xl">
-          Curated Properties <br />
-          <span className="text-gray-400">For The Discerning</span>
+        <h2 className="font-serif text-4xl font-medium leading-tight text-gray-900 md:text-6xl">
+          Discover Your <br />
+          <span className="italic text-[#C5A059]">Perfect Sanctuary</span>
         </h2>
-        <div className="mx-auto h-px w-24 bg-gray-300" />
-        <p className="mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-gray-500">
-          Discover a portfolio of architecturally significant homes,
-          where timeless design meets modern luxury in the heart of the city.
-        </p>
+        <div className="mx-auto mt-8 h-[1px] w-24 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
       </div>
 
-      {/* 
-        Grid Layout: 
-        - 3 Columns (md+)
-        - Staggered Vertical Alignment (Column 2 shifted)
-        - 3D Perspective Container
-      */}
-      <div
-        className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-12"
-        style={{ perspective: "1000px" }}
-      >
-        {/* Column 1 */}
-        <div className="flex flex-col gap-12 pt-0">
-          {propertiesData
-            .filter((_, i) => i % 3 === 0)
-            .map((property) => (
-              <div key={property.id} ref={addToRefs} className="will-change-transform">
-                <AllPropertyCard
-                  image={property.image}
-                  title={property.title}
-                  address={property.address}
-                  date="2024"
-                  area={property.area}
-                  price={property.price}
-                />
-              </div>
-            ))}
-        </div>
-
-        {/* Column 2 - Shifted Down */}
-        <div className="flex flex-col gap-12 md:pt-24">
-          {propertiesData
-            .filter((_, i) => i % 3 === 1)
-            .map((property) => (
-              <div key={property.id} ref={addToRefs} className="will-change-transform">
-                <AllPropertyCard
-                  image={property.image}
-                  title={property.title}
-                  address={property.address}
-                  date="2024"
-                  area={property.area}
-                  price={property.price}
-                />
-              </div>
-            ))}
-        </div>
-
-        {/* Column 3 */}
-        <div className="flex flex-col gap-12 pt-0 md:pt-12 lg:pt-0">
-          {propertiesData
-            .filter((_, i) => i % 3 === 2)
-            .map((property) => (
-              <div key={property.id} ref={addToRefs} className="will-change-transform">
-                <AllPropertyCard
-                  image={property.image}
-                  title={property.title}
-                  address={property.address}
-                  date="2024"
-                  area={property.area}
-                  price={property.price}
-                />
-              </div>
-            ))}
-        </div>
+      {/* Premium Grid Layout */}
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        {projects.map((property, index) => (
+          <div
+            key={property.id}
+            ref={addToRefs}
+            className="will-change-transform" // Performance hint
+          >
+            <AllPropertyCard property={property} index={index} />
+          </div>
+        ))}
       </div>
     </section>
   );
