@@ -5,15 +5,15 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
 import { FileFieldsInterceptor, FileInterceptor } from '@nestjs/platform-express';
 import { HomeService } from './home.service';
-import { fileUploader } from 'src/helper/fileUploader';
+import { fileUploader, upload } from 'src/helper/fileUploader';
 import { CreateHeroBannerDto, CreateLegacySectionDto, UpdateLegacySectionDto } from './homeDTO';
 import { prisma } from './../helper/prisma';
 
@@ -62,7 +62,7 @@ async getHeroBannerById(@Param('id') id: string) {
 
   // Update existing home banner 
 
-@Patch('/heroBanner/:id')
+@Put('/heroBanner/:id')
 @UseInterceptors(
   FileInterceptor('image', {
     storage: fileUploader.storage,
@@ -108,7 +108,7 @@ async updateHeroBanner(
     return this.homeService.textSectionGetById(id);
   }
 // update by id text
-  @Patch('/text/:id')
+  @Put('/text/:id')
   update(@Param('id') id: string, @Body() dto: UpdateLegacySectionDto) {
     return this.homeService.textSectionUpdate(id, dto);
   }
@@ -168,7 +168,7 @@ async updateHeroBanner(
     return this.homeService.featuredImageGetById(id);
   }
 
-  @Patch('/featuredImage/:id')
+  @Put('/featuredImage/:id')
   @UseInterceptors(
     FileFieldsInterceptor(
       [
@@ -210,19 +210,19 @@ async updateHeroBanner(
   }
 
 
-  // ✅ GET: active + ordered
+  // ✅ GET: active + ordered companyExperienceText
   @Get("/companyExperienceText")
   getCompanyExperience() {
     return this.homeService.getCompanyExperience();
   }
 
-  // ✅ GET by ID
+  // ✅ GET by ID companyExperienceText
   @Get('/companyExperienceText/:id')
   getCompanyExperienceByID(@Param('id') id: string) {
     return this.homeService.getCompanyExperienceById(id);
   }
 
-  // ✅ CREATE
+  // ✅ CREATE companyExperienceText
   @Post("/companyExperienceText")
   createCompanyExperience(
     @Body() body
@@ -230,8 +230,8 @@ async updateHeroBanner(
     return this.homeService.createCompanyExperience(body);
   }
 
-  // ✅ UPDATE
-  @Patch('/companyExperienceText/:id')
+  // ✅ UPDATE companyExperienceText
+  @Put('/companyExperienceText/:id')
   updateCompanyExperience(
     @Param('id') id: string,
     @Body() body
@@ -239,11 +239,113 @@ async updateHeroBanner(
     return this.homeService.updateCompanyExperience(id, body);
   }
 
-  // ✅ DELETE
+  // ✅ DELETE companyExperienceText
   @Delete('/companyExperienceText/:id')
   deleteCompanyExperience(@Param('id') id: string) {
     return this.homeService.deleteCompanyExperience(id);
   }
+
+// 🔧 helper to safely parse JSON
+  private parseData(data?: string) {
+    if (!data) return {};
+    try {
+      return JSON.parse(data);
+    } catch {
+      throw new BadRequestException('Invalid JSON in data field');
+    }
+  }
+
+  // ✅ propertySearch CREATE
+  @Post('/propertySearch')
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'image', maxCount: 1 },
+        { name: 'icons', maxCount: 1 },
+      ],
+      { storage: fileUploader.storage },
+    ),
+  )
+  property_search_stepCreate(
+    @Body('data') data: string,
+    @UploadedFiles()
+    files?: {
+      image?: Express.Multer.File[];
+      icons?: Express.Multer.File[];
+    },
+  ) {
+    const parsedData = this.parseData(data);
+    return this.homeService.property_search_stepCreate(parsedData, files);
+  }
+
+  // ✅ propertySearch GET ALL
+  @Get('/propertySearch')
+  property_search_stepsGetAll() {
+    return this.homeService.property_search_stepsGetAll();
+  }
+
+  // ✅propertySearch GET BY ID
+  @Get('/propertySearch/:id')
+  property_search_stepGetByID(@Param('id') id: string) {
+    return this.homeService.property_search_stepGetByID(id);
+  }
+
+  // ✅propertySearch UPDATE (client choice)
+  @Put('/propertySearch/:id')
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'image', maxCount: 1 },
+        { name: 'icons', maxCount: 1 },
+      ],
+      { storage: fileUploader.storage },
+    ),
+  )
+  property_search_stepUpdate(
+    @Param('id') id: string,
+    @Body('data') data?: string,
+    @UploadedFiles()
+    files?: {
+      image?: Express.Multer.File[];
+      icons?: Express.Multer.File[];
+    },
+  ) {
+    const parsedData = this.parseData(data);
+    return this.homeService.property_search_stepUpdate(
+      id,
+      parsedData,
+      files,
+    );
+  }
+
+  // ✅propertySearch DELETE
+  @Delete('/propertySearch/:id')
+  property_search_stepDelete(@Param('id') id: string) {
+    return this.homeService.property_search_stepDelete(id);
+  }
+
+// get ContactInfo 
+  @Get("/contactInfo")
+  async getContactInfo() {
+    return this.homeService.getContactInfo();
+  }
+// cerate ContactInfo 
+  @Post("/contactInfo")
+  async postContactInfo(@Body() body: any) {
+    return this.homeService.createContactInfo(body);
+  }
+//update ContactInfo 
+  @Put('/contactInfo/:id')
+  async updateContactInfo(@Param('id') id: string, @Body() body: any) {
+    return this.homeService.updateContactInfo(id, body);
+  }
+// delete ContactInfo 
+  @Delete('/contactInfo/:id')
+  async deleteContactInfo(@Param('id') id: string) {
+    return this.homeService.deleteContactInfo(id);
+  }
+  
+  
 }
 
 

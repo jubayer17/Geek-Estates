@@ -116,6 +116,45 @@ let HomeController = class HomeController {
     deleteCompanyExperience(id) {
         return this.homeService.deleteCompanyExperience(id);
     }
+    parseData(data) {
+        if (!data)
+            return {};
+        try {
+            return JSON.parse(data);
+        }
+        catch {
+            throw new common_1.BadRequestException('Invalid JSON in data field');
+        }
+    }
+    property_search_stepCreate(data, files) {
+        const parsedData = this.parseData(data);
+        return this.homeService.property_search_stepCreate(parsedData, files);
+    }
+    property_search_stepsGetAll() {
+        return this.homeService.property_search_stepsGetAll();
+    }
+    property_search_stepGetByID(id) {
+        return this.homeService.property_search_stepGetByID(id);
+    }
+    property_search_stepUpdate(id, data, files) {
+        const parsedData = this.parseData(data);
+        return this.homeService.property_search_stepUpdate(id, parsedData, files);
+    }
+    property_search_stepDelete(id) {
+        return this.homeService.property_search_stepDelete(id);
+    }
+    async getContactInfo() {
+        return this.homeService.getContactInfo();
+    }
+    async postContactInfo(body) {
+        return this.homeService.createContactInfo(body);
+    }
+    async updateContactInfo(id, body) {
+        return this.homeService.updateContactInfo(id, body);
+    }
+    async deleteContactInfo(id) {
+        return this.homeService.deleteContactInfo(id);
+    }
 };
 exports.HomeController = HomeController;
 __decorate([
@@ -143,7 +182,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], HomeController.prototype, "getHeroBannerById", null);
 __decorate([
-    (0, common_1.Patch)('/heroBanner/:id'),
+    (0, common_1.Put)('/heroBanner/:id'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image', {
         storage: fileUploader_1.fileUploader.storage,
     })),
@@ -182,7 +221,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], HomeController.prototype, "getById", null);
 __decorate([
-    (0, common_1.Patch)('/text/:id'),
+    (0, common_1.Put)('/text/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -224,7 +263,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], HomeController.prototype, "featuredImageGetById", null);
 __decorate([
-    (0, common_1.Patch)('/featuredImage/:id'),
+    (0, common_1.Put)('/featuredImage/:id'),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileFieldsInterceptor)([
         { name: 'image', maxCount: 1 },
         { name: 'icon', maxCount: 1 },
@@ -266,7 +305,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], HomeController.prototype, "createCompanyExperience", null);
 __decorate([
-    (0, common_1.Patch)('/companyExperienceText/:id'),
+    (0, common_1.Put)('/companyExperienceText/:id'),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -280,6 +319,79 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], HomeController.prototype, "deleteCompanyExperience", null);
+__decorate([
+    (0, common_1.Post)('/propertySearch'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileFieldsInterceptor)([
+        { name: 'image', maxCount: 1 },
+        { name: 'icons', maxCount: 1 },
+    ], { storage: fileUploader_1.fileUploader.storage })),
+    __param(0, (0, common_1.Body)('data')),
+    __param(1, (0, common_1.UploadedFiles)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "property_search_stepCreate", null);
+__decorate([
+    (0, common_1.Get)('/propertySearch'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "property_search_stepsGetAll", null);
+__decorate([
+    (0, common_1.Get)('/propertySearch/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "property_search_stepGetByID", null);
+__decorate([
+    (0, common_1.Put)('/propertySearch/:id'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileFieldsInterceptor)([
+        { name: 'image', maxCount: 1 },
+        { name: 'icons', maxCount: 1 },
+    ], { storage: fileUploader_1.fileUploader.storage })),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)('data')),
+    __param(2, (0, common_1.UploadedFiles)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, Object]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "property_search_stepUpdate", null);
+__decorate([
+    (0, common_1.Delete)('/propertySearch/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], HomeController.prototype, "property_search_stepDelete", null);
+__decorate([
+    (0, common_1.Get)("/contactInfo"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "getContactInfo", null);
+__decorate([
+    (0, common_1.Post)("/contactInfo"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "postContactInfo", null);
+__decorate([
+    (0, common_1.Put)('/contactInfo/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "updateContactInfo", null);
+__decorate([
+    (0, common_1.Delete)('/contactInfo/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "deleteContactInfo", null);
 exports.HomeController = HomeController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [home_service_1.HomeService])

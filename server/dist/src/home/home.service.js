@@ -241,6 +241,147 @@ let HomeService = class HomeService {
             where: { id },
         });
     }
+    async property_search_stepCreate(data, files) {
+        if (!files?.image?.[0]) {
+            throw new common_1.BadRequestException('Image is required');
+        }
+        const imageUpload = await (0, fileUploader_1.uploadToCloudinary)(files.image[0]);
+        let iconUrl = null;
+        if (files?.icons?.[0]) {
+            const iconUpload = await (0, fileUploader_1.uploadToCloudinary)(files.icons[0]);
+            iconUrl = iconUpload.secure_url;
+        }
+        return prisma_1.prisma.propertySearchStep.create({
+            data: {
+                stepNumber: Number(data.stepNumber),
+                title: data.title,
+                description: data.description,
+                imageUrl: imageUpload.secure_url,
+                statusText: data.statusText,
+                statusIcon: iconUrl,
+                order: Number(data.order),
+                isActive: data.isActive ?? true,
+            },
+        });
+    }
+    async property_search_stepsGetAll() {
+        return prisma_1.prisma.propertySearchStep.findMany({
+            where: { isActive: true },
+            orderBy: { order: 'asc' },
+        });
+    }
+    async property_search_stepGetByID(id) {
+        const step = await prisma_1.prisma.propertySearchStep.findUnique({
+            where: { id },
+        });
+        if (!step) {
+            throw new common_1.NotFoundException('Property search step not found');
+        }
+        return step;
+    }
+    async property_search_stepUpdate(id, data = {}, files) {
+        const existing = await this.property_search_stepGetByID(id);
+        let imageUrl = existing.imageUrl;
+        let statusIcon = existing.statusIcon;
+        if (files?.image?.[0]) {
+            const upload = await (0, fileUploader_1.uploadToCloudinary)(files.image[0]);
+            imageUrl = upload.secure_url;
+        }
+        if (files?.icons?.[0]) {
+            const upload = await (0, fileUploader_1.uploadToCloudinary)(files.icons[0]);
+            statusIcon = upload.secure_url;
+        }
+        return prisma_1.prisma.propertySearchStep.update({
+            where: { id },
+            data: {
+                stepNumber: data.stepNumber !== undefined
+                    ? Number(data.stepNumber)
+                    : undefined,
+                title: data.title,
+                description: data.description,
+                order: data.order !== undefined
+                    ? Number(data.order)
+                    : undefined,
+                statusText: data.statusText,
+                imageUrl,
+                statusIcon,
+                isActive: data.isActive !== undefined
+                    ? data.isActive === true || data.isActive === 'true'
+                    : undefined,
+            },
+        });
+    }
+    async property_search_stepDelete(id) {
+        await this.property_search_stepGetByID(id);
+        return prisma_1.prisma.propertySearchStep.delete({
+            where: { id },
+        });
+    }
+    async getContactInfo() {
+        const info = await prisma_1.prisma.contactInfo.findFirst({
+            include: {
+                openingHours: true,
+            },
+        });
+        if (!info)
+            throw new common_1.NotFoundException('Contact info not found');
+        return info;
+    }
+    async createContactInfo(data) {
+        const { openingHours, ...contactData } = data;
+        return prisma_1.prisma.contactInfo.create({
+            data: {
+                ...contactData,
+                openingHours: {
+                    create: openingHours,
+                },
+            },
+            include: {
+                openingHours: true,
+            },
+        });
+    }
+    async updateContactInfo(id, data) {
+        const existing = await prisma_1.prisma.contactInfo.findUnique({
+            where: { id },
+            include: { openingHours: true },
+        });
+        if (!existing)
+            throw new common_1.NotFoundException('Contact info not found');
+        const { openingHours, ...contactData } = data;
+        await prisma_1.prisma.contactInfo.update({
+            where: { id },
+            data: {
+                ...contactData,
+            },
+        });
+        if (openingHours && Array.isArray(openingHours)) {
+            await prisma_1.prisma.openingHourGroup.deleteMany({
+                where: { contactInfoId: id },
+            });
+            await prisma_1.prisma.openingHourGroup.createMany({
+                data: openingHours.map((oh) => ({
+                    contactInfoId: id,
+                    days: oh.days,
+                    openTime: oh.openTime,
+                    closeTime: oh.closeTime,
+                    isClosed: oh.isClosed ?? false,
+                })),
+            });
+        }
+        return prisma_1.prisma.contactInfo.findUnique({
+            where: { id },
+            include: { openingHours: true },
+        });
+    }
+    async deleteContactInfo(id) {
+        await prisma_1.prisma.openingHourGroup.deleteMany({
+            where: { contactInfoId: id },
+        });
+        return prisma_1.prisma.contactInfo.delete({
+            where: { id },
+        });
+    }
 };
 exports.HomeService = HomeService;
 exports.HomeService = HomeService = __decorate([

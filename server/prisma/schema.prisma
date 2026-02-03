@@ -64,6 +64,43 @@ model FeaturedImage {
   @@map("featured_image")
 }
 
+model PropertySearchStep {
+  id          String   @id @default(uuid())
+  stepNumber  Int
+  title       String
+  description String?
+  imageUrl    String
+  statusText  String?
+  statusIcon  String?
+  order       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("property_search_steps")
+}
+
+model ContactInfo {
+  id           String             @id @default(uuid())
+  fullAddress  String
+  country      String
+  phone        String
+  email        String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  openingHours OpeningHourGroup[]
+}
+
+model OpeningHourGroup {
+  id            String      @id @default(uuid())
+  contactInfoId String
+  days          String
+  openTime      String?
+  closeTime     String?
+  isClosed      Boolean     @default(false)
+  contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
+}
+
 model Admin {
   id             String        @id
   email          String        @unique

@@ -237,4 +237,138 @@ export declare class HomeService {
         updatedAt: Date;
         suffix: string | null;
     }>;
+    property_search_stepCreate(data: any, files?: {
+        image?: Express.Multer.File[];
+        icons?: Express.Multer.File[];
+    }): Promise<{
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
+        stepNumber: number;
+        statusText: string | null;
+        statusIcon: string | null;
+    }>;
+    property_search_stepsGetAll(): Promise<{
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
+        stepNumber: number;
+        statusText: string | null;
+        statusIcon: string | null;
+    }[]>;
+    property_search_stepGetByID(id: string): Promise<{
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
+        stepNumber: number;
+        statusText: string | null;
+        statusIcon: string | null;
+    }>;
+    property_search_stepUpdate(id: string, data?: any, files?: {
+        image?: Express.Multer.File[];
+        icons?: Express.Multer.File[];
+    }): Promise<{
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
+        stepNumber: number;
+        statusText: string | null;
+        statusIcon: string | null;
+    }>;
+    property_search_stepDelete(id: string): Promise<{
+        title: string;
+        isActive: boolean;
+        description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
+        stepNumber: number;
+        statusText: string | null;
+        statusIcon: string | null;
+    }>;
+    getContactInfo(): Promise<{
+        openingHours: {
+            id: string;
+            days: string;
+            openTime: string | null;
+            closeTime: string | null;
+            isClosed: boolean;
+            contactInfoId: string;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        fullAddress: string;
+        country: string;
+        phone: string;
+        email: string;
+    }>;
+    createContactInfo(data: any): Promise<{
+        openingHours: {
+            id: string;
+            days: string;
+            openTime: string | null;
+            closeTime: string | null;
+            isClosed: boolean;
+            contactInfoId: string;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        fullAddress: string;
+        country: string;
+        phone: string;
+        email: string;
+    }>;
+    updateContactInfo(id: string, data: any): Promise<({
+        openingHours: {
+            id: string;
+            days: string;
+            openTime: string | null;
+            closeTime: string | null;
+            isClosed: boolean;
+            contactInfoId: string;
+        }[];
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        fullAddress: string;
+        country: string;
+        phone: string;
+        email: string;
+    }) | null>;
+    deleteContactInfo(id: string): Promise<{
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        fullAddress: string;
+        country: string;
+        phone: string;
+        email: string;
+    }>;
 }
