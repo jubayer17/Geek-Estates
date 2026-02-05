@@ -5,9 +5,10 @@ import { AdminModule } from './admin/admin.module';
 import { CareerModule } from './career/career.module';
 import { ProjectsModule } from './projects/projects.module';
 import { HomeModule } from './home/home.module';
+import { AboutModule } from './about/about.module';
 
 @Module({
-  imports: [HomeModule, AdminModule, CareerModule, ProjectsModule],
+  imports: [HomeModule, AdminModule, CareerModule, ProjectsModule,AboutModule],
   controllers: [AppController],
   providers: [AppService],
 })

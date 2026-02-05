@@ -5,13 +5,13 @@ export declare class HomeService {
         message: string;
         data: {
             id: string;
-            badgeText: string | null;
             title: string | null;
-            subtitle: string | null;
-            imageUrl: string | null;
-            isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
+            badgeText: string | null;
+            subtitle: string | null;
+            isActive: boolean;
+            imageUrl: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -21,13 +21,13 @@ export declare class HomeService {
         message: string;
         data: {
             id: string;
-            badgeText: string | null;
             title: string | null;
-            subtitle: string | null;
-            imageUrl: string | null;
-            isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
+            badgeText: string | null;
+            subtitle: string | null;
+            isActive: boolean;
+            imageUrl: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         }[];
@@ -36,13 +36,13 @@ export declare class HomeService {
         success: boolean;
         data: {
             id: string;
-            badgeText: string | null;
             title: string | null;
-            subtitle: string | null;
-            imageUrl: string | null;
-            isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
+            badgeText: string | null;
+            subtitle: string | null;
+            isActive: boolean;
+            imageUrl: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -57,13 +57,13 @@ export declare class HomeService {
         message: string;
         data: {
             id: string;
-            badgeText: string | null;
             title: string | null;
-            subtitle: string | null;
-            imageUrl: string | null;
-            isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
+            badgeText: string | null;
+            subtitle: string | null;
+            isActive: boolean;
+            imageUrl: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -75,121 +75,121 @@ export declare class HomeService {
     textSectionCreate(dto: CreateLegacySectionDto): Promise<{
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
-        description: string | null;
     }>;
     textSectionGetAll(): Promise<{
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
-        description: string | null;
     }[]>;
     textSectionGetById(id: string): Promise<{
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
-        description: string | null;
     }>;
     textSectionUpdate(id: string, dto: UpdateLegacySectionDto): Promise<{
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
-        description: string | null;
     }>;
     textSectionRemove(id: string): Promise<{
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
+        isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
-        description: string | null;
     }>;
     featuredImageCreate(dto: CreateFeaturedImageDto, image?: Express.Multer.File, icon?: Express.Multer.File): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string;
         createdAt: Date;
         updatedAt: Date;
-        description: string;
+        isActive: boolean;
         order: number;
         label: string;
+        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageGetAll(): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string;
         createdAt: Date;
         updatedAt: Date;
-        description: string;
+        isActive: boolean;
         order: number;
         label: string;
+        imageUrl: string;
         iconUrl: string | null;
     }[]>;
     featuredImageGetById(id: string): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string;
         createdAt: Date;
         updatedAt: Date;
-        description: string;
+        isActive: boolean;
         order: number;
         label: string;
+        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageUpdate(id: string, dto: UpdateFeaturedImageDto, image?: Express.Multer.File, icon?: Express.Multer.File): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string;
         createdAt: Date;
         updatedAt: Date;
-        description: string;
+        isActive: boolean;
         order: number;
         label: string;
+        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageDelete(id: string): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string;
         createdAt: Date;
         updatedAt: Date;
-        description: string;
+        isActive: boolean;
         order: number;
         label: string;
+        imageUrl: string;
         iconUrl: string | null;
     }>;
     getCompanyExperience(): Promise<{
         number: number;
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
         suffix: string | null;
     }[]>;
@@ -197,10 +197,10 @@ export declare class HomeService {
         number: number;
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
         suffix: string | null;
     }>;
@@ -208,10 +208,10 @@ export declare class HomeService {
         number: number;
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
         suffix: string | null;
     }>;
@@ -219,10 +219,10 @@ export declare class HomeService {
         number: number;
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
         suffix: string | null;
     }>;
@@ -230,10 +230,10 @@ export declare class HomeService {
         number: number;
         id: string;
         title: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
         suffix: string | null;
     }>;
@@ -243,12 +243,12 @@ export declare class HomeService {
     }): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
+        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -256,12 +256,12 @@ export declare class HomeService {
     property_search_stepsGetAll(): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
+        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -269,12 +269,12 @@ export declare class HomeService {
     property_search_stepGetByID(id: string): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
+        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -285,12 +285,12 @@ export declare class HomeService {
     }): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
+        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -298,12 +298,12 @@ export declare class HomeService {
     property_search_stepDelete(id: string): Promise<{
         id: string;
         title: string;
-        imageUrl: string;
-        isActive: boolean;
+        description: string | null;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
+        isActive: boolean;
         order: number;
+        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -311,65 +311,65 @@ export declare class HomeService {
     getContactInfo(): Promise<{
         openingHours: {
             id: string;
-            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
+            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
         fullAddress: string;
         country: string;
         phone: string;
-        email: string;
     }>;
     createContactInfo(data: any): Promise<{
         openingHours: {
             id: string;
-            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
+            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
         fullAddress: string;
         country: string;
         phone: string;
-        email: string;
     }>;
     updateContactInfo(id: string, data: any): Promise<({
         openingHours: {
             id: string;
-            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
+            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
         fullAddress: string;
         country: string;
         phone: string;
-        email: string;
     }) | null>;
     deleteContactInfo(id: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        email: string;
         fullAddress: string;
         country: string;
         phone: string;
-        email: string;
     }>;
     createTestimonial(data: any): Promise<{
         id: string;
@@ -382,9 +382,9 @@ export declare class HomeService {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
+        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
-        propertyTitle: string;
     }>;
     getAllTestimonials(): Promise<{
         id: string;
@@ -397,9 +397,9 @@ export declare class HomeService {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
+        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
-        propertyTitle: string;
     }[]>;
     getTestimonialById(id: string): Promise<{
         id: string;
@@ -412,9 +412,9 @@ export declare class HomeService {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
+        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
-        propertyTitle: string;
     }>;
     updateTestimonial(id: string, data: any): Promise<{
         id: string;
@@ -427,9 +427,9 @@ export declare class HomeService {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
+        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
-        propertyTitle: string;
     }>;
     deleteTestimonial(id: string): Promise<{
         message: string;

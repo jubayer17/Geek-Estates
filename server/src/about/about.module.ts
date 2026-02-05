@@ -8,4 +8,4 @@ import { AboutController } from './about.controller';
   controllers: [AboutController],
   providers: [AboutService],
 })
-export class AppModule { }
+export class AboutModule { }
