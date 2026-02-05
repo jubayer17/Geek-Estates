@@ -155,6 +155,21 @@ let HomeController = class HomeController {
     async deleteContactInfo(id) {
         return this.homeService.deleteContactInfo(id);
     }
+    async createTestimonial(body) {
+        return this.homeService.createTestimonial(body);
+    }
+    async getAllTestimonials() {
+        return this.homeService.getAllTestimonials();
+    }
+    async getTestimonialById(id) {
+        return this.homeService.getTestimonialById(id);
+    }
+    async updateTestimonial(id, body) {
+        return this.homeService.updateTestimonial(id, body);
+    }
+    async deleteTestimonial(id) {
+        return this.homeService.deleteTestimonial(id);
+    }
 };
 exports.HomeController = HomeController;
 __decorate([
@@ -392,6 +407,41 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], HomeController.prototype, "deleteContactInfo", null);
+__decorate([
+    (0, common_1.Post)("/testimonial"),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "createTestimonial", null);
+__decorate([
+    (0, common_1.Get)("/testimonial"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "getAllTestimonials", null);
+__decorate([
+    (0, common_1.Get)('/testimonial/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "getTestimonialById", null);
+__decorate([
+    (0, common_1.Put)('/testimonial/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "updateTestimonial", null);
+__decorate([
+    (0, common_1.Delete)('/testimonial/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], HomeController.prototype, "deleteTestimonial", null);
 exports.HomeController = HomeController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [home_service_1.HomeService])

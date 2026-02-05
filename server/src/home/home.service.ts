@@ -1,7 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import {  CreateFeaturedImageDto, CreateHeroBannerDto, CreateLegacySectionDto, UpdateFeaturedImageDto, UpdateLegacySectionDto } from './homeDTO';
 import { fileUploader, uploadToCloudinary } from 'src/helper/fileUploader';
-import { prisma } from 'src/helper/prisma';
+import { Testimonial } from '@prisma/client';
+import { prisma } from './../helper/prisma';
 
 @Injectable()
 export class HomeService {
@@ -529,6 +530,83 @@ async deleteHeroBanner(id: string) {
     return prisma.contactInfo.delete({
       where: { id },
     });
+  }
+
+// =========================
+  // CREATE a testimonial
+  // =========================
+  async createTestimonial(data: any) {
+    const {
+      content,
+      authorName,
+      authorInitial,
+      authorTitle,
+      authorLocation,
+      rating,
+      propertyCategory,
+      propertyTitle,
+      propertyPurchaseValue,
+      propertyPurchaseValueDisplay
+    } = data;
+
+    if (!content || !authorName || !rating || !propertyTitle) {
+      throw new BadRequestException('Required fields missing');
+    }
+
+    const testimonial = await prisma.testimonial.create({
+      data: {
+        content,
+        authorName,
+        authorInitial,
+        authorTitle,
+        authorLocation,
+        rating,
+        propertyCategory,
+        propertyTitle,
+        propertyPurchaseValue,
+        propertyPurchaseValueDisplay: propertyPurchaseValueDisplay ?? `$${propertyPurchaseValue}M`
+      }
+    });
+
+    return testimonial;
+  }
+
+  // =========================
+  // GET all testimonials
+  // =========================
+  async getAllTestimonials() {
+    return prisma.testimonial.findMany({
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  // =========================
+  // GET testimonial by ID
+  // =========================
+  async getTestimonialById(id: string) {
+    const testimonial = await prisma.testimonial.findUnique({ where: { id } });
+    if (!testimonial) throw new NotFoundException('Testimonial not found');
+    return testimonial;
+  }
+
+  // =========================
+  // UPDATE testimonial by ID
+  // =========================
+  async updateTestimonial(id: string, data: any) {
+    await this.getTestimonialById(id);
+    return prisma.testimonial.update({
+      where: { id },
+      data,
+    });
+  }
+
+  // =========================
+  // DELETE testimonial by ID
+  // =========================
+  async deleteTestimonial(id: string) {
+    await this.getTestimonialById(id);
+    await prisma.testimonial.delete({ where: { id } });
+    return { message: 'Testimonial deleted successfully' };
   }
 
 }

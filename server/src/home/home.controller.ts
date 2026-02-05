@@ -346,6 +346,45 @@ async updateHeroBanner(
   }
   
   
+  // =========================
+  // CREATE testimonial
+  // =========================
+  @Post("/testimonial")
+  async createTestimonial(@Body() body: any) {
+    return this.homeService.createTestimonial(body);
+  }
+
+  // =========================
+  // GET all testimonials
+  // =========================
+  @Get("/testimonial")
+  async getAllTestimonials() {
+    return this.homeService.getAllTestimonials();
+  }
+
+  // =========================
+  // GET testimonial by ID
+  // =========================
+  @Get('/testimonial/:id')
+  async getTestimonialById(@Param('id') id: string) {
+    return this.homeService.getTestimonialById(id);
+  }
+
+  // =========================
+  // UPDATE testimonial by ID
+  // =========================
+  @Put('/testimonial/:id')
+  async updateTestimonial(@Param('id') id: string, @Body() body: any) {
+    return this.homeService.updateTestimonial(id, body);
+  }
+
+  // =========================
+  // DELETE testimonial by ID
+  // =========================
+  @Delete('/testimonial/:id')
+  async deleteTestimonial(@Param('id') id: string) {
+    return this.homeService.deleteTestimonial(id);
+  }
 }
 
 

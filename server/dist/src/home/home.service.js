@@ -9,7 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HomeService = void 0;
 const common_1 = require("@nestjs/common");
 const fileUploader_1 = require("../helper/fileUploader");
-const prisma_1 = require("../helper/prisma");
+const prisma_1 = require("./../helper/prisma");
 let HomeService = class HomeService {
     async createHeroBanner(dto, file) {
         let imageUrl = null;
@@ -381,6 +381,50 @@ let HomeService = class HomeService {
         return prisma_1.prisma.contactInfo.delete({
             where: { id },
         });
+    }
+    async createTestimonial(data) {
+        const { content, authorName, authorInitial, authorTitle, authorLocation, rating, propertyCategory, propertyTitle, propertyPurchaseValue, propertyPurchaseValueDisplay } = data;
+        if (!content || !authorName || !rating || !propertyTitle) {
+            throw new common_1.BadRequestException('Required fields missing');
+        }
+        const testimonial = await prisma_1.prisma.testimonial.create({
+            data: {
+                content,
+                authorName,
+                authorInitial,
+                authorTitle,
+                authorLocation,
+                rating,
+                propertyCategory,
+                propertyTitle,
+                propertyPurchaseValue,
+                propertyPurchaseValueDisplay: propertyPurchaseValueDisplay ?? `$${propertyPurchaseValue}M`
+            }
+        });
+        return testimonial;
+    }
+    async getAllTestimonials() {
+        return prisma_1.prisma.testimonial.findMany({
+            orderBy: { createdAt: 'desc' },
+        });
+    }
+    async getTestimonialById(id) {
+        const testimonial = await prisma_1.prisma.testimonial.findUnique({ where: { id } });
+        if (!testimonial)
+            throw new common_1.NotFoundException('Testimonial not found');
+        return testimonial;
+    }
+    async updateTestimonial(id, data) {
+        await this.getTestimonialById(id);
+        return prisma_1.prisma.testimonial.update({
+            where: { id },
+            data,
+        });
+    }
+    async deleteTestimonial(id) {
+        await this.getTestimonialById(id);
+        await prisma_1.prisma.testimonial.delete({ where: { id } });
+        return { message: 'Testimonial deleted successfully' };
     }
 };
 exports.HomeService = HomeService;

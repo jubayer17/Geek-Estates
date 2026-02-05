@@ -1,6 +1,5 @@
 generator client {
   provider = "prisma-client-js"
- 
 }
 
 datasource db {
@@ -102,30 +101,46 @@ model OpeningHourGroup {
   contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
 }
 
+model Testimonial {
+  id                           String   @id @default(uuid())
+  content                      String
+  authorName                   String
+  authorInitial                String?
+  authorTitle                  String
+  authorLocation               String
+  rating                       Int
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime @updatedAt
+  propertyCategory             String
+  propertyPurchaseValue        Float
+  propertyPurchaseValueDisplay String
+  propertyTitle                String
+}
+
 model Admin {
-  id             String        @id
+  id             String        @id @default(uuid())
   email          String        @unique
   name           String
   password       String
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime      @updatedAt
   projectsPageId String?
   ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
 
 model User {
-  id        String   @id
+  id        String   @id @default(uuid())
   email     String   @unique
   name      String
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }
 
 model CareerPage {
-  id                String   @id
-  updatedAt         DateTime
+  id                String   @id @default(uuid())
+  updatedAt         DateTime @updatedAt
   heroImage         String   @default("/career.jpg")
   heroSubtitle      String   @default("We’re always looking for talented people. Explore opportunities and grow your career with us!")
   heroTitle         String   @default("Join Our Team")
@@ -133,15 +148,16 @@ model CareerPage {
   jobsDescription   String   @default("Discover the role that will challenge you, inspire you, and let you make a real impact.")
   jobsTitle         String   @default("Current Positions")
   perksBadge        String   @default("Employee Benefits")
-  perksDescription  String   @default("We believe that when you feel your best, you do your best work. That's why we've crafted a benefits package that supports you inside and outside the office.")
+  perksDescription  String   @default("We believe that when you feel your best, you do your best work.")
   perksTitle        String   @default("Everything You Need To Thrive.")
   valuesBadge       String   @default("Our Core Philosophy")
-  valuesDescription String   @default("At Geek Estate, we don't just build properties; we build legacies. Our core values are the compass that guides every decision, ensuring we remain true to our mission of redefining modern living.")
+  valuesDescription String   @default("At Geek Estate, we don't just build properties; we build legacies.")
   valuesTitle       String   @default("Driven by Purpose")
+  createdAt         DateTime @default(now())
 }
 
 model Job {
-  id               String   @id
+  id               String   @id @default(uuid())
   title            String
   description      String
   longDescription  String?
@@ -156,29 +172,29 @@ model Job {
   category         String?
   gender           String?
   createdAt        DateTime @default(now())
-  updatedAt        DateTime
+  updatedAt        DateTime @updatedAt
 }
 
 model CareerPerk {
-  id          String   @id
+  id          String   @id @default(uuid())
   title       String
   description String
   icon        String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 }
 
 model CareerValue {
-  id          String   @id
+  id          String   @id @default(uuid())
   title       String
   description String
   icon        String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 }
 
 model Project {
-  id             String        @id
+  id             String        @id @default(uuid())
   title          String
   description    String?
   image          String
@@ -192,27 +208,28 @@ model Project {
   status         String?
   featured       Boolean       @default(false)
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime      @updatedAt
   projectsPageId String?
   ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
 
 model ProjectsPage {
-  id              String    @id
+  id              String    @id @default(uuid())
   heroBadge       String    @default("Exclusive Portfolio")
   heroTitle       String    @default("Curated Excellence")
-  heroDescription String    @default("Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy.")
+  heroDescription String    @default("Explore a world of architectural marvels.")
   statsCount1     String    @default("140+")
   statsLabel1     String    @default("Properties")
   statsCount2     String    @default("12")
   statsLabel2     String    @default("Cities")
-  heroImages      String[]  @default(["/outdoor-real-state/1.webp", "/outdoor-real-state/2.webp", "/outdoor-real-state/3.webp", "/outdoor-real-state/4.webp", "/outdoor-real-state/5.webp"])
+  heroImages      String[]  @default(["/outdoor-real-state/1.webp"])
   ctaBadge        String    @default("Bespoke Service")
   ctaTitleRegular String    @default("Can't find exactly what")
   ctaTitleItalic  String    @default("you're looking for?")
-  ctaDescription  String    @default("Our private collection includes exclusive off-market listings reserved for our most discerning clients. Let us help you find your perfect match.")
+  ctaDescription  String    @default("Our private collection includes exclusive off-market listings.")
   ctaButtonText   String    @default("Contact Our Team")
-  updatedAt       DateTime
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
   Admin           Admin[]
   Project         Project[]
 }
