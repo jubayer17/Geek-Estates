@@ -247,6 +247,60 @@ model AboutUsBuildSection {
   updatedAt       DateTime @updatedAt
 }
 
+model NewsAndBlogsText {
+  id        String   @id @default(uuid())
+  page      String
+  title     String
+  subtitle  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model News {
+  id            String    @id @default(uuid())
+  title         String
+  subtitle      String?
+  content       String
+  coverImageUrl String?
+  category      String
+  author        String?
+  publishedAt   DateTime?
+  isPublished   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Subscriber {
+  id       String   @id @default(uuid())
+  email    String   @unique
+  name     String?
+  joinedAt DateTime @default(now())
+  source   String?
+}
+
+model NewsletterSection {
+  id          String   @id @default(uuid())
+  heading     String
+  subheading  String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  section     String
+}
+
+model SustainabilityReport {
+  id          String   @id @default(uuid())
+  category    String   @default("SUSTAINABILITY")
+  title       String
+  description String
+  publishDate DateTime
+  downloadUrl String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
 model Admin {
   id             String        @id @default(uuid())
   email          String        @unique
@@ -362,41 +416,6 @@ model ProjectsPage {
   createdAt       DateTime  @default(now())
   Admin           Admin[]
   Project         Project[]
-}
-
-model ContactInfo {
-  id              String    @id @default(uuid())
-  fullAddress      String
-  country          String
-  phone            String
-  email            String
-  createdAt        DateTime           @default(now())
-  updatedAt        DateTime
-  OpeningHourGroup OpeningHourGroup[]
-}
-
-model OpeningHourGroup {
-  id              String    @id @default(uuid())
-  contactInfoId   String
-  days            String
-  openTime        String?
-  closeTime       String?
-  isClosed        Boolean     @default(false)
-  ContactInfo     ContactInfo @relation(fields: [contactInfoId], references: [id])
-}
-
-model property_search_steps {
-  id          String   @id @default(uuid())
-  stepNumber  Int
-  title       String
-  description String?
-  imageUrl    String
-  statusText  String?
-  statusIcon  String?
-  order       Int
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime
 }
 
 enum Role {
