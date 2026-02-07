@@ -1,8 +1,9 @@
-import dotenv from 'dotenv';
-import path from 'path';
+import * as dotenv from 'dotenv';
+import * as path from 'path';
 
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
+console.log(process.env.CLOUDINARY_CLOUD_NAME)
 export default {
     node_env: process.env.NODE_ENV,
     cloudinary_api_secret:process.env.CLOUDINARY_API_SECRET,

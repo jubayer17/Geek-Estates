@@ -64,13 +64,196 @@ model FeaturedImage {
   @@map("featured_image")
 }
 
+model PropertySearchStep {
+  id          String   @id @default(uuid())
+  stepNumber  Int
+  title       String
+  description String?
+  imageUrl    String
+  statusText  String?
+  statusIcon  String?
+  order       Int
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("property_search_steps")
+}
+
+model ContactInfo {
+  id           String             @id @default(uuid())
+  fullAddress  String
+  country      String
+  phone        String
+  email        String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  openingHours OpeningHourGroup[]
+}
+
+model OpeningHourGroup {
+  id            String      @id @default(uuid())
+  contactInfoId String
+  days          String
+  openTime      String?
+  closeTime     String?
+  isClosed      Boolean     @default(false)
+  contactInfo   ContactInfo @relation(fields: [contactInfoId], references: [id])
+}
+
+model Testimonial {
+  id                           String   @id @default(uuid())
+  content                      String
+  authorName                   String
+  authorInitial                String?
+  authorTitle                  String
+  authorLocation               String
+  rating                       Int
+  createdAt                    DateTime @default(now())
+  updatedAt                    DateTime @updatedAt
+  propertyCategory             String
+  propertyPurchaseValue        Float
+  propertyPurchaseValueDisplay String
+  propertyTitle                String
+}
+
+model AboutUsText {
+  id        String   @id @default(uuid())
+  page      String
+  title     String
+  subtitle  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutUsBanner {
+  id        String   @id @default(uuid())
+  url       String
+  altText   String?
+  type      String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutWhoWeAre {
+  id                String   @id @default(uuid())
+  imageUrl          String
+  yearsOfExcellence String
+  excellenceText    String
+  smallHeading      String
+  mainHeading       String
+  mainHeadingItalic String
+  paragraphs        String[]
+  ctaText           String?
+  ctaUrl            String?
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model AboutUsAchievements {
+  id          String   @id @default(uuid())
+  number      String
+  title       String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutUsCoreValue {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutUsAwardTextSection {
+  id         String   @id @default(uuid())
+  title      String
+  extraTitle String?
+  subtitle   String
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  upText     String?
+}
+
+model AboutUsAwardRecord {
+  id        String   @id @default(uuid())
+  year      String
+  title     String
+  subtitle  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AboutUsJourneyTextSection {
+  id        String   @id @default(uuid())
+  title     String
+  subtitle  String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  upText    String?
+}
+
+model AboutUsJourneyTimeline {
+  id          String   @id @default(uuid())
+  startYear   String
+  endYear     String
+  title       String
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutUsLeadership {
+  id          String   @id @default(uuid())
+  imageUrl    String
+  quote       String
+  name        String
+  designation String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutUsTestimonial {
+  id          String   @id @default(uuid())
+  message     String
+  company     String
+  rating      Int
+  name        String
+  designation String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AboutUsBuildSection {
+  id              String   @id @default(uuid())
+  heading         String
+  highlightedText String?
+  description     String?
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 model Admin {
   id             String        @id @default(uuid())
   email          String        @unique
   name           String
   password       String
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime      @updatedAt
   projectsPageId String?
   ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
@@ -82,12 +265,12 @@ model User {
   password  String
   role      Role     @default(USER)
   createdAt DateTime @default(now())
-  updatedAt DateTime
+  updatedAt DateTime @updatedAt
 }
 
 model CareerPage {
   id                String   @id @default(uuid())
-  updatedAt         DateTime
+  updatedAt         DateTime @updatedAt
   heroImage         String   @default("/career.jpg")
   heroSubtitle      String   @default("We’re always looking for talented people. Explore opportunities and grow your career with us!")
   heroTitle         String   @default("Join Our Team")
@@ -95,11 +278,12 @@ model CareerPage {
   jobsDescription   String   @default("Discover the role that will challenge you, inspire you, and let you make a real impact.")
   jobsTitle         String   @default("Current Positions")
   perksBadge        String   @default("Employee Benefits")
-  perksDescription  String   @default("We believe that when you feel your best, you do your best work. That's why we've crafted a benefits package that supports you inside and outside the office.")
+  perksDescription  String   @default("We believe that when you feel your best, you do your best work.")
   perksTitle        String   @default("Everything You Need To Thrive.")
   valuesBadge       String   @default("Our Core Philosophy")
-  valuesDescription String   @default("At Geek Estate, we don't just build properties; we build legacies. Our core values are the compass that guides every decision, ensuring we remain true to our mission of redefining modern living.")
+  valuesDescription String   @default("At Geek Estate, we don't just build properties; we build legacies.")
   valuesTitle       String   @default("Driven by Purpose")
+  createdAt         DateTime @default(now())
 }
 
 model Job {
@@ -118,7 +302,7 @@ model Job {
   category         String?
   gender           String?
   createdAt        DateTime @default(now())
-  updatedAt        DateTime
+  updatedAt        DateTime @updatedAt
 }
 
 model CareerPerk {
@@ -127,7 +311,7 @@ model CareerPerk {
   description String
   icon        String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 }
 
 model CareerValue {
@@ -136,7 +320,7 @@ model CareerValue {
   description String
   icon        String
   createdAt   DateTime @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime @updatedAt
 }
 
 model Project {
@@ -154,7 +338,7 @@ model Project {
   status         String?
   featured       Boolean       @default(false)
   createdAt      DateTime      @default(now())
-  updatedAt      DateTime
+  updatedAt      DateTime      @updatedAt
   projectsPageId String?
   ProjectsPage   ProjectsPage? @relation(fields: [projectsPageId], references: [id])
 }
@@ -163,18 +347,19 @@ model ProjectsPage {
   id              String    @id @default(uuid())
   heroBadge       String    @default("Exclusive Portfolio")
   heroTitle       String    @default("Curated Excellence")
-  heroDescription String    @default("Explore a world of architectural marvels. From modern villas to timeless estates, find the home that reflects your legacy.")
+  heroDescription String    @default("Explore a world of architectural marvels.")
   statsCount1     String    @default("140+")
   statsLabel1     String    @default("Properties")
   statsCount2     String    @default("12")
   statsLabel2     String    @default("Cities")
-  heroImages      String[]  @default(["/outdoor-real-state/1.webp", "/outdoor-real-state/2.webp", "/outdoor-real-state/3.webp", "/outdoor-real-state/4.webp", "/outdoor-real-state/5.webp"])
+  heroImages      String[]  @default(["/outdoor-real-state/1.webp"])
   ctaBadge        String    @default("Bespoke Service")
   ctaTitleRegular String    @default("Can't find exactly what")
   ctaTitleItalic  String    @default("you're looking for?")
-  ctaDescription  String    @default("Our private collection includes exclusive off-market listings reserved for our most discerning clients. Let us help you find your perfect match.")
+  ctaDescription  String    @default("Our private collection includes exclusive off-market listings.")
   ctaButtonText   String    @default("Contact Our Team")
-  updatedAt       DateTime
+  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime  @default(now())
   Admin           Admin[]
   Project         Project[]
 }
