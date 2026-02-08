@@ -1,45 +1,101 @@
-"use client"
+"use client";
 
-import React, { useState, useMemo } from "react"
-import blogsData from "../../public/data/news.json"
-import Image from "next/image"
-import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Blog } from "@/app/news-and-blogs/[slug]/page"
-import { MagnifyingGlassIcon, ArrowTopRightIcon } from "@radix-ui/react-icons"
+import React, { useState, useMemo, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { MagnifyingGlassIcon, ArrowTopRightIcon } from "@radix-ui/react-icons";
+import config from "@/app/config";
 
-// Enhanced Blog type with category
-type EnhancedBlog = Blog & { category: string }
+// Type for incoming API blog data
+interface ApiBlog {
+  id: string;
+  title: string;
+  subtitle: string;
+  content: string;
+  coverImageUrl: string;
+  category: string;
+  author: string;
+  publishedAt: string;
+  isPublished: boolean;
+}
 
-// Categories configuration
-const CATEGORIES = ["All", "Market Trends", "Investment", "Lifestyle", "Design"]
+// Enhanced Blog type used internally with "image" and "date" keys matching your UI usage
+type Blog = {
+  id: string;
+  title: string;
+  excerpt: string;
+  image: string;
+  category: string;
+  author: string;
+  date: string;
+  slug: string;
+};
+
+const CATEGORIES = ["All", "Market Trends", "Investment", "Lifestyle", "Design", "Real Estate Trends", "Sustainability", "Advice & Tips", "Market Analysis"];
 
 export default function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [search, setSearch] = useState("")
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [search, setSearch] = useState("");
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  // Enrich blogs with categories based on keywords
-  const enrichedBlogs: EnhancedBlog[] = useMemo(() => {
-    return (blogsData as Blog[]).map(blog => {
-      let category = "Design" // Default
-      const text = (blog.title + blog.excerpt).toLowerCase()
+  // Fetch blogs from API on mount
+  useEffect(() => {
+    async function fetchBlogs() {
+      try {
+        // Replace this URL with your actual API endpoint
+        const res = await fetch(`${config.base_url}/news`);
+        if (!res.ok) throw new Error("Failed to fetch blogs");
+        const data: ApiBlog[] = await res.json();
 
-      if (text.includes("invest") || text.includes("growth") || text.includes("tips")) category = "Investment"
-      else if (text.includes("trend") || text.includes("future") || text.includes("market")) category = "Market Trends"
-      else if (text.includes("luxury") || text.includes("smart") || text.includes("urban") || text.includes("life")) category = "Lifestyle"
+        // Filter only published blogs and map to your UI-friendly format
+        const mappedBlogs: Blog[] = data
+          .filter((blog) => blog.isPublished)
+          .map((blog) => ({
+            id: blog.id,
+            title: blog.title,
+            excerpt: blog.subtitle,
+            image: blog.coverImageUrl,
+            category: blog.category,
+            author: blog.author,
+            date: new Date(blog.publishedAt).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" }),
+            slug: blog.id, // Or however you generate slugs, e.g. from title
+          }))
+          // Sort by published date descending
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
-      return { ...blog, category }
-    }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-  }, [])
+        setBlogs(mappedBlogs);
+        setLoading(false);
+      } catch (err: any) {
+        setError(err.message || "Failed to load blogs");
+        setLoading(false);
+      }
+    }
 
-  // Filter logic
-  const filteredBlogs = enrichedBlogs.filter((blog) => {
-    const matchesSearch = blog.title.toLowerCase().includes(search.toLowerCase()) ||
-      blog.excerpt.toLowerCase().includes(search.toLowerCase())
-    const matchesCategory = activeCategory === "All" || blog.category === activeCategory
-    return matchesSearch && matchesCategory
-  })
+    fetchBlogs();
+  }, []);
+
+  // Filter blogs by search and category
+  const filteredBlogs = useMemo(() => {
+    return blogs.filter((blog) => {
+      const searchLower = search.toLowerCase();
+      const matchesSearch =
+        blog.title.toLowerCase().includes(searchLower) || blog.excerpt.toLowerCase().includes(searchLower);
+      const matchesCategory = activeCategory === "All" || blog.category === activeCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [blogs, search, activeCategory]);
+
+  if (loading) {
+    return <div className="text-center py-20 text-gray-500">Loading articles...</div>;
+  }
+
+  if (error) {
+    return <div className="text-center py-20 text-red-500">Error: {error}</div>;
+  }
 
   return (
     <section className="bg-white min-h-screen">
@@ -88,10 +144,9 @@ export default function BlogPage() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative pb-4 text-sm uppercase tracking-widest transition-colors duration-300 ${activeCategory === category
-                  ? "text-[#1A1A1A] font-bold"
-                  : "text-gray-400 hover:text-[#1A1A1A]"
-                  }`}
+                className={`relative pb-4 text-sm uppercase tracking-widest transition-colors duration-300 ${
+                  activeCategory === category ? "text-[#1A1A1A] font-bold" : "text-gray-400 hover:text-[#1A1A1A]"
+                }`}
               >
                 {category}
                 {activeCategory === category && (
@@ -122,7 +177,7 @@ export default function BlogPage() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="group cursor-pointer flex flex-col h-full"
               >
-                <Link href={`/blogs/${blog.slug}`} className="block h-full flex flex-col">
+                <Link href={`/news-and-blogs/${blog.id}`} className="block h-full flex flex-col">
                   {/* Image Container - Sharp Edges */}
                   <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 mb-6">
                     <Image
@@ -174,5 +229,5 @@ export default function BlogPage() {
         )}
       </div>
     </section>
-  )
+  );
 }

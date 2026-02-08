@@ -8,10 +8,10 @@ export declare class HomeService {
             title: string | null;
             createdAt: Date;
             updatedAt: Date;
-            badgeText: string | null;
             subtitle: string | null;
             isActive: boolean;
             imageUrl: string | null;
+            badgeText: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -24,10 +24,10 @@ export declare class HomeService {
             title: string | null;
             createdAt: Date;
             updatedAt: Date;
-            badgeText: string | null;
             subtitle: string | null;
             isActive: boolean;
             imageUrl: string | null;
+            badgeText: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         }[];
@@ -39,10 +39,10 @@ export declare class HomeService {
             title: string | null;
             createdAt: Date;
             updatedAt: Date;
-            badgeText: string | null;
             subtitle: string | null;
             isActive: boolean;
             imageUrl: string | null;
+            badgeText: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -60,10 +60,10 @@ export declare class HomeService {
             title: string | null;
             createdAt: Date;
             updatedAt: Date;
-            badgeText: string | null;
             subtitle: string | null;
             isActive: boolean;
             imageUrl: string | null;
+            badgeText: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
         };
@@ -129,9 +129,9 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
+        imageUrl: string;
         order: number;
         label: string;
-        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageGetAll(): Promise<{
@@ -141,9 +141,9 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
+        imageUrl: string;
         order: number;
         label: string;
-        imageUrl: string;
         iconUrl: string | null;
     }[]>;
     featuredImageGetById(id: string): Promise<{
@@ -153,9 +153,9 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
+        imageUrl: string;
         order: number;
         label: string;
-        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageUpdate(id: string, dto: UpdateFeaturedImageDto, image?: Express.Multer.File, icon?: Express.Multer.File): Promise<{
@@ -165,9 +165,9 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
+        imageUrl: string;
         order: number;
         label: string;
-        imageUrl: string;
         iconUrl: string | null;
     }>;
     featuredImageDelete(id: string): Promise<{
@@ -177,9 +177,9 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
+        imageUrl: string;
         order: number;
         label: string;
-        imageUrl: string;
         iconUrl: string | null;
     }>;
     getCompanyExperience(): Promise<{
@@ -247,8 +247,8 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
-        order: number;
         imageUrl: string;
+        order: number;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -260,8 +260,8 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
-        order: number;
         imageUrl: string;
+        order: number;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -273,8 +273,8 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
-        order: number;
         imageUrl: string;
+        order: number;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -289,8 +289,8 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
-        order: number;
         imageUrl: string;
+        order: number;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -302,8 +302,8 @@ export declare class HomeService {
         createdAt: Date;
         updatedAt: Date;
         isActive: boolean;
-        order: number;
         imageUrl: string;
+        order: number;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -321,10 +321,10 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     createContactInfo(data: any): Promise<{
         openingHours: {
@@ -339,10 +339,10 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     updateContactInfo(id: string, data: any): Promise<({
         openingHours: {
@@ -357,30 +357,30 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }) | null>;
     deleteContactInfo(id: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     createTestimonial(data: any): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        rating: number;
         content: string;
         authorName: string;
         authorInitial: string | null;
         authorTitle: string;
         authorLocation: string;
-        rating: number;
         propertyCategory: string;
         propertyTitle: string;
         propertyPurchaseValue: number;
@@ -390,12 +390,12 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        rating: number;
         content: string;
         authorName: string;
         authorInitial: string | null;
         authorTitle: string;
         authorLocation: string;
-        rating: number;
         propertyCategory: string;
         propertyTitle: string;
         propertyPurchaseValue: number;
@@ -405,12 +405,12 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        rating: number;
         content: string;
         authorName: string;
         authorInitial: string | null;
         authorTitle: string;
         authorLocation: string;
-        rating: number;
         propertyCategory: string;
         propertyTitle: string;
         propertyPurchaseValue: number;
@@ -420,12 +420,12 @@ export declare class HomeService {
         id: string;
         createdAt: Date;
         updatedAt: Date;
+        rating: number;
         content: string;
         authorName: string;
         authorInitial: string | null;
         authorTitle: string;
         authorLocation: string;
-        rating: number;
         propertyCategory: string;
         propertyTitle: string;
         propertyPurchaseValue: number;

@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     // You can keep domains, formats, loader, etc.
     // No 'quality' here
+    domains: ['res.cloudinary.com'],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
