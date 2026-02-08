@@ -1,15 +1,21 @@
 "use client"
 
-import React, { useState, useMemo } from "react"
-import blogsData from "../../public/data/news.json"
+import React, { useState, useMemo, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
-import { Blog } from "@/app/news-and-blogs/[slug]/page"
 import { MagnifyingGlassIcon, ArrowTopRightIcon } from "@radix-ui/react-icons"
 
-// Enhanced Blog type with category
-type EnhancedBlog = Blog & { category: string }
+export interface NewsItem {
+  id: string
+  title: string
+  subtitle: string | null
+  content: string
+  coverImageUrl: string | null
+  category: string
+  author: string | null
+  publishedAt: string | null
+}
 
 // Categories configuration
 const CATEGORIES = ["All", "Market Trends", "Investment", "Lifestyle", "Design"]
@@ -18,28 +24,37 @@ export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All")
   const [search, setSearch] = useState("")
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [blogs, setBlogs] = useState<NewsItem[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // Enrich blogs with categories based on keywords
-  const enrichedBlogs: EnhancedBlog[] = useMemo(() => {
-    return (blogsData as Blog[]).map(blog => {
-      let category = "Design" // Default
-      const text = (blog.title + blog.excerpt).toLowerCase()
-
-      if (text.includes("invest") || text.includes("growth") || text.includes("tips")) category = "Investment"
-      else if (text.includes("trend") || text.includes("future") || text.includes("market")) category = "Market Trends"
-      else if (text.includes("luxury") || text.includes("smart") || text.includes("urban") || text.includes("life")) category = "Lifestyle"
-
-      return { ...blog, category }
-    }).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/news')
+        if (res.ok) {
+          const data = await res.json()
+          setBlogs(data)
+        }
+      } catch (error) {
+        console.error('Failed to fetch blogs:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchBlogs()
   }, [])
 
   // Filter logic
-  const filteredBlogs = enrichedBlogs.filter((blog) => {
-    const matchesSearch = blog.title.toLowerCase().includes(search.toLowerCase()) ||
-      blog.excerpt.toLowerCase().includes(search.toLowerCase())
-    const matchesCategory = activeCategory === "All" || blog.category === activeCategory
-    return matchesSearch && matchesCategory
-  })
+  const filteredBlogs = useMemo(() => {
+    return blogs.filter((blog) => {
+      const matchesSearch = blog.title.toLowerCase().includes(search.toLowerCase()) ||
+        (blog.subtitle || '').toLowerCase().includes(search.toLowerCase())
+      const matchesCategory = activeCategory === "All" || blog.category === activeCategory
+      return matchesSearch && matchesCategory
+    }).sort((a, b) => new Date(b.publishedAt || '').getTime() - new Date(a.publishedAt || '').getTime())
+  }, [blogs, search, activeCategory])
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center">Loading...</div>
 
   return (
     <section className="bg-white min-h-screen">
@@ -112,7 +127,7 @@ export default function BlogPage() {
           <AnimatePresence mode="popLayout">
             {filteredBlogs.map((blog, index) => (
               <motion.div
-                key={blog.slug}
+                key={blog.id}
                 layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -122,11 +137,11 @@ export default function BlogPage() {
                 onMouseLeave={() => setHoveredIndex(null)}
                 className="group cursor-pointer flex flex-col h-full"
               >
-                <Link href={`/blogs/${blog.slug}`} className="block h-full flex flex-col">
+                <Link href={`/news-and-blogs/${blog.id}`} className="block h-full flex flex-col">
                   {/* Image Container - Sharp Edges */}
                   <div className="relative aspect-[4/3] overflow-hidden bg-gray-100 mb-6">
                     <Image
-                      src={blog.image}
+                      src={blog.coverImageUrl || '/placeholder.jpg'}
                       alt={blog.title}
                       fill
                       className="object-cover transition-transform duration-1000 ease-out group-hover:scale-105"
@@ -143,7 +158,7 @@ export default function BlogPage() {
                   {/* Content */}
                   <div className="flex flex-col flex-grow relative border-l border-transparent pl-0 group-hover:border-[#E7C873] group-hover:pl-6 transition-all duration-300">
                     <div className="flex items-center gap-3 text-xs text-gray-400 uppercase tracking-wider mb-3">
-                      <span>{blog.date}</span>
+                      <span>{blog.publishedAt ? new Date(blog.publishedAt).toLocaleDateString() : ''}</span>
                       <span className="w-px h-3 bg-gray-300" />
                       <span>{blog.author}</span>
                     </div>
@@ -153,7 +168,7 @@ export default function BlogPage() {
                     </h3>
 
                     <p className="text-gray-500 font-light leading-relaxed line-clamp-3 mb-6 flex-grow">
-                      {blog.excerpt}
+                      {blog.subtitle}
                     </p>
 
                     <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] text-[#1A1A1A] group-hover:text-[#E7C873] transition-colors mt-auto">

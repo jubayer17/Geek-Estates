@@ -24,7 +24,7 @@ export default function CareerJobsContentForm() {
 
   const fetchPageData = async () => {
     try {
-      const res = await fetch('http://localhost:4001/career/page');
+      const res = await fetch('http://localhost:5000/career/page');
       if (res.ok) {
         const data = await res.json();
         setPageData(data);
@@ -40,7 +40,7 @@ export default function CareerJobsContentForm() {
   const handlePageUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4001/career/page', {
+      const res = await fetch('http://localhost:5000/career/page', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pageData),

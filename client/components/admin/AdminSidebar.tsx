@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { LayoutDashboard, Briefcase, Building, ChevronDown, ChevronRight, CreditCard, MousePointerClick, Heart, Star } from 'lucide-react';
+import { LayoutDashboard, Briefcase, Building, ChevronDown, ChevronRight, CreditCard, MousePointerClick, Heart, Star, Info, FileText, Users, Trophy, Medal, Milestone, UserCheck, MessageSquare } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -14,9 +14,9 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   { name: 'Dashboard', icon: LayoutDashboard, href: '/admin/dashboard' },
-  { 
-    name: 'Projects', 
-    icon: Building, 
+  {
+    name: 'Projects',
+    icon: Building,
     href: '/admin/projects',
     children: [
       { name: 'All Projects', href: '/admin/projects', icon: Building },
@@ -24,9 +24,9 @@ const menuItems: MenuItem[] = [
       { name: 'CTA Section', href: '/admin/projects?view=cta', view: 'cta', icon: MousePointerClick },
     ]
   },
-  { 
-    name: 'Career Page', 
-    icon: Briefcase, 
+  {
+    name: 'Career Page',
+    icon: Briefcase,
     href: '/admin/career',
     children: [
       { name: 'All Jobs', href: '/admin/career', icon: Briefcase },
@@ -36,19 +36,33 @@ const menuItems: MenuItem[] = [
       { name: 'Jobs Content', href: '/admin/career?view=jobs-content', view: 'jobs-content', icon: MousePointerClick },
     ]
   },
+  {
+    name: 'About Us',
+    icon: Info,
+    href: '/admin/about',
+    children: [
+      { name: 'General', href: '/admin/about?view=general', view: 'general', icon: FileText },
+      { name: 'Who We Are', href: '/admin/about?view=who-we-are', view: 'who-we-are', icon: Users },
+      { name: 'Achievements', href: '/admin/about?view=achievements', view: 'achievements', icon: Trophy },
+      { name: 'Awards', href: '/admin/about?view=awards', view: 'awards', icon: Medal },
+      { name: 'Journey', href: '/admin/about?view=journey', view: 'journey', icon: Milestone },
+      { name: 'Leadership', href: '/admin/about?view=leadership', view: 'leadership', icon: UserCheck },
+      { name: 'Testimonials', href: '/admin/about?view=testimonials', view: 'testimonials', icon: MessageSquare },
+    ]
+  },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const currentView = searchParams.get('view');
-  
+
   // State to track expanded items
   const [expandedItems, setExpandedItems] = useState<string[]>(['Projects', 'Career Page']);
 
   const toggleExpand = (name: string) => {
-    setExpandedItems(prev => 
-      prev.includes(name) 
+    setExpandedItems(prev =>
+      prev.includes(name)
         ? prev.filter(item => item !== name)
         : [...prev, name]
     );
@@ -59,8 +73,8 @@ export default function AdminSidebar() {
     menuItems.forEach(item => {
       if (item.children) {
         const hasActiveChild = item.children.some(child => {
-           if (child.view) return pathname === child.href.split('?')[0] && currentView === child.view;
-           return pathname === child.href && !currentView;
+          if (child.view) return pathname === child.href.split('?')[0] && currentView === child.view;
+          return pathname === child.href && !currentView;
         });
         if (hasActiveChild && !expandedItems.includes(item.name)) {
           setExpandedItems(prev => [...prev, item.name]);
@@ -121,7 +135,7 @@ export default function AdminSidebar() {
                   {item.children!.map((child) => {
                     const ChildIcon = child.icon || ChevronRight;
                     // Check if this specific child is active
-                    const isChildActive = child.view 
+                    const isChildActive = child.view
                       ? (pathname === child.href.split('?')[0] && currentView === child.view)
                       : (pathname === child.href && !currentView);
 

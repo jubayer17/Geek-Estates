@@ -22,7 +22,7 @@ export default function AdminLogin() {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:4001/admin/login', {
+            const response = await fetch('http://localhost:5000/admin/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
