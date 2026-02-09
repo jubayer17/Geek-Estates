@@ -15,7 +15,7 @@ export default function ProjectsList() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -26,7 +26,7 @@ export default function ProjectsList() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('http://localhost:4001/projects');
+      const res = await fetch('http://localhost:5000/projects');
       const data = await res.json();
       setProjects(Array.isArray(data) ? data : []);
       setIsLoading(false);
@@ -40,7 +40,7 @@ export default function ProjectsList() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this project?')) return;
     try {
-      const res = await fetch(`http://localhost:4001/projects/${id}`, { method: 'DELETE' });
+      const res = await fetch(`http://localhost:5000/projects/${id}`, { method: 'DELETE' });
       if (!res.ok) throw new Error();
       setProjects(projects.filter(p => p.id !== id));
       toast.success('Project deleted');
@@ -157,10 +157,10 @@ export default function ProjectsList() {
           <DialogHeader>
             <DialogTitle>{editingProject ? 'Edit Project' : 'Create New Project'}</DialogTitle>
           </DialogHeader>
-          <ProjectForm 
-            project={editingProject} 
-            onSuccess={handleSuccess} 
-            onCancel={closeModal} 
+          <ProjectForm
+            project={editingProject}
+            onSuccess={handleSuccess}
+            onCancel={closeModal}
           />
         </DialogContent>
       </Dialog>

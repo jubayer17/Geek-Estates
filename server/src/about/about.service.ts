@@ -5,10 +5,10 @@ import { uploadToCloudinary } from 'src/helper/fileUploader';
 
 @Injectable()
 export class AboutService {
- 
-    
+
+
   //AboutUsText CREATE (only once)
-// 🔥 RUNS AUTOMATICALLY WHEN SERVER STARTS
+  // 🔥 RUNS AUTOMATICALLY WHEN SERVER STARTS
   async onModuleInit() {
     const exists = await prisma.aboutUsText.findFirst();
 
@@ -44,7 +44,14 @@ export class AboutService {
     const existing = await prisma.aboutUsText.findFirst();
 
     if (!existing) {
-      throw new NotFoundException('AboutUsText not found');
+      return prisma.aboutUsText.create({
+        data: {
+          page: dto.page || 'about',
+          title: dto.title || '',
+          subtitle: dto.subtitle || '',
+          isActive: dto.isActive ?? true,
+        },
+      });
     }
 
     return prisma.aboutUsText.update({
@@ -53,10 +60,10 @@ export class AboutService {
     });
   }
 
-// =====================
+  // =====================
   // CREATE / Upload Banner
   // =====================
-   // CREATE / UPLOAD NEW IMAGE
+  // CREATE / UPLOAD NEW IMAGE
   async aboutUsUploadImage(file: Express.Multer.File, text?: string, type?: string) {
     if (!file) throw new BadRequestException('File is required');
 
@@ -143,15 +150,15 @@ export class AboutService {
       },
     });
   }
-//aboutWhoWeAre get
+  //aboutWhoWeAre get
   async aboutWhoWeAreGet() {
     return prisma.aboutWhoWeAre.findMany({
       where: { isActive: true },
       orderBy: { createdAt: 'desc' },
     });
   }
-//aboutWhoWeAre update
-async aboutWhoWeAreUpdate(
+  //aboutWhoWeAre update
+  async aboutWhoWeAreUpdate(
     id: string,
     file?: Express.Multer.File,
     data?: any,
@@ -184,7 +191,7 @@ async aboutWhoWeAreUpdate(
     });
   }
 
-//aboutWhoWeAre delete
+  //aboutWhoWeAre delete
   async aboutWhoWeAreDelete(id: string) {
     const existing = await prisma.aboutWhoWeAre.findUnique({ where: { id } });
     if (!existing || !existing.isActive) throw new NotFoundException('Entry not found');
@@ -306,8 +313,8 @@ async aboutWhoWeAreUpdate(
     });
   }
 
-   //aboutUsAwardTextSection CREATE
- async aboutUsAwardTextSectionCreate(data: {
+  //aboutUsAwardTextSection CREATE
+  async aboutUsAwardTextSectionCreate(data: {
     title: string;
     extraTitle?: string;
     subtitle: string;
@@ -372,7 +379,7 @@ async aboutWhoWeAreUpdate(
     });
   }
 
-   //aboutUsAwardRecord CREATE
+  //aboutUsAwardRecord CREATE
   async aboutUsAwardRecordCreate(data: {
     year: string;
     title: string;
@@ -827,5 +834,5 @@ async aboutWhoWeAreUpdate(
 
 
 
-  
+
 
