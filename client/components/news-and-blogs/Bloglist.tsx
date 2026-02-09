@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useState, useMemo, useEffect } from "react"
 import Image from "next/image"
@@ -103,9 +103,7 @@ export default function BlogPage() {
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`relative pb-4 text-sm uppercase tracking-widest transition-colors duration-300 ${activeCategory === category
-                  ? "text-[#1A1A1A] font-bold"
-                  : "text-gray-400 hover:text-[#1A1A1A]"
+                className={`relative pb-4 text-sm uppercase tracking-widest transition-colors duration-300 ${activeCategory === category ? "text-[#1A1A1A] font-bold" : "text-gray-400 hover:text-[#1A1A1A]"
                   }`}
               >
                 {category}
@@ -189,5 +187,5 @@ export default function BlogPage() {
         )}
       </div>
     </section>
-  )
+  );
 }
