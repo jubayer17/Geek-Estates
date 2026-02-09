@@ -40,8 +40,8 @@ export default function CareersSection() {
     const fetchData = async () => {
       try {
         const [pageRes, jobsRes] = await Promise.all([
-          fetch('http://localhost:4001/career/page'),
-          fetch('http://localhost:4001/career/jobs')
+          fetch('http://localhost:5000/career/page'),
+          fetch('http://localhost:5000/career/jobs')
         ]);
         if (pageRes.ok) {
           const page = await pageRes.json();

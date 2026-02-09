@@ -27,8 +27,8 @@ export default function CareerPerksForm() {
   const fetchData = async () => {
     try {
       const [pageRes, perksRes] = await Promise.all([
-        fetch('http://localhost:4001/career/page'),
-        fetch('http://localhost:4001/career/perks'),
+        fetch('http://localhost:5000/career/page'),
+        fetch('http://localhost:5000/career/perks'),
       ]);
 
       const page = await pageRes.json();
@@ -47,7 +47,7 @@ export default function CareerPerksForm() {
   const handlePageUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4001/career/page', {
+      const res = await fetch('http://localhost:5000/career/page', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pageData),
@@ -62,7 +62,7 @@ export default function CareerPerksForm() {
   const handleAddPerk = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4001/career/perks', {
+      const res = await fetch('http://localhost:5000/career/perks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newPerk),
@@ -80,7 +80,7 @@ export default function CareerPerksForm() {
   const handleDeletePerk = async (id: string) => {
     if (!confirm('Are you sure?')) return;
     try {
-      await fetch(`http://localhost:4001/career/perks/${id}`, { method: 'DELETE' });
+      await fetch(`http://localhost:5000/career/perks/${id}`, { method: 'DELETE' });
       setPerks(perks.filter(p => p.id !== id));
       toast.success('Perk deleted');
     } catch (error) {

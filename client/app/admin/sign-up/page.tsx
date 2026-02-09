@@ -23,7 +23,7 @@ export default function AdminSignUp() {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://localhost:4001/admin', {
+            const response = await fetch('http://localhost:5000/admin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

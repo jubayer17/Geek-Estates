@@ -5,7 +5,7 @@ export default async function JobPage({ params }: { params: Promise<{ id: string
   const { id } = await params
   
   try {
-    const res = await fetch(`http://localhost:4001/career/jobs/${id}`, {
+    const res = await fetch(`http://localhost:5000/career/jobs/${id}`, {
         cache: 'no-store'
     });
 
