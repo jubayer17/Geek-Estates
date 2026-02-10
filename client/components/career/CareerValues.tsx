@@ -29,8 +29,8 @@ export default function CareerValues() {
         const fetchData = async () => {
             try {
                 const [pageRes, valuesRes] = await Promise.all([
-                    fetch('http://localhost:4001/career/page'),
-                    fetch('http://localhost:4001/career/values')
+                    fetch('http://localhost:5000/career/page'),
+                    fetch('http://localhost:5000/career/values')
                 ])
                 
                 if (pageRes.ok) {

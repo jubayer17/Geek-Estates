@@ -37,7 +37,7 @@ export default function CareerJobsList() {
 
   const fetchJobs = async () => {
     try {
-      const res = await fetch('http://localhost:4001/career/jobs');
+      const res = await fetch('http://localhost:5000/career/jobs');
       const data = await res.json();
       setJobs(Array.isArray(data) ? data : []);
       setIsLoading(false);
@@ -53,8 +53,8 @@ export default function CareerJobsList() {
     try {
       const method = editingJob ? 'PATCH' : 'POST';
       const url = editingJob
-        ? `http://localhost:4001/career/jobs/${editingJob.id}`
-        : 'http://localhost:4001/career/jobs';
+        ? `http://localhost:5000/career/jobs/${editingJob.id}`
+        : 'http://localhost:5000/career/jobs';
 
       const payload = {
         ...jobForm,
@@ -90,7 +90,7 @@ export default function CareerJobsList() {
   const handleDeleteJob = async (id: string) => {
     if (!confirm('Are you sure?')) return;
     try {
-      await fetch(`http://localhost:4001/career/jobs/${id}`, { method: 'DELETE' });
+      await fetch(`http://localhost:5000/career/jobs/${id}`, { method: 'DELETE' });
       setJobs(jobs.filter(j => j.id !== id));
       toast.success('Job deleted');
     } catch (error) {

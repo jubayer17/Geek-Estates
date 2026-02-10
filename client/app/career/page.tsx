@@ -14,7 +14,7 @@ export default function Career() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:4001/career/page')
+    fetch('http://localhost:5000/career/page')
       .then(res => res.json())
       .then(data => {
         if (data) {

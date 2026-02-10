@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { LayoutDashboard, Briefcase, Building, ChevronDown, ChevronRight, CreditCard, MousePointerClick, Heart, Star } from 'lucide-react';
+import { LayoutDashboard, Briefcase, Building, ChevronDown, ChevronRight, CreditCard, MousePointerClick, Heart, Star, Home, Plus, Text, Image, Notebook, PlusCircle, Search, Contact, Newspaper, NewspaperIcon, Cable, Subscript, ClipboardCheckIcon, MessageCircle, TextAlignCenter, ImageIcon, FileQuestionMarkIcon, Medal, ChartBar, CalendarHeartIcon, History, Waypoints, Disc2Icon, TextAlignCenterIcon, Speech, Users, Factory } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -34,6 +34,56 @@ const menuItems: MenuItem[] = [
       { name: 'Values Section', href: '/admin/career?view=values', view: 'values', icon: Heart },
       { name: 'Perks Section', href: '/admin/career?view=perks', view: 'perks', icon: Star },
       { name: 'Jobs Content', href: '/admin/career?view=jobs-content', view: 'jobs-content', icon: MousePointerClick },
+    ]
+  },
+   { 
+    name: 'Home Page', 
+    icon: Home, 
+    href: '/admin/home',
+    children: [
+      
+      { name: 'Hero Section', href: '/admin/home?view=hero', view: 'hero', icon: CreditCard },
+      { name: 'Add Hero Section', href: '/admin/home?view=addBanner', view: 'addBanner', icon: Plus },
+      { name: 'Text', href: '/admin/home?view=homeText', view: 'homeText', icon: Text },
+      { name: 'Featured Image', href: '/admin/home?view=homeFeatureImage', view: 'homeFeatureImage', icon: Image },
+      { name: 'Company Experience', href: '/admin/home?view=homeCompanyExperience', view: 'homeCompanyExperience', icon: Notebook },
+      { name: 'Add Company Experience', href: '/admin/home?view=addHomeCompanyExperience', view: 'addHomeCompanyExperience', icon: PlusCircle },
+      { name: 'Property Search Steps', href: '/admin/home?view=propertySearch', view: 'propertySearch', icon: Search },
+      { name: 'Add Property Search Steps', href: '/admin/home?view=addPropertySearch', view: 'addPropertySearch', icon: Search },
+      { name: 'Contact Info', href: '/admin/home?view=contactInfo', view: 'contactInfo', icon: Contact },
+      
+    ]
+  },
+   { 
+    name: 'News and Blogs', 
+    icon: Newspaper, 
+    href: '/admin/news-blogs',
+    children: [
+      { name: 'News', href: '/admin/news-blogs?view=news', view: 'news', icon: NewspaperIcon },
+      { name: 'Stay Connected Text', href: '/admin/news-blogs?view=stay-connected', view: 'stay-connected', icon: Cable },
+      { name: 'Subscribers', href: '/admin/news-blogs?view=subscribers', view: 'subscribers', icon: Subscript },
+      { name: 'Reports', href: '/admin/news-blogs?view=reports', view: 'reports', icon: ClipboardCheckIcon },
+    
+    ]
+  },
+   { 
+    name: 'About Us', 
+    icon: MessageCircle, 
+    href: '/admin/about-us',
+    children: [
+      { name: 'Text', href: '/admin/about-us?view=about-us-text', view: 'about-us-text', icon: TextAlignCenter },
+      { name: 'Banner', href: '/admin/about-us?view=about-us-banner', view: 'about-us-banner', icon: ImageIcon },
+      { name: 'Who are we', href: '/admin/about-us?view=aboutWhoWeAre', view: 'aboutWhoWeAre', icon: FileQuestionMarkIcon },
+      { name: 'Achievement', href: '/admin/about-us?view=aboutUsAchievements', view: 'aboutUsAchievements', icon: ChartBar },
+      { name: 'CoreValue', href: '/admin/about-us?view=aboutUsCoreValue', view: 'aboutUsCoreValue', icon: CalendarHeartIcon },
+      { name: 'Award Text', href: '/admin/about-us?view=aboutUsAwardTextSection', view: 'aboutUsAwardTextSection', icon: TextAlignCenterIcon },
+      { name: 'Award Record', href: '/admin/about-us?view=aboutUsAwardRecords', view: 'aboutUsAwardRecords', icon: Disc2Icon },
+      { name: 'Journey Text', href: '/admin/about-us?view=aboutUsJourneyTextSection', view: 'aboutUsJourneyTextSection', icon: Waypoints },
+      { name: 'Journey Timeline', href: '/admin/about-us?view=aboutUsJourneyTimeline', view: 'aboutUsJourneyTimeline', icon: History },
+      { name: 'Leadership', href: '/admin/about-us?view=aboutUsLeadership', view: 'aboutUsLeadership', icon: Speech },
+      { name: 'Testimonial', href: '/admin/about-us?view=aboutUsTestimonial', view: 'aboutUsTestimonial', icon: Users },
+      { name: 'Build Section', href: '/admin/about-us?view=aboutUsBuildSection', view: 'aboutUsBuildSection', icon: Factory },
+  
     ]
   },
 ];

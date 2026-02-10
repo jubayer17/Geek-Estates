@@ -30,6 +30,8 @@ let HomeService = class HomeService {
                 subtitle: dto.subtitle,
                 imageUrl,
                 isActive: dto.isActive ?? true,
+                buttonText1: dto.buttonText1,
+                buttonText2: dto.buttonText2
             },
         });
         return {
@@ -89,6 +91,10 @@ let HomeService = class HomeService {
             updateData.subtitle = dto.subtitle;
         if (dto.isActive !== undefined)
             updateData.isActive = dto.isActive;
+        if (dto.buttonText1 !== undefined)
+            updateData.buttonText1 = dto.buttonText1;
+        if (dto.buttonText2 !== undefined)
+            updateData.buttonText2 = dto.buttonText2;
         const updatedBanner = await prisma_1.prisma.heroBanner.update({
             where: { id },
             data: updateData,

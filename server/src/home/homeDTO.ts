@@ -15,11 +15,11 @@ export class CreateHeroBannerDto {
 
   @IsOptional()
   @IsString()
-  button1Text?: string; // optional first button text
+  buttonText1?: string; // optional first button text
 
   @IsOptional()
   @IsString()
-  button2Text?: string; // optional second button text
+  buttonText2?: string; // optional second button text
 
   @IsOptional()
   @IsBoolean()

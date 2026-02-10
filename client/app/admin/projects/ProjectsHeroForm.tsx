@@ -29,7 +29,7 @@ export default function ProjectsHeroForm() {
 
   const fetchPageData = async () => {
     try {
-      const res = await fetch('http://localhost:4001/projects/page');
+      const res = await fetch('http://localhost:5000/projects/page');
       if (res.ok) {
         const text = await res.text();
         if (text) {
@@ -48,7 +48,7 @@ export default function ProjectsHeroForm() {
   const handlePageSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:4001/projects/page', {
+      const res = await fetch('http://localhost:5000/projects/page', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(pageData),

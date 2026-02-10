@@ -5,7 +5,7 @@ import AllProjectsCTA from "@/components/all-projects/AllProjectsCTA";
 
 async function getPageData() {
   try {
-    const res = await fetch('http://localhost:4001/projects/page', {
+    const res = await fetch('http://localhost:5000/projects/page', {
       cache: 'no-store', // Disable cache for real-time updates
     });
     if (!res.ok) return undefined;

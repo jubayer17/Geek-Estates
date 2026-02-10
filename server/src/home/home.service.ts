@@ -36,6 +36,8 @@ export class HomeService {
         subtitle: dto.subtitle,
         imageUrl,
         isActive: dto.isActive ?? true,
+        buttonText1:dto.buttonText1,
+        buttonText2:dto.buttonText2
       },
     });
 
@@ -88,6 +90,8 @@ export class HomeService {
     title: string;
     subtitle: string;
     isActive: boolean;
+    buttonText1:string,
+        buttonText2:string
   }> = {},
   file?: Express.Multer.File,
 ) {
@@ -118,6 +122,8 @@ export class HomeService {
   if (dto.title !== undefined) updateData.title = dto.title;
   if (dto.subtitle !== undefined) updateData.subtitle = dto.subtitle;
   if (dto.isActive !== undefined) updateData.isActive = dto.isActive;
+  if (dto.buttonText1 !== undefined) updateData.buttonText1 = dto.buttonText1;
+  if (dto.buttonText2 !== undefined) updateData.buttonText2 = dto.buttonText2;
 
   const updatedBanner = await prisma.heroBanner.update({
     where: { id },
