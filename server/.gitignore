@@ -1,42 +1,7 @@
-<<<<<<< HEAD
 node_modules
 # Keep environment variables out of version control
 .env
 dist
-=======
-# compiled output
-/dist
-/node_modules
-
-# logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-.pnpm-debug.log*
-
-# os
-.DS_Store
-Thumbs.db
-
-# env
-.env
-.env.production
-.env.development
-.env.test
-
-# coverage
-/coverage
-/test/coverage
-
-# ide
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# prisma
->>>>>>> f95c67ee80b865e522998ccfd2d7d23540d0b35a
 /generated/prisma
 *.sqlite
 *.sqlite-journal

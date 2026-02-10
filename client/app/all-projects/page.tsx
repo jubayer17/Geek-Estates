@@ -24,7 +24,7 @@ export default async function AllPage() {
       <AllPropertiesBanner data={pageData} />
       <AllPropertiesSearch />
       <AllProjectShowGrid />
-      <AllProjectsCTA data={pageData} />
+      <AllProjectsCTA />
     </main>
   );
 }

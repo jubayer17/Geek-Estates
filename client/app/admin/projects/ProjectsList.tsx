@@ -15,7 +15,7 @@ export default function ProjectsList() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // Modal State
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProject, setEditingProject] = useState<Project | null>(null);
@@ -157,10 +157,10 @@ export default function ProjectsList() {
           <DialogHeader>
             <DialogTitle>{editingProject ? 'Edit Project' : 'Create New Project'}</DialogTitle>
           </DialogHeader>
-          <ProjectForm 
-            project={editingProject} 
-            onSuccess={handleSuccess} 
-            onCancel={closeModal} 
+          <ProjectForm
+            project={editingProject}
+            onSuccess={handleSuccess}
+            onCancel={closeModal}
           />
         </DialogContent>
       </Dialog>
