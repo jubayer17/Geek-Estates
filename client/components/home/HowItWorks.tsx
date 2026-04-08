@@ -279,6 +279,8 @@ export default function HowItWorks() {
                                         fill
                                         className={`object-cover transition-transform duration-[1.5s] ease-out ${hoveredIndex === index ? "scale-110" : "scale-100"
                                             }`}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        quality={75}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80"></div>
 

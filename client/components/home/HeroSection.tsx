@@ -181,7 +181,12 @@ export default function HeroSection() {
         if (!isAnimating) autoplayRef.current = setTimeout(goToNext, AUTOPLAY_DELAY)
       }}
     >
-      {banners.map((slide, index) => (
+      {banners.map((slide, index) => {
+        const previousIndex = banners.length > 1 ? (currentSlide - 1 + banners.length) % banners.length : currentSlide
+        const nextIndex = banners.length > 1 ? (currentSlide + 1) % banners.length : currentSlide
+        const shouldLoadImage = index === currentSlide || index === previousIndex || index === nextIndex
+
+        return (
         <div
           key={slide.id}
           ref={(el) => { slidesRef.current[index] = el }} // ✅ Type-safe
@@ -191,12 +196,15 @@ export default function HeroSection() {
         >
           {/* Image */}
           <div className="hero-image absolute inset-0 w-full h-full">
-            {slide.imageUrl && (
+            {slide.imageUrl && shouldLoadImage && (
               <Image
                 src={slide.imageUrl}
                 alt={slide.title}
                 fill
                 className="object-cover"
+                sizes="100vw"
+                priority={index === currentSlide}
+                quality={70}
               />
             )}
             <div className="absolute inset-0 bg-black/20" />
@@ -251,7 +259,8 @@ export default function HeroSection() {
             </div>
           </div>
         </div>
-      ))}
+        )
+      })}
 
       {/* Navigation */}
       <div className="absolute bottom-8 md:bottom-12 left-0 w-full z-20 px-4 sm:px-6 lg:px-12">

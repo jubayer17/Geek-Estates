@@ -88,6 +88,8 @@ export default function Companies() {
                                         alt={company.name}
                                         fill
                                         className="object-contain"
+                                        sizes="(max-width: 640px) 96px, 128px"
+                                        quality={70}
                                     />
                                 </div>
                             </div>
