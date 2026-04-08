@@ -242,8 +242,8 @@ export default function HowItWorks() {
 
                                     <div
                                         className={`w-20 h-20 rounded-full bg-white shadow flex items-center justify-center text-[#E7C873] mb-2 transition-all duration-500 border border-slate-100 ${hoveredIndex === index
-                                                ? "bg-[#E7C873] text-white scale-110 rotate-12 shadow-[0_20px_40px_-10px_rgba(231,200,115,0.4)]"
-                                                : ""
+                                            ? "bg-[#E7C873] text-white scale-110 rotate-12 shadow-[0_20px_40px_-10px_rgba(231,200,115,0.4)]"
+                                            : ""
                                             } ${index % 2 !== 0 ? "md:self-start" : ""}`}
                                     >
                                         <Image src={step.statusIcon} alt={`${step.title} icon`} width={36} height={36} />

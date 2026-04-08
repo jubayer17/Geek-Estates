@@ -187,78 +187,77 @@ export default function HeroSection() {
         const shouldLoadImage = index === currentSlide || index === previousIndex || index === nextIndex
 
         return (
-        <div
-          key={slide.id}
-          ref={(el) => { slidesRef.current[index] = el }} // ✅ Type-safe
-          className={`absolute inset-0 w-full h-full transition-opacity duration-0 ${
-            index === 0 ? "opacity-100 z-20" : "opacity-0 z-10"
-          }`}
-        >
-          {/* Image */}
-          <div className="hero-image absolute inset-0 w-full h-full">
-            {slide.imageUrl && shouldLoadImage && (
-              <Image
-                src={slide.imageUrl}
-                alt={slide.title}
-                fill
-                className="object-cover"
-                sizes="100vw"
-                priority={index === currentSlide}
-                quality={70}
-              />
-            )}
-            <div className="absolute inset-0 bg-black/20" />
-          </div>
-
-          {/* Content */}
           <div
-            ref={(el) => { contentRefs.current[index] = el }} // ✅ Type-safe
-            className="relative z-10 h-full flex items-center pt-24 md:pt-44"
+            key={slide.id}
+            ref={(el) => { slidesRef.current[index] = el }} // ✅ Type-safe
+            className={`absolute inset-0 w-full h-full transition-opacity duration-0 ${index === 0 ? "opacity-100 z-20" : "opacity-0 z-10"
+              }`}
           >
-            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full">
-              <div className="max-w-4xl -mt-32">
-                <div className="hero-badge overflow-hidden mb-4 md:mb-6">
-                  <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
-                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#E7C873] animate-pulse" />
-                    <span className="text-[10px] md:text-sm font-medium tracking-widest uppercase text-white/90">
-                      {slide.badgeText}
-                    </span>
+            {/* Image */}
+            <div className="hero-image absolute inset-0 w-full h-full">
+              {slide.imageUrl && shouldLoadImage && (
+                <Image
+                  src={slide.imageUrl}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  sizes="100vw"
+                  priority={index === currentSlide}
+                  quality={70}
+                />
+              )}
+              <div className="absolute inset-0 bg-black/20" />
+            </div>
+
+            {/* Content */}
+            <div
+              ref={(el) => { contentRefs.current[index] = el }} // ✅ Type-safe
+              className="relative z-10 h-full flex items-center pt-24 md:pt-44"
+            >
+              <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-12 w-full">
+                <div className="max-w-4xl -mt-32">
+                  <div className="hero-badge overflow-hidden mb-4 md:mb-6">
+                    <div className="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 rounded-full border border-white/20 bg-white/5 backdrop-blur-sm">
+                      <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#E7C873] animate-pulse" />
+                      <span className="text-[10px] md:text-sm font-medium tracking-widest uppercase text-white/90">
+                        {slide.badgeText}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-medium text-white leading-[1.1] tracking-tighter flex flex-wrap gap-x-2 md:gap-x-4 mb-4 md:mb-6">
-                  {slide.title.split(" ").map((word, i) => (
-                    <span key={i} className="hero-heading-line inline-block font-serif italic">
-                      {word}
-                    </span>
-                  ))}
-                </h1>
+                  <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-6xl xl:text-7xl font-medium text-white leading-[1.1] tracking-tighter flex flex-wrap gap-x-2 md:gap-x-4 mb-4 md:mb-6">
+                    {slide.title.split(" ").map((word, i) => (
+                      <span key={i} className="hero-heading-line inline-block font-serif italic">
+                        {word}
+                      </span>
+                    ))}
+                  </h1>
 
-                <p className="hero-subheading text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-xl md:max-w-2xl mb-8 md:mb-10 leading-relaxed font-light">
-                  {slide.subtitle}
-                </p>
+                  <p className="hero-subheading text-sm sm:text-base md:text-lg lg:text-xl text-white/80 max-w-xl md:max-w-2xl mb-8 md:mb-10 leading-relaxed font-light">
+                    {slide.subtitle}
+                  </p>
 
-                <div className="hero-cta flex flex-wrap gap-4 md:gap-6 mb-10 md:mb-14">
-                  <Button
-                    size="lg"
-                    className="group rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
-                  >
-                    <span className="relative z-10">{slide.buttonText1}</span>
-                    <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </Button>
+                  <div className="hero-cta flex flex-wrap gap-4 md:gap-6 mb-10 md:mb-14">
+                    <Button
+                      size="lg"
+                      className="group rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-[#E7C873] hover:bg-[#d9ba5f] text-gray-900 shadow-[0_0_40px_rgba(231,200,115,0.3)] hover:shadow-[0_0_60px_rgba(231,200,115,0.5)] transition-all duration-500"
+                    >
+                      <span className="relative z-10">{slide.buttonText1}</span>
+                      <ArrowRight className="ml-2 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </Button>
 
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
-                  >
-                    {slide.buttonText2}
-                  </Button>
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="rounded-full px-5 py-4 md:px-6 md:py-5 lg:px-8 lg:py-6 text-xs md:text-base font-bold tracking-widest uppercase bg-white/10 backdrop-blur-md border-white/40 text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 shadow-lg"
+                    >
+                      {slide.buttonText2}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
         )
       })}
 
