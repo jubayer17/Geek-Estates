@@ -7,63 +7,63 @@ export declare class HomeController {
         success: boolean;
         message: string;
         data: {
-            id: string;
-            title: string | null;
-            createdAt: Date;
-            updatedAt: Date;
             badgeText: string | null;
+            title: string | null;
             subtitle: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
             isActive: boolean;
+            id: string;
             imageUrl: string | null;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     getHeroBanners(): Promise<{
         success: boolean;
         message: string;
         data: {
-            id: string;
-            title: string | null;
-            createdAt: Date;
-            updatedAt: Date;
             badgeText: string | null;
+            title: string | null;
             subtitle: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
             isActive: boolean;
+            id: string;
             imageUrl: string | null;
+            createdAt: Date;
+            updatedAt: Date;
         }[];
     }>;
     getHeroBannerById(id: string): Promise<{
         success: boolean;
         data: {
-            id: string;
-            title: string | null;
-            createdAt: Date;
-            updatedAt: Date;
             badgeText: string | null;
+            title: string | null;
             subtitle: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
             isActive: boolean;
+            id: string;
             imageUrl: string | null;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     updateHeroBanner(id: string, file?: Express.Multer.File, data?: string): Promise<{
         success: boolean;
         message: string;
         data: {
-            id: string;
-            title: string | null;
-            createdAt: Date;
-            updatedAt: Date;
             badgeText: string | null;
+            title: string | null;
             subtitle: string | null;
             buttonText1: string | null;
             buttonText2: string | null;
             isActive: boolean;
+            id: string;
             imageUrl: string | null;
+            createdAt: Date;
+            updatedAt: Date;
         };
     }>;
     deleteHeroBanner(id: string): Promise<{
@@ -71,174 +71,174 @@ export declare class HomeController {
         message: string;
     }>;
     create(dto: CreateLegacySectionDto): Promise<{
-        id: string;
         title: string;
-        description: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
+        description: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     getAll(): Promise<{
-        id: string;
         title: string;
-        description: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
+        description: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
     }[]>;
     getById(id: string): Promise<{
-        id: string;
         title: string;
-        description: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
+        description: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     update(id: string, dto: UpdateLegacySectionDto): Promise<{
-        id: string;
         title: string;
-        description: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
+        description: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     remove(id: string): Promise<{
-        id: string;
         title: string;
-        description: string | null;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
         journeyTag: string | null;
         emphasis: string | null;
+        description: string | null;
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
     }>;
     featuredImageCreate(files: {
         image?: Express.Multer.File[];
         icon?: Express.Multer.File[];
     }, data: string): Promise<{
-        id: string;
         title: string;
-        description: string;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
+        description: string;
         order: number;
         label: string;
+        id: string;
         imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
         iconUrl: string | null;
     }>;
     featuredImageGetAll(): Promise<{
-        id: string;
         title: string;
-        description: string;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
+        description: string;
         order: number;
         label: string;
+        id: string;
         imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
         iconUrl: string | null;
     }[]>;
     featuredImageGetById(id: string): Promise<{
-        id: string;
         title: string;
-        description: string;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
+        description: string;
         order: number;
         label: string;
+        id: string;
         imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
         iconUrl: string | null;
     }>;
     featuredImageUpdate(id: string, files: {
         image?: Express.Multer.File[];
         icon?: Express.Multer.File[];
     }, data: string): Promise<{
-        id: string;
         title: string;
-        description: string;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
+        description: string;
         order: number;
         label: string;
+        id: string;
         imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
         iconUrl: string | null;
     }>;
     featuredImageDelete(id: string): Promise<{
-        id: string;
         title: string;
-        description: string;
-        createdAt: Date;
-        updatedAt: Date;
         isActive: boolean;
+        description: string;
         order: number;
         label: string;
+        id: string;
         imageUrl: string;
+        createdAt: Date;
+        updatedAt: Date;
         iconUrl: string | null;
     }>;
     getCompanyExperience(): Promise<{
         number: number;
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
         suffix: string | null;
     }[]>;
     getCompanyExperienceByID(id: string): Promise<{
         number: number;
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
         suffix: string | null;
     }>;
     createCompanyExperience(body: any): Promise<{
         number: number;
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
         suffix: string | null;
     }>;
     updateCompanyExperience(id: string, body: any): Promise<{
         number: number;
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
         suffix: string | null;
     }>;
     deleteCompanyExperience(id: string): Promise<{
         number: number;
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
         suffix: string | null;
     }>;
     private parseData;
@@ -246,40 +246,40 @@ export declare class HomeController {
         image?: Express.Multer.File[];
         icons?: Express.Multer.File[];
     }): Promise<{
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
-        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
     }>;
     property_search_stepsGetAll(): Promise<{
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
-        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
     }[]>;
     property_search_stepGetByID(id: string): Promise<{
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
-        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -288,27 +288,27 @@ export declare class HomeController {
         image?: Express.Multer.File[];
         icons?: Express.Multer.File[];
     }): Promise<{
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
-        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
     }>;
     property_search_stepDelete(id: string): Promise<{
-        id: string;
         title: string;
+        isActive: boolean;
         description: string | null;
+        order: number;
+        id: string;
+        imageUrl: string;
         createdAt: Date;
         updatedAt: Date;
-        isActive: boolean;
-        order: number;
-        imageUrl: string;
         stepNumber: number;
         statusText: string | null;
         statusIcon: string | null;
@@ -316,65 +316,65 @@ export declare class HomeController {
     getContactInfo(): Promise<{
         openingHours: {
             id: string;
+            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
-            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     postContactInfo(body: any): Promise<{
         openingHours: {
             id: string;
+            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
-            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     updateContactInfo(id: string, body: any): Promise<({
         openingHours: {
             id: string;
+            contactInfoId: string;
             days: string;
             openTime: string | null;
             closeTime: string | null;
             isClosed: boolean;
-            contactInfoId: string;
         }[];
     } & {
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }) | null>;
     deleteContactInfo(id: string): Promise<{
         id: string;
         createdAt: Date;
         updatedAt: Date;
-        email: string;
         fullAddress: string;
         country: string;
         phone: string;
+        email: string;
     }>;
     createTestimonial(body: any): Promise<{
         id: string;
@@ -387,9 +387,9 @@ export declare class HomeController {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
-        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
+        propertyTitle: string;
     }>;
     getAllTestimonials(): Promise<{
         id: string;
@@ -402,9 +402,9 @@ export declare class HomeController {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
-        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
+        propertyTitle: string;
     }[]>;
     getTestimonialById(id: string): Promise<{
         id: string;
@@ -417,9 +417,9 @@ export declare class HomeController {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
-        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
+        propertyTitle: string;
     }>;
     updateTestimonial(id: string, body: any): Promise<{
         id: string;
@@ -432,9 +432,9 @@ export declare class HomeController {
         authorLocation: string;
         rating: number;
         propertyCategory: string;
-        propertyTitle: string;
         propertyPurchaseValue: number;
         propertyPurchaseValueDisplay: string;
+        propertyTitle: string;
     }>;
     deleteTestimonial(id: string): Promise<{
         message: string;
