@@ -3,6 +3,8 @@ import AllPropertiesSearch from "@/components/all-projects/AllPropertiesSearch";
 import AllProjectShowGrid from "@/components/all-projects/AllProjectShowGrid";
 import AllProjectsCTA from "@/components/all-projects/AllProjectsCTA";
 
+export const dynamic = "force-dynamic";
+
 async function getPageData() {
   try {
     const res = await fetch('http://localhost:5000/projects/page', {
