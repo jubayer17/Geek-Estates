@@ -38,7 +38,7 @@ export default function AllProjectShowGrid() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('http://localhost:5000/projects');
+        const res = await fetch('https://geek-estates.onrender.com/projects');
         const data = await res.json();
         setProjects(Array.isArray(data) ? data : []);
       } catch (error) {

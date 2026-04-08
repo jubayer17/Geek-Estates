@@ -26,7 +26,7 @@ export default function AboutLeadershipForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/aboutUsLeadership');
+      const res = await fetch('https://geek-estates.onrender.com/aboutUsLeadership');
       if (res.ok) setMembers(await res.json() || []);
       setIsLoading(false);
     } catch (error) {
@@ -40,8 +40,8 @@ export default function AboutLeadershipForm() {
     try {
       const method = editingMember ? 'PUT' : 'POST';
       const url = editingMember
-        ? `http://localhost:5000/aboutUsLeadership/${editingMember.id}`
-        : 'http://localhost:5000/aboutUsLeadership';
+        ? `https://geek-estates.onrender.com/aboutUsLeadership/${editingMember.id}`
+        : 'https://geek-estates.onrender.com/aboutUsLeadership';
 
       const payload = new FormData();
       if (imageFile) payload.append('image', imageFile);
@@ -64,7 +64,7 @@ export default function AboutLeadershipForm() {
 
   const deleteMember = async (id: string) => {
     if (!confirm('Confirm delete?')) return;
-    await fetch(`http://localhost:5000/aboutUsLeadership/${id}`, { method: 'DELETE' });
+    await fetch(`https://geek-estates.onrender.com/aboutUsLeadership/${id}`, { method: 'DELETE' });
     fetchData();
   };
 
@@ -101,7 +101,7 @@ export default function AboutLeadershipForm() {
         {members.map((member) => (
           <div key={member.id} className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg space-y-3">
             {member.imageUrl && (
-              <img src={`http://localhost:5000${member.imageUrl}`} alt={member.name} className="w-full h-48 object-cover rounded-lg mb-2" />
+              <img src={`https://geek-estates.onrender.com${member.imageUrl}`} alt={member.name} className="w-full h-48 object-cover rounded-lg mb-2" />
             )}
             <div className="flex justify-between items-start">
               <div>

@@ -23,7 +23,7 @@ export default function AboutAwardsForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/aboutUsAwardRecords');
+      const res = await fetch('https://geek-estates.onrender.com/aboutUsAwardRecords');
       if (res.ok) setItems(await res.json() || []);
       setIsLoading(false);
     } catch (error) {
@@ -37,8 +37,8 @@ export default function AboutAwardsForm() {
     try {
       const method = editingItem ? 'PUT' : 'POST';
       const url = editingItem
-        ? `http://localhost:5000/aboutUsAwardRecords/${editingItem.id}`
-        : 'http://localhost:5000/aboutUsAwardRecords';
+        ? `https://geek-estates.onrender.com/aboutUsAwardRecords/${editingItem.id}`
+        : 'https://geek-estates.onrender.com/aboutUsAwardRecords';
 
       const res = await fetch(url, {
         method,
@@ -58,7 +58,7 @@ export default function AboutAwardsForm() {
 
   const deleteAward = async (id: string) => {
     if (!confirm('Confirm delete?')) return;
-    await fetch(`http://localhost:5000/aboutUsAwardRecords/${id}`, { method: 'DELETE' });
+    await fetch(`https://geek-estates.onrender.com/aboutUsAwardRecords/${id}`, { method: 'DELETE' });
     fetchData();
   };
 

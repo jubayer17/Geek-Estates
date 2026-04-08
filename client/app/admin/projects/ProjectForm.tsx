@@ -108,8 +108,8 @@ export default function ProjectForm({ project, onSuccess, onCancel }: ProjectFor
       }
 
       const url = project
-        ? `http://localhost:5000/projects/${project.id}`
-        : 'http://localhost:5000/projects';
+        ? `https://geek-estates.onrender.com/projects/${project.id}`
+        : 'https://geek-estates.onrender.com/projects';
 
       const method = project ? 'PATCH' : 'POST';
 

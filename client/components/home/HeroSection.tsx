@@ -35,7 +35,7 @@ export default function HeroSection() {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const res = await fetch("http://localhost:5000/heroBanner")
+        const res = await fetch("https://geek-estates.onrender.com/heroBanner")
         const data = await res.json()
         if (data.success && Array.isArray(data.data)) {
           setBanners(data.data)

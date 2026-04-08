@@ -23,7 +23,7 @@ export default function AboutAchievementsForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/aboutUsCoreValue');
+      const res = await fetch('https://geek-estates.onrender.com/aboutUsCoreValue');
       if (res.ok) setItems(await res.json() || []);
       setIsLoading(false);
     } catch (error) {
@@ -37,8 +37,8 @@ export default function AboutAchievementsForm() {
     try {
       const method = editingItem ? 'PUT' : 'POST';
       const url = editingItem
-        ? `http://localhost:5000/aboutUsCoreValue/${editingItem.id}`
-        : 'http://localhost:5000/aboutUsCoreValue';
+        ? `https://geek-estates.onrender.com/aboutUsCoreValue/${editingItem.id}`
+        : 'https://geek-estates.onrender.com/aboutUsCoreValue';
 
       const dataObj = {
         title: formData.title,
@@ -64,7 +64,7 @@ export default function AboutAchievementsForm() {
 
   const deleteVal = async (id: string) => {
     if (!confirm('Confirm delete?')) return;
-    await fetch(`http://localhost:5000/aboutUsCoreValue/${id}`, { method: 'DELETE' });
+    await fetch(`https://geek-estates.onrender.com/aboutUsCoreValue/${id}`, { method: 'DELETE' });
     fetchData();
   };
 

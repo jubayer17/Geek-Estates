@@ -14,7 +14,7 @@ export default function Career() {
   });
 
   useEffect(() => {
-    fetch('http://localhost:5000/career/page')
+    fetch('https://geek-estates.onrender.com/career/page')
       .then(res => res.json())
       .then(data => {
         if (data) {

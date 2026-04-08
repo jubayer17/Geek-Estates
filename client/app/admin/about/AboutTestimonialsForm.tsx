@@ -28,7 +28,7 @@ export default function AboutTestimonialsForm() {
 
   const fetchData = async () => {
     try {
-      const testRes = await fetch('http://localhost:5000/aboutUsTestimonial');
+      const testRes = await fetch('https://geek-estates.onrender.com/aboutUsTestimonial');
       if (testRes.ok) setTestimonials(await testRes.json() || []);
       setIsLoading(false);
     } catch (error) {
@@ -42,8 +42,8 @@ export default function AboutTestimonialsForm() {
     try {
       const method = editingItem ? 'PUT' : 'POST';
       const url = editingItem
-        ? `http://localhost:5000/aboutUsTestimonial/${editingItem.id}`
-        : 'http://localhost:5000/aboutUsTestimonial';
+        ? `https://geek-estates.onrender.com/aboutUsTestimonial/${editingItem.id}`
+        : 'https://geek-estates.onrender.com/aboutUsTestimonial';
 
       const dataObj = {
         ...form,
@@ -68,7 +68,7 @@ export default function AboutTestimonialsForm() {
 
   const deleteTestimonial = async (id: string) => {
     if (!confirm('Confirm delete?')) return;
-    await fetch(`http://localhost:5000/aboutUsTestimonial/${id}`, { method: 'DELETE' });
+    await fetch(`https://geek-estates.onrender.com/aboutUsTestimonial/${id}`, { method: 'DELETE' });
     fetchData();
   };
 

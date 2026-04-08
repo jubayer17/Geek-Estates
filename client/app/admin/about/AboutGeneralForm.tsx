@@ -28,8 +28,8 @@ export default function AboutGeneralForm() {
   const fetchData = async () => {
     try {
       const [textRes, imgRes] = await Promise.all([
-        fetch('http://localhost:5000/about-us-text'),
-        fetch('http://localhost:5000/about-us-banner-image')
+        fetch('https://geek-estates.onrender.com/about-us-text'),
+        fetch('https://geek-estates.onrender.com/about-us-banner-image')
       ]);
 
       if (textRes.ok) {
@@ -52,7 +52,7 @@ export default function AboutGeneralForm() {
   const handleTextUpdate = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await fetch('http://localhost:5000/about-us-text', {
+      const res = await fetch('https://geek-estates.onrender.com/about-us-text', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(textData),
@@ -77,7 +77,7 @@ export default function AboutGeneralForm() {
     formData.append('type', newImageType);
 
     try {
-      const res = await fetch('http://localhost:5000/about-us-banner-image', {
+      const res = await fetch('https://geek-estates.onrender.com/about-us-banner-image', {
         method: 'POST',
         body: formData,
       });
@@ -94,7 +94,7 @@ export default function AboutGeneralForm() {
   const handleDeleteImage = async (id: string) => {
     if (!confirm('Are you sure you want to delete this image?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/about-us-banner-image/${id}`, {
+      const res = await fetch(`https://geek-estates.onrender.com/about-us-banner-image/${id}`, {
         method: 'DELETE',
       });
       if (!res.ok) throw new Error();
@@ -185,7 +185,7 @@ export default function AboutGeneralForm() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {images.map((img) => (
               <div key={img.id} className="relative group border border-zinc-800 rounded-lg overflow-hidden">
-                <img src={`http://localhost:5000${img.url}`} alt={img.text} className="w-full h-48 object-cover" />
+                <img src={`https://geek-estates.onrender.com${img.url}`} alt={img.text} className="w-full h-48 object-cover" />
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Button
                     variant="destructive"

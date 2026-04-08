@@ -30,7 +30,7 @@ export default function AboutWhoWeAreForm() {
 
   const fetchItems = async () => {
     try {
-      const res = await fetch('http://localhost:5000/aboutWhoWeAre');
+      const res = await fetch('https://geek-estates.onrender.com/aboutWhoWeAre');
       if (res.ok) {
         const data = await res.json();
         setItems(Array.isArray(data) ? data : []);
@@ -48,8 +48,8 @@ export default function AboutWhoWeAreForm() {
     try {
       const method = editingItem ? 'PUT' : 'POST';
       const url = editingItem
-        ? `http://localhost:5000/aboutWhoWeAre/${editingItem.id}`
-        : 'http://localhost:5000/aboutWhoWeAre';
+        ? `https://geek-estates.onrender.com/aboutWhoWeAre/${editingItem.id}`
+        : 'https://geek-estates.onrender.com/aboutWhoWeAre';
 
       const payload = new FormData();
       if (imageFile) {
@@ -84,7 +84,7 @@ export default function AboutWhoWeAreForm() {
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure?')) return;
     try {
-      await fetch(`http://localhost:5000/aboutWhoWeAre/${id}`, { method: 'DELETE' });
+      await fetch(`https://geek-estates.onrender.com/aboutWhoWeAre/${id}`, { method: 'DELETE' });
       setItems(items.filter(i => i.id !== id));
       toast.success('Item deleted');
     } catch (error) {
@@ -125,7 +125,7 @@ export default function AboutWhoWeAreForm() {
         {items.map((item) => (
           <div key={item.id} className="bg-zinc-900 border border-zinc-800 p-4 rounded-lg space-y-3">
             {item.imageUrl && (
-              <img src={`http://localhost:5000${item.imageUrl}`} alt={item.title} className="w-full h-40 object-cover rounded" />
+              <img src={`https://geek-estates.onrender.com${item.imageUrl}`} alt={item.title} className="w-full h-40 object-cover rounded" />
             )}
             <div className="flex justify-between items-start">
               <h3 className="font-semibold text-lg text-[#E7C873]">{item.title}</h3>

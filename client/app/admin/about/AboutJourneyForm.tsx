@@ -23,7 +23,7 @@ export default function AboutJourneyForm() {
 
   const fetchData = async () => {
     try {
-      const res = await fetch('http://localhost:5000/aboutUsJourneyTimeline');
+      const res = await fetch('https://geek-estates.onrender.com/aboutUsJourneyTimeline');
       if (res.ok) setItems(await res.json() || []);
       setIsLoading(false);
     } catch (error) {
@@ -37,8 +37,8 @@ export default function AboutJourneyForm() {
     try {
       const method = editingItem ? 'PUT' : 'POST';
       const url = editingItem
-        ? `http://localhost:5000/aboutUsJourneyTimeline/${editingItem.id}`
-        : 'http://localhost:5000/aboutUsJourneyTimeline';
+        ? `https://geek-estates.onrender.com/aboutUsJourneyTimeline/${editingItem.id}`
+        : 'https://geek-estates.onrender.com/aboutUsJourneyTimeline';
 
       const res = await fetch(url, {
         method,
@@ -58,7 +58,7 @@ export default function AboutJourneyForm() {
 
   const deleteJourney = async (id: string) => {
     if (!confirm('Confirm delete?')) return;
-    await fetch(`http://localhost:5000/aboutUsJourneyTimeline/${id}`, { method: 'DELETE' });
+    await fetch(`https://geek-estates.onrender.com/aboutUsJourneyTimeline/${id}`, { method: 'DELETE' });
     fetchData();
   };
 

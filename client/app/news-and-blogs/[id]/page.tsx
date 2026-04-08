@@ -18,7 +18,7 @@ export default function BlogDetails() {
     const fetchBlog = async () => {
       if (!id) return
       try {
-        const res = await fetch(`http://localhost:5000/news/${id}`)
+        const res = await fetch(`https://geek-estates.onrender.com/news/${id}`)
         if (res.ok) {
           const data = await res.json()
           setBlog(data)

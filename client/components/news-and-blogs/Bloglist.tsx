@@ -30,7 +30,7 @@ export default function BlogPage() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch('http://localhost:5000/news')
+        const res = await fetch('https://geek-estates.onrender.com/news')
         if (res.ok) {
           const data = await res.json()
           setBlogs(data)
