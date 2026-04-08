@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { MoreVertical, Pencil, Trash } from "lucide-react"
 import { Banner } from "./home.type"
-import EditBannerDialog from "./EditBannerDialog"
+import EditHeroBannerDialog from "./EditHeroBannerDialog"
 
 
 type Props = {
@@ -82,7 +82,7 @@ export default function BannerCard({ banner, onDelete, onUpdate }: Props) {
         </CardContent>
       </Card>
 
-      <EditBannerDialog
+      <EditHeroBannerDialog
         open={open}
         setOpen={setOpen}
         banner={banner}
