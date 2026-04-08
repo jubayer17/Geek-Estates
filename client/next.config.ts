@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
-    // You can keep domains, formats, loader, etc.
-    // No 'quality' here
-    domains: ['res.cloudinary.com'],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
