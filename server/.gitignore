@@ -6,3 +6,8 @@ node_modules
 *.tsbuildinfo
 
 /generated/prisma
+*.sqlite
+*.sqlite-journal
+
+# nest
+*.tsbuildinfo

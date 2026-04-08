@@ -18,7 +18,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 gsap.registerPlugin(ScrollTrigger)
 
 type Job = {
-    id: number
+    id: string
     title: string
     description: string
     longDescription?: string

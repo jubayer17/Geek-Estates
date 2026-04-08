@@ -1,22 +1,21 @@
 import Image from "next/image";
 
 interface AllPropertyCardProps {
-  image: string;
-  title: string;
-  address: string;
-  date: string;
-  area: number;
-  price: string;
+  property: {
+    id: string;
+    image: string;
+    title: string;
+    location: string;
+    date?: string;
+    area?: number;
+    price?: string;
+  };
+  index?: number;
 }
 
-export default function AllPropertyCard({
-  image,
-  title,
-  address,
-  date,
-  area,
-  price,
-}: AllPropertyCardProps) {
+export default function AllPropertyCard({ property }: AllPropertyCardProps) {
+  const { image, title, location: address, date, area, price } = property;
+  
   return (
     <div className="group relative w-full overflow-hidden bg-white shadow-lg transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl">
       {/* Portrait Aspect Ratio Container (3:4 = 0.75, or taller like 2:3) 
@@ -37,8 +36,8 @@ export default function AllPropertyCard({
         {/* Floating Content over Image */}
         <div className="absolute bottom-0 left-0 w-full p-6 text-white transform transition-transform duration-500 group-hover:-translate-y-2">
           <div className="mb-3 flex items-center gap-3 text-sm font-medium uppercase tracking-widest opacity-90">
-            <span className="rounded-full bg-white/20 px-3 py-1 backdrop-blur-sm">{date}</span>
-            <span>{area} sq ft</span>
+            <span className="rounded-full bg-white/20 px-3 py-1 backdrop-blur-sm">{date || 'N/A'}</span>
+            <span>{area || 0} sq ft</span>
           </div>
 
           <h3 className="mb-2 font-serif text-3xl font-light leading-tight text-white group-hover:text-[#C5A059] transition-colors">
@@ -50,7 +49,7 @@ export default function AllPropertyCard({
           </p>
 
           <div className="flex items-center justify-between border-t border-white/20 pt-5 opacity-0 transition-all duration-500 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0">
-            <span className="text-2xl font-semibold tracking-wide">{price}</span>
+            <span className="text-2xl font-semibold tracking-wide">{price || 'On Request'}</span>
             <button className="rounded-full bg-white p-3 text-black transition-colors hover:bg-[#C5A059] hover:text-white">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </button>
